@@ -24,6 +24,7 @@ public class MainBuild : Build
         obj.GetComponent<NavMeshAgent>().Warp(shortPoint);
         obj.GetComponent<Unit>().SetTargetPosition(pointSbor);
         Main.instance.allUnits.Add(obj.GetComponent<Unit>());
+        Main.instance.allSelectebleObjects.Add(obj.GetComponent<Unit>());
 
     }
 }

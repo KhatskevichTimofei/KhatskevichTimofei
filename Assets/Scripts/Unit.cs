@@ -8,6 +8,8 @@ public abstract class Unit : MonoBehaviour, ISelected
     public float hp, damage, speed, armor, speedShots;
     public NavMeshAgent agent;
 
+
+
     void Start()
     {
 
@@ -18,7 +20,6 @@ public abstract class Unit : MonoBehaviour, ISelected
 
     }
 
-    public abstract void ShowInfo();
 
     public void SetTargetPosition(Vector3 position)
     {
@@ -30,4 +31,10 @@ public abstract class Unit : MonoBehaviour, ISelected
 
     }
 
+    public void OnMouseUp()
+    {
+        Main.instance.selected.Clear();
+        Main.instance.selected.Add(this);
+    }
+    
 }

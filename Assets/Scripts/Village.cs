@@ -14,8 +14,5 @@ public class Village : Unit
         base.Update();
     }
 
-    public override void ShowInfo()
-    {
-        Debug.Log("Крестьянин");
-    }
+
 }
