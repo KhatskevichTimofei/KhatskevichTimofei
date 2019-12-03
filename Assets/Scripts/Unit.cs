@@ -53,6 +53,11 @@ public abstract class Unit : MonoBehaviour, ISelected
     {
         Main.instance.selected.Clear();
         Main.instance.selected.Add(this);
+        for (int i = 0; i < Main.instance.selected.Count; i++)
+        {
+            Main.instance.selected[i].IsSelected = true;
+        }
+        
     }
 
 }
