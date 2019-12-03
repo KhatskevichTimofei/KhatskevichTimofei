@@ -15,9 +15,10 @@ public class Main : MonoBehaviour
     public List<Build> allBuild = new List<Build>();
     public List<ISelected> selected = new List<ISelected>();
     public List<ISelected> allSelectebleObjects = new List<ISelected>();
+    public Dictionary<KeyCode, List<ISelected>> saveSelectedObject = new Dictionary<KeyCode, List<ISelected>>();
     public Button continueButton;
     public MainBuild mainBuild;
-    
+
     void Start()
     {
         instance = this; //Переменной типа Main мы задаём здачения самого себя 
@@ -26,15 +27,15 @@ public class Main : MonoBehaviour
     }
 
     void Update()
-    { 
-        if (Input.GetKeyDown(KeyCode.P))//При одном нажатии кнопки P выполняется условие
-        {
-            
-            selected.Clear(); //Проходит очистка списка выбранных юнитов
-            selected.Add(allUnits[Random.Range(0, allUnits.Count)]); //Выбранные юниты берутся из списка всех существующих юнитов
-        }
-        if (Input.GetKeyDown(KeyCode.Y))//При одном нажатии кнопки Y выполняется условие
-            mainBuild.CreateUnit(1);//MainBuild создаёт юнита с индексом 1 при нажатии кнопки Y 
+    {
+        //if (Input.GetKeyDown(KeyCode.P))//При одном нажатии кнопки P выполняется условие
+        //{
+
+        //    selected.Clear(); //Проходит очистка списка выбранных юнитов
+        //    selected.Add(allUnits[Random.Range(0, allUnits.Count)]); //Выбранные юниты берутся из списка всех существующих юнитов
+        //}
+        //if (Input.GetKeyDown(KeyCode.Y))//При одном нажатии кнопки Y выполняется условие
+        //    mainBuild.CreateUnit(1);//MainBuild создаёт юнита с индексом 1 при нажатии кнопки Y 
         if (Input.GetMouseButtonDown(1)) //При нажатии правой кнопки выполняется условие 
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); //Создаётся переменнная типа Ray(луч) ??????????
@@ -45,7 +46,7 @@ public class Main : MonoBehaviour
                 for (int i = 0; i < selected.Count; i++)//Цикл который проходится по всем выбранным юнитам
                 {
                     if (selected[i] as Unit != null)
-                    (selected[i]as Unit).SetTargetPosition(casthit.point);//Каждый выбранный юнит обращается к выбранной позиции, которая задаётся с помощью луча 
+                        (selected[i] as Unit).SetTargetPosition(casthit.point);//Каждый выбранный юнит обращается к выбранной позиции, которая задаётся с помощью луча 
                 }
             }
             //    if (agent.CalculatePath(casthit.point, path))
@@ -57,6 +58,10 @@ public class Main : MonoBehaviour
         if (Input.GetMouseButtonDown(0)) //При нажатии левой кнопки мыши выполняется условие
         {
             startMouse = Input.mousePosition; // В пеменную типа Vector3 записывается позиция мыши
+            for (int i = 0; i < selected.Count; i++)
+            {
+                selected[i].IsSelected = false;
+            }
             selected.Clear();//Отчищается список выбранных юнитов 
             image1.enabled = true; //Включает картинку для выделения
 
@@ -78,21 +83,50 @@ public class Main : MonoBehaviour
             }
             image1.rectTransform.sizeDelta = delta;// Картинке передаётся размер находящийся в переменной delta
         }
-        if(Input.GetMouseButtonUp(0)) //Выделяет юнитов попавших в картинку
+        if (Input.GetMouseButtonUp(0)) //Выделяет юнитов попавших в картинку
         {
 
             for (int i = 0; i < allSelectebleObjects.Count; i++) //Создаёт новое изображение и записываает его в перменную area. 
             {
                 Rect area = new Rect(image1.rectTransform.anchoredPosition, image1.rectTransform.sizeDelta);
-                if (area.Contains(Camera.main.WorldToScreenPoint((allSelectebleObjects[i]as MonoBehaviour).transform.position))) //Если в созданную картинку area попадает какой либо юнит, выполняется условие  и записывает из массива allUnits юнитов в массив selectedUnits 
+                if (area.Contains(Camera.main.WorldToScreenPoint((allSelectebleObjects[i] as MonoBehaviour).transform.position))) //Если в созданную картинку area попадает какой либо юнит, выполняется условие  и записывает из массива allUnits юнитов в массив selectedUnits 
                 {
 
                     selected.Add(allSelectebleObjects[i]);
-
+                    allSelectebleObjects[i].IsSelected = true;
                 }
                 image1.enabled = false;//Выключает картинку
-                
+
             }
         }
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            for (int i = 48; i < 58; i++)
+                if (Input.GetKeyDown((KeyCode)i))
+                {
+                    if (saveSelectedObject.ContainsKey((KeyCode)i))
+                        saveSelectedObject.Remove((KeyCode)i);
+
+                    saveSelectedObject.Add((KeyCode)i, new List<ISelected>(selected));
+                }
+        }
+        else
+            for (int i = 48; i < 58; i++)
+                if (Input.GetKeyDown((KeyCode)i))
+                    if (saveSelectedObject.ContainsKey((KeyCode)i))
+                    {
+                        for (int j = 0; j < selected.Count; j++)
+                        {
+                            selected[j].IsSelected = false;
+                        }
+                        selected.Clear();
+
+                        selected.AddRange(saveSelectedObject[(KeyCode)i]);
+                        for (int j = 0; j < selected.Count; j++)
+                        {
+                            selected[j].IsSelected = true;
+                        }
+
+                    }
     }
 }

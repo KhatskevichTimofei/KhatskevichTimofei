@@ -7,7 +7,25 @@ public abstract class Unit : MonoBehaviour, ISelected
 {
     public float hp, damage, speed, armor, speedShots;
     public NavMeshAgent agent;
+    bool isSelected;
 
+    public bool IsSelected
+    {
+        get { return isSelected; }
+        set
+        {
+            isSelected = value;
+            if (isSelected)
+            {
+                GetComponent<MeshRenderer>().material = Resources.Load<Material>("Materials/SelectedUnit");
+            }
+            else
+            {
+                GetComponent<MeshRenderer>().material = Resources.Load<Material>("Materials/StandartUnit");
+            }
+
+        }
+    }
 
 
     void Start()
@@ -36,5 +54,5 @@ public abstract class Unit : MonoBehaviour, ISelected
         Main.instance.selected.Clear();
         Main.instance.selected.Add(this);
     }
-    
+
 }

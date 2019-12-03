@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface ISelected
 {
-
+    bool IsSelected { get; set; }
 
 
 }
