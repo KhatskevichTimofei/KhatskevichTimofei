@@ -128,6 +128,8 @@ MonoBehaviour:
   speed: 50
   armor: 50
   speedShots: 0
+  radiusLook: 20
+  radiusAttack: 2
   agent: {fileID: 6914884771554602855}
   sideConflict: 1
   target: {fileID: 0}
