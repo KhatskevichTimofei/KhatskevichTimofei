@@ -11,16 +11,17 @@ public class Printer3D : Build
     public GameObject funcionalPanel;
     public List<Image> ocheredImage;
     public Image progressBar;
+    //public GameObject clickBar
 
     public override bool IsSelected
     {
         get
         {
-            return isSelected;
+            return isSelected; 
         }
         set
         {
-            isSelected = value;
+            isSelected = value; //
             if (isSelected)
             {
                 GetComponent<MeshRenderer>().material = Resources.Load<Material>("Materials/Selected3DPrinter");
@@ -49,6 +50,18 @@ public class Printer3D : Build
         {
             progressBar.transform.parent.gameObject.SetActive(true);
             progressBar.fillAmount = ochered[0].progress / ochered[0].timeCreate;
+            //if (i == 5)
+            //{
+
+
+
+
+
+
+
+
+
+            //}
         }
         else
             progressBar.transform.parent.gameObject.SetActive(false);
