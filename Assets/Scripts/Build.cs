@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public abstract class Build : MonoBehaviour, ISelected
+public abstract class Build : MonoBehaviour, ISelected, IDestroyed
 {
     public float hp;
     public List<UnitPrice> unitsPrice = new List<UnitPrice>();
@@ -11,6 +11,7 @@ public abstract class Build : MonoBehaviour, ISelected
     public Vector3 shortPoint;
     public Vector3 pointSbor;
     protected bool isSelected;
+    public GameObject obvodka;
 
     public virtual bool IsSelected
     {
@@ -22,6 +23,14 @@ public abstract class Build : MonoBehaviour, ISelected
         {
 
             isSelected = value;
+            if (isSelected) 
+            {
+                obvodka.SetActive(true);
+            }
+            else
+            {
+                obvodka.SetActive(false);
+            }
         }
     }
 
@@ -72,6 +81,16 @@ public abstract class Build : MonoBehaviour, ISelected
         {
             Main.instance.selected[i].IsSelected = true;
         }
+
+    }
+
+    public void GetDamage(float damage)
+    {
+
+    }
+
+    public void Destroyed()
+    {
 
     }
 }

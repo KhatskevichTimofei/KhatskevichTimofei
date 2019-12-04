@@ -10,12 +10,13 @@ public enum SideConflict
 }
 
 
-public class Character : MonoBehaviour
+public class Character : MonoBehaviour, IDestroyed
 {
-    public float hp, damage, speed, armor, speedShots, radiusLook, radiusAttack;
+    public float hp, speed, armor, radiusLook;
     public NavMeshAgent agent;
     public SideConflict sideConflict;
     public Character target;
+    public Attack attack;
 
 
 
@@ -24,12 +25,22 @@ public class Character : MonoBehaviour
         if (target != null)
         {
             Vector3 distance = transform.position - target.transform.position;
-            if (distance.magnitude > radiusAttack)
+            if (distance.magnitude > attack.radiusAttack)
             {
-                SetTargetPosition(target.transform.position + distance.normalized * (radiusAttack - (radiusAttack * 0.1f)));
+                SetTargetPosition(target.transform.position + distance.normalized * (attack.radiusAttack - (attack.radiusAttack * 0.1f)));
+
+            }
+            else
+            {
+
+                if (attack.cdProgress <= 0)
+                {
+                    Attack(attack, target);
+                }
 
             }
         }
+        attack.cdProgress -= Time.deltaTime;
     }
 
     public void SetTarget(Character character)
@@ -47,5 +58,27 @@ public class Character : MonoBehaviour
             agent.SetPath(path);
         }
 
+    }
+
+    public void Attack(Attack attack, IDestroyed destroyed)
+    {
+        destroyed.GetDamage(attack.damage);
+        attack.cdProgress = attack.cd;
+    }
+
+    public void GetDamage(float damage)
+    {
+
+        hp -= damage;
+        if (hp <= 0)
+        {
+            Destroyed();
+        }
+
+    }
+
+    public void Destroyed()
+    {
+        Destroy(gameObject);
     }
 }

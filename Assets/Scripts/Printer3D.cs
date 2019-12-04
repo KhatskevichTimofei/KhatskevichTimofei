@@ -24,7 +24,6 @@ public class Printer3D : Build
             isSelected = value; //
             if (isSelected)
             {
-                GetComponent<MeshRenderer>().material = Resources.Load<Material>("Materials/Selected3DPrinter");
                 ocheredPanel.SetActive(true);
                 funcionalPanel.SetActive(true);
             }
@@ -32,9 +31,8 @@ public class Printer3D : Build
             {
                 funcionalPanel.SetActive(false);
                 ocheredPanel.SetActive(false);
-                GetComponent<MeshRenderer>().material = Resources.Load<Material>("Materials/Standart3DPrinter");
             }
-
+            base.IsSelected = value;
 
         }
     }
