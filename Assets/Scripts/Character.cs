@@ -12,7 +12,7 @@ public enum SideConflict
 
 public class Character : MonoBehaviour
 {
-    public float hp, damage, speed, armor, speedShots, radiusLook;
+    public float hp, damage, speed, armor, speedShots, radiusLook, radiusAttack;
     public NavMeshAgent agent;
     public SideConflict sideConflict;
     public Character target;
@@ -21,9 +21,15 @@ public class Character : MonoBehaviour
 
     public virtual void Update()
     {
-        if(target != null)
-        SetTargetPosition(target.transform.position);
-        
+        if (target != null)
+        {
+            Vector3 distance = transform.position - target.transform.position;
+            if (distance.magnitude > radiusAttack)
+            {
+                SetTargetPosition(target.transform.position + distance.normalized * (radiusAttack - (radiusAttack * 0.1f)));
+
+            }
+        }
     }
 
     public void SetTarget(Character character)

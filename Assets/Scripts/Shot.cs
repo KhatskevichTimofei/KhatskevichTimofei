@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Shot : Unit
 {
-    public float radius;
 
    
 
