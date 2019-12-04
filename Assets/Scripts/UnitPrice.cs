@@ -9,4 +9,27 @@ public class UnitPrice
     public float timeCreate;
     public int plasticPrice, colorPrice;
     public string infoUnit;
+    public float progress;
+
+
+    public bool AddProgress()
+    {
+
+        progress += Time.deltaTime;
+        return progress >= timeCreate;
+    }
+
+    public UnitPrice Copy()
+    {
+
+        UnitPrice unitPrice = new UnitPrice
+        {
+            unit = unit,
+            timeCreate = timeCreate,
+            plasticPrice = plasticPrice,
+            colorPrice = colorPrice,
+            infoUnit = infoUnit
+        };
+        return unitPrice;
+    }
 }

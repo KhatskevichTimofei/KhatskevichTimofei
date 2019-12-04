@@ -22,8 +22,8 @@ public class Main : MonoBehaviour
     void Start()
     {
         instance = this; //Переменной типа Main мы задаём здачения самого себя 
-        allSelectebleObjects.AddRange(allUnits);
-        allSelectebleObjects.AddRange(allBuild);
+        allSelectebleObjects.AddRange(allUnits); //В список всех построек и юнитов записываются все юниты
+        allSelectebleObjects.AddRange(allBuild); //В список всех построке и юнитов записываются все построек
     }
 
     void Update()
