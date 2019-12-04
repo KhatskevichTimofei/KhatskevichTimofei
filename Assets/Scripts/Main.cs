@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class Main : MonoBehaviour
 {
@@ -17,7 +18,8 @@ public class Main : MonoBehaviour
     public List<ISelected> allSelectebleObjects = new List<ISelected>();
     public Dictionary<KeyCode, List<ISelected>> saveSelectedObject = new Dictionary<KeyCode, List<ISelected>>();
     public Button continueButton;
-    public MainBuild mainBuild;
+    public Printer3D mainBuild;
+    bool isFrameSelected;
 
     void Start()
     {
@@ -57,16 +59,19 @@ public class Main : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(0)) //При нажатии левой кнопки мыши выполняется условие
         {
-            startMouse = Input.mousePosition; // В пеменную типа Vector3 записывается позиция мыши
-            for (int i = 0; i < selected.Count; i++)
+            if (!EventSystem.current.IsPointerOverGameObject())
             {
-                selected[i].IsSelected = false;
+                startMouse = Input.mousePosition; // В пеменную типа Vector3 записывается позиция мыши
+                for (int i = 0; i < selected.Count; i++)
+                {
+                    selected[i].IsSelected = false;
+                }
+                selected.Clear();//Отчищается список выбранных юнитов 
+                image1.enabled = true; //Включает картинку для выделения
+                isFrameSelected = true;
             }
-            selected.Clear();//Отчищается список выбранных юнитов 
-            image1.enabled = true; //Включает картинку для выделения
-
         }
-        if (Input.GetMouseButton(0)) //При отжатии левой кнопки мыши выполняется условие
+        if (Input.GetMouseButton(0) && isFrameSelected) //При отжатии левой кнопки мыши выполняется условие
         {
             stopMouse = Input.mousePosition; //В переменную типа Vector3 записывается конечное значение координат нахождения мыши 
             image1.rectTransform.anchoredPosition = startMouse; //В переменную startMouse записывается значение нахождения объекта image1 на сцене. 
@@ -83,7 +88,7 @@ public class Main : MonoBehaviour
             }
             image1.rectTransform.sizeDelta = delta;// Картинке передаётся размер находящийся в переменной delta
         }
-        if (Input.GetMouseButtonUp(0)) //Выделяет юнитов попавших в картинку
+        if (Input.GetMouseButtonUp(0) && isFrameSelected) //Выделяет юнитов попавших в картинку
         {
 
             for (int i = 0; i < allSelectebleObjects.Count; i++) //Создаёт новое изображение и записываает его в перменную area. 
@@ -98,6 +103,7 @@ public class Main : MonoBehaviour
                 image1.enabled = false;//Выключает картинку
 
             }
+            isFrameSelected = false;
         }
         if (Input.GetKey(KeyCode.LeftShift))
         {

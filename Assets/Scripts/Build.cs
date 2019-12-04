@@ -10,8 +10,20 @@ public abstract class Build : MonoBehaviour, ISelected
     public List<UnitPrice> ochered = new List<UnitPrice>();
     public Vector3 shortPoint;
     public Vector3 pointSbor;
+    protected bool isSelected;
 
-    public bool IsSelected { get; set; }
+    public virtual bool IsSelected
+    {
+        get
+        {
+            return isSelected;
+        }
+        set
+        {
+
+            isSelected = value;
+        }
+    }
 
     void Start()
     {
@@ -19,7 +31,7 @@ public abstract class Build : MonoBehaviour, ISelected
     }
 
 
-    void Update()
+    protected virtual void Update()
     {
         if (ochered.Count > 0)
         {
@@ -49,6 +61,17 @@ public abstract class Build : MonoBehaviour, ISelected
     public void AddOchered(UnitPrice unitPrice)
     {
         ochered.Add(unitPrice.Copy());
+
+    }
+
+    public void OnMouseUp()
+    {
+        Main.instance.selected.Clear();
+        Main.instance.selected.Add(this);
+        for (int i = 0; i < Main.instance.selected.Count; i++)
+        {
+            Main.instance.selected[i].IsSelected = true;
+        }
 
     }
 }
