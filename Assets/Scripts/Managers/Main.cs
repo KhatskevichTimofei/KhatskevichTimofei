@@ -48,6 +48,7 @@ public class Main : MonoBehaviour
             storage.AddPlastic(50);
             storage.AddBabin(30);
         }
+        storage.Update();
 
     }
 

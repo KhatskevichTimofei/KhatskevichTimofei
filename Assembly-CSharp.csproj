@@ -68,9 +68,9 @@
     <Compile Include="Assets\Scripts\Character\Character.cs" />
     <Compile Include="Assets\Scripts\Character\Enemy\Taracan.cs" />
     <Compile Include="Assets\Scripts\Character\Enemy\UnitsEnemy.cs" />
+    <Compile Include="Assets\Scripts\Character\Player\Knife.cs" />
     <Compile Include="Assets\Scripts\Character\Player\Shot.cs" />
     <Compile Include="Assets\Scripts\Character\Player\Unit.cs" />
-    <Compile Include="Assets\Scripts\Character\Player\Village.cs" />
     <Compile Include="Assets\Scripts\Hero.cs" />
     <Compile Include="Assets\Scripts\Interface\IDestroyed.cs" />
     <Compile Include="Assets\Scripts\Interface\ISelected.cs" />

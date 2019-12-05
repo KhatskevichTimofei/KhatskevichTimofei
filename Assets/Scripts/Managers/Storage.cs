@@ -1,11 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
+[System.Serializable]
 public class Storage
 {
     public int babin;
     public float plastic;
+    public Image babinIcon;
+    public Image plasticIcon;
+    public TextMeshProUGUI textBabin;
+    public TextMeshProUGUI textPlastic;
+
+    public void Update()
+    {
+        textBabin.text = babin.ToString();
+        textPlastic.text = plastic.ToString();
+    }
 
     public bool ExistPlastic(float plastic)
     {
