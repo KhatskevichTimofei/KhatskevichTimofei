@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public abstract class Unit : Character, ISelected
 {
-    
+    public GameObject obvodka;
     bool isSelected;
 
     public bool IsSelected
@@ -16,11 +16,13 @@ public abstract class Unit : Character, ISelected
             isSelected = value; // ??
             if (isSelected) //Если выбран
             {
-                GetComponent<MeshRenderer>().material = Resources.Load<Material>("Materials/SelectedUnit"); //Загружает материал выбранному юниту
+                //GetComponent<MeshRenderer>().material = Resources.Load<Material>("Materials/SelectedUnit"); //Загружает материал выбранному юниту
+                obvodka.SetActive(true);
             }
             else
             {
-                GetComponent<MeshRenderer>().material = Resources.Load<Material>("Materials/StandartUnit"); //Загружает материал выбранному юниту
+                //GetComponent<MeshRenderer>().material = Resources.Load<Material>("Materials/StandartUnit"); //Загружает материал выбранному юниту
+                obvodka.SetActive(false);
             }
 
         }

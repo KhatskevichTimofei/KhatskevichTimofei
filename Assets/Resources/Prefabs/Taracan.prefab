@@ -124,15 +124,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 40
-  damage: 50
   speed: 50
   armor: 50
-  speedShots: 0
   radiusLook: 20
-  radiusAttack: 2
   agent: {fileID: 6914884771554602855}
   sideConflict: 1
   target: {fileID: 0}
+  attack:
+    damage: 40
+    cd: 2
+    cdProgress: 0
+    radiusAttack: 10
 --- !u!195 &6914884771554602855
 NavMeshAgent:
   m_ObjectHideFlags: 0
