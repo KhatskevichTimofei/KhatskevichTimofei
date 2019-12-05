@@ -20,6 +20,7 @@ public class Main : MonoBehaviour
     public Dictionary<KeyCode, List<ISelected>> saveSelectedObject = new Dictionary<KeyCode, List<ISelected>>();
     public Button continueButton;
     public Printer3D mainBuild;
+    public Storage storage = new Storage();
     bool isFrameSelected;
 
     void Start()
@@ -39,38 +40,19 @@ public class Main : MonoBehaviour
         //}
         //if (Input.GetKeyDown(KeyCode.Y))//При одном нажатии кнопки Y выполняется условие
         //    mainBuild.CreateUnit(1);//MainBuild создаёт юнита с индексом 1 при нажатии кнопки Y 
-        if (Input.GetMouseButtonDown(1)) //При нажатии правой кнопки выполняется условие 
+        RightMouseClick();
+        Select();
+        Binds();
+        if (Input.GetKeyDown(KeyCode.T))
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); //Создаётся переменнная типа Ray(луч) ??????????
-            RaycastHit casthit; // Слздаётся переменнная типа RaycastHit(???)
-
-            if (Physics.Raycast(ray, out casthit)) // ????
-            {
-                UnitsEnemy target = casthit.transform.GetComponent<UnitsEnemy>();
-                if (target != null)
-                {
-                    for (int i = 0; i < selected.Count; i++)
-                    {
-                        if (selected[i] as Unit != null)
-                        {
-                            (selected[i] as Unit).SetTarget(target);
-                            (selected[i] as Unit).typeTarget = TypeTarget.Set;
-                        }
-                    }
-                }
-                else
-                    for (int i = 0; i < selected.Count; i++)//Цикл который проходится по всем выбранным юнитам
-                    {
-                        if (selected[i] as Unit != null)
-                            (selected[i] as Unit).SetTargetPosition(casthit.point);//Каждый выбранный юнит обращается к выбранной позиции, которая задаётся с помощью луча 
-                    }
-            }
-            //    if (agent.CalculatePath(casthit.point, path))
-            //    {
-            //        agent.SetPath(path);
-            //    }
-
+            storage.AddPlastic(50);
+            storage.AddBabin(30);
         }
+
+    }
+
+    private void Select()
+    {
         if (Input.GetMouseButtonDown(0)) //При нажатии левой кнопки мыши выполняется условие
         {
             if (!EventSystem.current.IsPointerOverGameObject())
@@ -119,6 +101,10 @@ public class Main : MonoBehaviour
             }
             isFrameSelected = false;
         }
+    }
+
+    private void Binds()
+    {
         if (Input.GetKey(KeyCode.LeftShift))
         {
             for (int i = 48; i < 58; i++)
@@ -148,5 +134,41 @@ public class Main : MonoBehaviour
                         }
 
                     }
+    }
+
+    private void RightMouseClick()
+    {
+        if (Input.GetMouseButtonDown(1)) //При нажатии правой кнопки выполняется условие 
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); //Создаётся переменнная типа Ray(луч) ??????????
+            RaycastHit casthit; // Слздаётся переменнная типа RaycastHit(???)
+
+            if (Physics.Raycast(ray, out casthit)) // ????
+            {
+                UnitsEnemy target = casthit.transform.GetComponent<UnitsEnemy>();
+                if (target != null)
+                {
+                    for (int i = 0; i < selected.Count; i++)
+                    {
+                        if (selected[i] as Unit != null)
+                        {
+                            (selected[i] as Unit).SetTarget(target);
+                            (selected[i] as Unit).typeTarget = TypeTarget.Set;
+                        }
+                    }
+                }
+                else
+                    for (int i = 0; i < selected.Count; i++)//Цикл который проходится по всем выбранным юнитам
+                    {
+                        if (selected[i] as Unit != null)
+                            (selected[i] as Unit).SetTargetPosition(casthit.point);//Каждый выбранный юнит обращается к выбранной позиции, которая задаётся с помощью луча 
+                    }
+            }
+            //    if (agent.CalculatePath(casthit.point, path))
+            //    {
+            //        agent.SetPath(path);
+            //    }
+
+        }
     }
 }

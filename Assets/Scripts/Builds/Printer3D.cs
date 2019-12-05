@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class Printer3D : Build
 {
-
     public GameObject ocheredPanel;
     public GameObject funcionalPanel;
     public List<Image> ocheredImage;
@@ -17,7 +16,7 @@ public class Printer3D : Build
     {
         get
         {
-            return isSelected; 
+            return isSelected;
         }
         set
         {
@@ -51,17 +50,13 @@ public class Printer3D : Build
             //if (i == 5)
             //{
 
-
-
-
-
-
-
-
-
             //}
         }
         else
             progressBar.transform.parent.gameObject.SetActive(false);
+        for (int i = 0; i < unitsPrice.Count; i++)
+        {
+            buttons[i].interactable = Main.instance.storage.ExistBabin(unitsPrice[i].babinPrice) && Main.instance.storage.ExistPlastic(unitsPrice[i].plasticPrice);
+        }
     }
 }

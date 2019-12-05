@@ -75,6 +75,7 @@
     <Compile Include="Assets\Scripts\Interface\IDestroyed.cs" />
     <Compile Include="Assets\Scripts\Interface\ISelected.cs" />
     <Compile Include="Assets\Scripts\Managers\Main.cs" />
+    <Compile Include="Assets\Scripts\Managers\Storage.cs" />
     <Compile Include="Assets\Scripts\Simple\Attack.cs" />
     <Compile Include="Assets\Scripts\Simple\MainCamera.cs" />
     <Compile Include="Assets\Scripts\Simple\UnitPrice.cs" />
