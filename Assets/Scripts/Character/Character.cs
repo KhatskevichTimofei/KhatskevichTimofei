@@ -77,7 +77,7 @@ public class Character : MonoBehaviour, IDestroyed
 
     }
 
-    public void Destroyed()
+    public virtual void Destroyed()
     {
         Destroy(gameObject);
     }

@@ -37,10 +37,11 @@ public abstract class Unit : Character, ISelected
     public override void Update()
     {
         base.Update();
+
     }
 
 
-    
+
 
     public void OnMouseUp()  //При нажатии на мышь отчищается выбранные юниты. Добавляет в список выбранных ???. Проходится по циклу от i до размерности листа выбранных. И каждый выбранный юнит получает статус выделенного.
     {
@@ -50,7 +51,17 @@ public abstract class Unit : Character, ISelected
         {
             Main.instance.selected[i].IsSelected = true;
         }
-        
+
+    }
+
+    public override void Destroyed()
+    {
+        base.Destroyed();
+        Main.instance.allUnits.Remove(this);
+        if (Main.instance.selected.Contains(this))
+            Main.instance.selected.Remove(this);
+        Main.instance.allSelectebleObjects.Remove(this);
+
     }
 
 }
