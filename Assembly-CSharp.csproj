@@ -72,6 +72,7 @@
     <Compile Include="Assets\Scripts\Character\Player\Shot.cs" />
     <Compile Include="Assets\Scripts\Character\Player\Unit.cs" />
     <Compile Include="Assets\Scripts\Hero.cs" />
+    <Compile Include="Assets\Scripts\Interactive\Interactive.cs" />
     <Compile Include="Assets\Scripts\Interface\IDestroyed.cs" />
     <Compile Include="Assets\Scripts\Interface\ISelected.cs" />
     <Compile Include="Assets\Scripts\Managers\Main.cs" />

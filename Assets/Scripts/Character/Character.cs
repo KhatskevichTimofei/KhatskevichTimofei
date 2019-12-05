@@ -15,19 +15,23 @@ public class Character : MonoBehaviour, IDestroyed
     public float hp, speed, armor, radiusLook;
     public NavMeshAgent agent;
     public SideConflict sideConflict;
-    public Character target;
+    public IDestroyed target;
     public Attack attack;
 
 
 
     public virtual void Update()
     {
+        Debug.Log(target);
+        Debug.Log((target as MonoBehaviour));
+        if (target == null || (target as MonoBehaviour) == null)
+            target = null;
         if (target != null)
         {
-            Vector3 distance = transform.position - target.transform.position;
+            Vector3 distance = transform.position - (target as MonoBehaviour).transform.position;
             if (distance.magnitude > attack.radiusAttack)
             {
-                SetTargetPosition(target.transform.position + distance.normalized * (attack.radiusAttack - (attack.radiusAttack * 0.1f)));
+                SetTargetPosition((target as MonoBehaviour).transform.position + distance.normalized * (attack.radiusAttack - (attack.radiusAttack * 0.1f)));
 
             }
             else
@@ -45,10 +49,10 @@ public class Character : MonoBehaviour, IDestroyed
         attack.cdProgress -= Time.deltaTime;
     }
 
-    public void SetTarget(Character character)
+    public void SetTarget(IDestroyed target)
     {
 
-        target = character;
+        this.target = target;
 
     }
 

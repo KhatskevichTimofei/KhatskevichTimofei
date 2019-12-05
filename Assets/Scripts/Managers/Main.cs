@@ -146,17 +146,18 @@ public class Main : MonoBehaviour
 
             if (Physics.Raycast(ray, out casthit)) // ????
             {
-                UnitsEnemy target = casthit.transform.GetComponent<UnitsEnemy>();
+                IDestroyed target = casthit.transform.GetComponent<IDestroyed>();
                 if (target != null)
                 {
-                    for (int i = 0; i < selected.Count; i++)
-                    {
-                        if (selected[i] as Unit != null)
+                    if (target as Character == null || target as Character != null && (target as Character).sideConflict == SideConflict.Enemy)
+                        for (int i = 0; i < selected.Count; i++)
                         {
-                            (selected[i] as Unit).SetTarget(target);
-                            (selected[i] as Unit).typeTarget = TypeTarget.Set;
+                            if (selected[i] as Unit != null)
+                            {
+                                (selected[i] as Unit).SetTarget(target);
+                                (selected[i] as Unit).typeTarget = TypeTarget.Set;
+                            }
                         }
-                    }
                 }
                 else
                     for (int i = 0; i < selected.Count; i++)//Цикл который проходится по всем выбранным юнитам
