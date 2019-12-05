@@ -3,10 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+public enum TypeTarget
+{
+    Auto,
+    Set
+    
+}
+
 public abstract class Unit : Character, ISelected
 {
     public GameObject obvodka;
+    public TypeTarget typeTarget;
     bool isSelected;
+
 
     public bool IsSelected
     {
@@ -37,6 +46,37 @@ public abstract class Unit : Character, ISelected
     public override void Update()
     {
         base.Update();
+        switch (typeTarget)
+        {
+            case TypeTarget.Auto:
+                float minDistance = float.MaxValue;
+                UnitsEnemy unit = null;
+                for (int i = 0; i < Main.instance.unitsEnemies.Count; i++)
+                {
+                    float distance = (Main.instance.unitsEnemies[i].transform.position - transform.position).magnitude;
+                    if (distance < minDistance)
+                    {
+                        minDistance = distance;
+                        unit = Main.instance.unitsEnemies[i];
+                    }
+
+
+                }
+                if (minDistance < attack.radiusAttack)
+                {
+                    SetTarget(unit);
+                    typeTarget = TypeTarget.Auto;
+                }
+                else
+                {
+                    SetTarget(null);
+                }
+
+                break;
+            case TypeTarget.Set:
+                break;
+        }
+       
 
     }
 

@@ -37,6 +37,8 @@ public class Character : MonoBehaviour, IDestroyed
                 {
                     Attack(attack, target);
                 }
+                if (this as Unit != null && (this as Unit).typeTarget == TypeTarget.Set)
+                    SetTargetPosition(transform.position);
 
             }
         }

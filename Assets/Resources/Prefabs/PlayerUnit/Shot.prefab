@@ -92,10 +92,11 @@ MonoBehaviour:
   target: {fileID: 0}
   attack:
     damage: 10
-    cd: 0
+    cd: 1
     cdProgress: 0
     radiusAttack: 10
   obvodka: {fileID: 7466036706040712674}
+  typeTarget: 0
 --- !u!1001 &751417977
 PrefabInstance:
   m_ObjectHideFlags: 0

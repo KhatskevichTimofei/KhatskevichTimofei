@@ -16,6 +16,7 @@ public class Main : MonoBehaviour
     public List<Build> allBuild = new List<Build>();
     public List<ISelected> selected = new List<ISelected>();
     public List<ISelected> allSelectebleObjects = new List<ISelected>();
+    public List<UnitsEnemy> unitsEnemies = new List<UnitsEnemy>();
     public Dictionary<KeyCode, List<ISelected>> saveSelectedObject = new Dictionary<KeyCode, List<ISelected>>();
     public Button continueButton;
     public Printer3D mainBuild;
@@ -45,11 +46,24 @@ public class Main : MonoBehaviour
 
             if (Physics.Raycast(ray, out casthit)) // ????
             {
-                for (int i = 0; i < selected.Count; i++)//Цикл который проходится по всем выбранным юнитам
+                UnitsEnemy target = casthit.transform.GetComponent<UnitsEnemy>();
+                if (target != null)
                 {
-                    if (selected[i] as Unit != null)
-                        (selected[i] as Unit).SetTargetPosition(casthit.point);//Каждый выбранный юнит обращается к выбранной позиции, которая задаётся с помощью луча 
+                    for (int i = 0; i < selected.Count; i++)
+                    {
+                        if (selected[i] as Unit != null)
+                        {
+                            (selected[i] as Unit).SetTarget(target);
+                            (selected[i] as Unit).typeTarget = TypeTarget.Set;
+                        }
+                    }
                 }
+                else
+                    for (int i = 0; i < selected.Count; i++)//Цикл который проходится по всем выбранным юнитам
+                    {
+                        if (selected[i] as Unit != null)
+                            (selected[i] as Unit).SetTargetPosition(casthit.point);//Каждый выбранный юнит обращается к выбранной позиции, которая задаётся с помощью луча 
+                    }
             }
             //    if (agent.CalculatePath(casthit.point, path))
             //    {
