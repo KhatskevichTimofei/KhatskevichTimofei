@@ -63,21 +63,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Attack.cs" />
-    <Compile Include="Assets\Scripts\Build.cs" />
-    <Compile Include="Assets\Scripts\Character.cs" />
+    <Compile Include="Assets\Scripts\Builds\Build.cs" />
+    <Compile Include="Assets\Scripts\Builds\Printer3D.cs" />
+    <Compile Include="Assets\Scripts\Character\Character.cs" />
+    <Compile Include="Assets\Scripts\Character\Enemy\Taracan.cs" />
+    <Compile Include="Assets\Scripts\Character\Enemy\UnitsEnemy.cs" />
+    <Compile Include="Assets\Scripts\Character\Player\Shot.cs" />
+    <Compile Include="Assets\Scripts\Character\Player\Unit.cs" />
+    <Compile Include="Assets\Scripts\Character\Player\Village.cs" />
     <Compile Include="Assets\Scripts\Hero.cs" />
-    <Compile Include="Assets\Scripts\IDestroyed.cs" />
-    <Compile Include="Assets\Scripts\ISelected.cs" />
-    <Compile Include="Assets\Scripts\Main.cs" />
-    <Compile Include="Assets\Scripts\MainCamera.cs" />
-    <Compile Include="Assets\Scripts\Printer3D.cs" />
-    <Compile Include="Assets\Scripts\Shot.cs" />
-    <Compile Include="Assets\Scripts\Taracan.cs" />
-    <Compile Include="Assets\Scripts\Unit.cs" />
-    <Compile Include="Assets\Scripts\UnitPrice.cs" />
-    <Compile Include="Assets\Scripts\UnitsEnemy.cs" />
-    <Compile Include="Assets\Scripts\Village.cs" />
+    <Compile Include="Assets\Scripts\Interface\IDestroyed.cs" />
+    <Compile Include="Assets\Scripts\Interface\ISelected.cs" />
+    <Compile Include="Assets\Scripts\Managers\Main.cs" />
+    <Compile Include="Assets\Scripts\Simple\Attack.cs" />
+    <Compile Include="Assets\Scripts\Simple\MainCamera.cs" />
+    <Compile Include="Assets\Scripts\Simple\UnitPrice.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
