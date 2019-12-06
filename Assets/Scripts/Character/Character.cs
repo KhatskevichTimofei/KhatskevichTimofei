@@ -15,15 +15,16 @@ public class Character : MonoBehaviour, IDestroyed
     public float hp, speed, armor, radiusLook;
     public NavMeshAgent agent;
     public SideConflict sideConflict;
-    public IDestroyed target;
+    public IActivity target;
     public Attack attack;
+    public CollectionUP collectionUP;
+    public Transform transformation;
 
 
 
     public virtual void Update()
     {
-        Debug.Log(target);
-        Debug.Log((target as MonoBehaviour));
+
         if (target == null || (target as MonoBehaviour) == null)
             target = null;
         if (target != null)
@@ -36,10 +37,26 @@ public class Character : MonoBehaviour, IDestroyed
             }
             else
             {
-
-                if (attack.cdProgress <= 0)
+                if (target as IDestroyed != null)
                 {
-                    Attack(attack, target);
+                    if (attack.cdProgress <= 0)
+                    {
+                        Attack(attack, target as IDestroyed);
+                    }
+                }
+                else
+                {
+                    if (target as CollectionUP != null)
+                    {
+                        SetTargetPosition((target as CollectionUP).transform.position);
+                        if (distance.magnitude < 2) //Длина 
+                        {
+                            collectionUP = target as CollectionUP;
+                            (target as CollectionUP).gameObject.SetActive(false);
+                            SetTarget(null);
+                        }
+                    }
+
                 }
                 if (this as Unit != null && (this as Unit).typeTarget == TypeTarget.Set)
                     SetTargetPosition(transform.position);
@@ -49,7 +66,7 @@ public class Character : MonoBehaviour, IDestroyed
         attack.cdProgress -= Time.deltaTime;
     }
 
-    public void SetTarget(IDestroyed target)
+    public void SetTarget(IActivity target)
     {
 
         this.target = target;
