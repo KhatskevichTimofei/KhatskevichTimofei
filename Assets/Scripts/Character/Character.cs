@@ -109,8 +109,10 @@ public class Character : MonoBehaviour, IDestroyed
 
     public virtual void Destroyed()
     {
+        GameObject residue = Instantiate(Resources.Load<GameObject>("Prefabs/Residue/ResidueResource"));
         Destroy(gameObject);
+        residue.transform.position = transform.position;
+        
     }
 
-    public void 
 }

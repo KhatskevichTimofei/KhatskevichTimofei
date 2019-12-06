@@ -164,17 +164,26 @@ public class Main : MonoBehaviour
                     target = casthit.transform.GetComponent<CollectionUP>();
                     if (target != null)
                     {
-                        if (selected.Count > 0)
+                        for (int i = 0; i < selected.Count; i++)
                         {
-                            (selected[0] as Unit).SetTarget(target);
-                            (selected[0] as Unit).typeTarget = TypeTarget.Set;
+
+                            if ((selected[i] as Unit).collectionUP == null)
+                            {
+                                (selected[i] as Unit).SetTarget(target);
+                                (selected[i] as Unit).typeTarget = TypeTarget.Set;
+                                break;
+                            }
                         }
                     }
                     else
                     for (int i = 0; i < selected.Count; i++)//Цикл который проходится по всем выбранным юнитам
                     {
-                        if (selected[i] as Unit != null)
-                            (selected[i] as Unit).SetTargetPosition(casthit.point);//Каждый выбранный юнит обращается к выбранной позиции, которая задаётся с помощью луча 
+                            if (selected[i] as Unit != null)
+                            {
+                                (selected[i] as Unit).SetTarget(null);
+                                (selected[i] as Unit).typeTarget = TypeTarget.Auto;
+                                (selected[i] as Unit).SetTargetPosition(casthit.point);//Каждый выбранный юнит обращается к выбранной позиции, которая задаётся с помощью луча 
+                            }
                     }
                 }
             }
