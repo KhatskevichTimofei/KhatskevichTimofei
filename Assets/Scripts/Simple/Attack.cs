@@ -6,7 +6,7 @@ using UnityEngine;
 [System.Serializable]
 public class Attack 
 {
-    public float damage, cd, cdProgress, radiusAttack;
+    public float damage, cd, cdProgress, radiusAttack, radiusUp;
 
  
 }

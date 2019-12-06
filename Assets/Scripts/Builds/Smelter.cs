@@ -1,14 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.UI;
 
-public class Printer3D : Build
+public class Smelter : Build
 {
-    public List<UnitPrice> prices = new List<UnitPrice>();
-    public List<UnitPrice> ochered = new List<UnitPrice>();
-    //public GameObject clickBar
+    public List<BabinPrice> prices = new List<BabinPrice>();
+    public List<BabinPrice> ochered = new List<BabinPrice>();
 
 
     protected override void Update()
@@ -53,6 +51,6 @@ public class Printer3D : Build
     {
         Main.instance.storage.RemovePlastic(price.plasticPrice);
         Main.instance.storage.RemoveBabin(price.babinPrice);
-        ochered.Add(price.Copy<UnitPrice>());
+        ochered.Add(price.Copy<BabinPrice>());
     }
 }
