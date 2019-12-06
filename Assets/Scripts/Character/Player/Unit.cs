@@ -15,6 +15,7 @@ public abstract class Unit : Character, ISelected
     public GameObject obvodka;
     public TypeTarget typeTarget;
     bool isSelected;
+    public CollectionUP collectionUp;
 
 
     public bool IsSelected

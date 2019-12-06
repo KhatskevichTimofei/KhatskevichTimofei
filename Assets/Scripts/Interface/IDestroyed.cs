@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IDestroyed
+public interface IDestroyed : IActivity
 {
     void GetDamage(float damage);
     void Destroyed();

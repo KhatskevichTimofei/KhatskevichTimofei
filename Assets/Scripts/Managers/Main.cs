@@ -146,7 +146,7 @@ public class Main : MonoBehaviour
 
             if (Physics.Raycast(ray, out casthit)) // ????
             {
-                IDestroyed target = casthit.transform.GetComponent<IDestroyed>();
+                IActivity target = casthit.transform.GetComponent<IDestroyed>();
                 if (target != null)
                 {
                     if (target as Character == null || target as Character != null && (target as Character).sideConflict == SideConflict.Enemy)
@@ -160,11 +160,23 @@ public class Main : MonoBehaviour
                         }
                 }
                 else
+                {
+                    target = casthit.transform.GetComponent<CollectionUP>();
+                    if (target != null)
+                    {
+                        if (selected.Count > 0)
+                        {
+                            (selected[0] as Unit).SetTarget(target);
+                            (selected[0] as Unit).typeTarget = TypeTarget.Set;
+                        }
+                    }
+                    else
                     for (int i = 0; i < selected.Count; i++)//Цикл который проходится по всем выбранным юнитам
                     {
                         if (selected[i] as Unit != null)
                             (selected[i] as Unit).SetTargetPosition(casthit.point);//Каждый выбранный юнит обращается к выбранной позиции, которая задаётся с помощью луча 
                     }
+                }
             }
             //    if (agent.CalculatePath(casthit.point, path))
             //    {
