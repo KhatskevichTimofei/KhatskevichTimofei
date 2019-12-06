@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Village : Unit
+public class Knife : Unit
 {
     void Start()
     {

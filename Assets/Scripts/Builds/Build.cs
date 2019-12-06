@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public abstract class Build : MonoBehaviour, ISelected, IDestroyed
 {
     public float hp;
     public List<UnitPrice> unitsPrice = new List<UnitPrice>();
     public List<UnitPrice> ochered = new List<UnitPrice>();
+    public List<Button> buttons = new List<Button>();
     public Vector3 shortPoint;
     public Vector3 pointSbor;
     protected bool isSelected;
@@ -69,6 +71,8 @@ public abstract class Build : MonoBehaviour, ISelected, IDestroyed
 
     public void AddOchered(UnitPrice unitPrice)
     {
+        Main.instance.storage.RemovePlastic(unitPrice.plasticPrice);
+        Main.instance.storage.RemoveBabin(unitPrice.babinPrice);
         ochered.Add(unitPrice.Copy());
 
     }

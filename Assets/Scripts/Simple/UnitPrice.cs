@@ -7,7 +7,7 @@ public class UnitPrice
 {
     public GameObject unit;
     public float timeCreate;
-    public int plasticPrice, colorPrice;
+    public int plasticPrice, babinPrice;
     public string infoUnit;
     public float progress;
 
@@ -27,7 +27,7 @@ public class UnitPrice
             unit = unit,
             timeCreate = timeCreate,
             plasticPrice = plasticPrice,
-            colorPrice = colorPrice,
+            babinPrice = babinPrice,
             infoUnit = infoUnit
         };
         return unitPrice;

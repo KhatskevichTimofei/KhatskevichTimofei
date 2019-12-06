@@ -124,13 +124,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46933cc2b32e62a49ace5ac1b7248c99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 500
+  hp: 30
   speed: 50
   armor: 50
   radiusLook: 20
   agent: {fileID: 6914884771554602855}
   sideConflict: 1
-  target: {fileID: 0}
   attack:
     damage: 40
     cd: 2
@@ -168,7 +167,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1
+  m_Radius: 1.17
+  m_Height: 2.26
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
