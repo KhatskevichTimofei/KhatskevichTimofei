@@ -111,4 +111,6 @@ public class Character : MonoBehaviour, IDestroyed
     {
         Destroy(gameObject);
     }
+
+    public void 
 }
