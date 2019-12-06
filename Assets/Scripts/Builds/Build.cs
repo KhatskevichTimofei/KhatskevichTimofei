@@ -7,9 +7,11 @@ using UnityEngine.UI;
 public abstract class Build : MonoBehaviour, ISelected, IDestroyed
 {
     public float hp;
-    public List<UnitPrice> unitsPrice = new List<UnitPrice>();
-    public List<UnitPrice> ochered = new List<UnitPrice>();
     public List<Button> buttons = new List<Button>();
+    public List<Image> ocheredImage;
+    public GameObject ocheredPanel;
+    public GameObject funcionalPanel;
+    public Image progressBar;
     public Vector3 shortPoint;
     public Vector3 pointSbor;
     protected bool isSelected;
@@ -23,16 +25,21 @@ public abstract class Build : MonoBehaviour, ISelected, IDestroyed
         }
         set
         {
-
-            isSelected = value;
-            if (isSelected) 
+            isSelected = value; //
+            if (isSelected)
             {
+                ocheredPanel.SetActive(true);
+                funcionalPanel.SetActive(true);
                 obvodka.SetActive(true);
             }
             else
             {
+                funcionalPanel.SetActive(false);
+                ocheredPanel.SetActive(false);
                 obvodka.SetActive(false);
             }
+            isSelected = value;
+
         }
     }
 
@@ -44,37 +51,6 @@ public abstract class Build : MonoBehaviour, ISelected, IDestroyed
 
     protected virtual void Update()
     {
-        if (ochered.Count > 0)
-        {
-            if (ochered[0].AddProgress())
-            {
-                CreateUnit(ochered[0].unit);
-                ochered.RemoveAt(0);
-            }
-        }
-    }
-
-    public void CreateUnit(GameObject gameObj)
-    {
-        GameObject obj = Instantiate(gameObj);
-        obj.GetComponent<NavMeshAgent>().Warp(shortPoint);
-        obj.GetComponent<Unit>().SetTargetPosition(pointSbor);
-        Main.instance.allUnits.Add(obj.GetComponent<Unit>());
-        Main.instance.allSelectebleObjects.Add(obj.GetComponent<Unit>());
-    }
-
-    public void AddOchered(int index)
-    {
-        AddOchered(unitsPrice[index]);
-    }
-
-
-    public void AddOchered(UnitPrice unitPrice)
-    {
-        Main.instance.storage.RemovePlastic(unitPrice.plasticPrice);
-        Main.instance.storage.RemoveBabin(unitPrice.babinPrice);
-        ochered.Add(unitPrice.Copy());
-
     }
 
     public void OnMouseUp()

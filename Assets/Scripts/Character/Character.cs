@@ -18,7 +18,8 @@ public class Character : MonoBehaviour, IDestroyed
     public IActivity target;
     public Attack attack;
     public CollectionUP collectionUP;
-    public Transform transformation;
+    public Transform collectionUpParent;
+    //public Attack radiusUpCharacter;
 
 
 
@@ -29,37 +30,43 @@ public class Character : MonoBehaviour, IDestroyed
             target = null;
         if (target != null)
         {
+            CollectionUP collection = target as CollectionUP;
+            IDestroyed destroyed = target as IDestroyed;
+
+
             Vector3 distance = transform.position - (target as MonoBehaviour).transform.position;
-            if (distance.magnitude > attack.radiusAttack)
+            if (destroyed != null && distance.magnitude > attack.radiusAttack)
             {
                 SetTargetPosition((target as MonoBehaviour).transform.position + distance.normalized * (attack.radiusAttack - (attack.radiusAttack * 0.1f)));
 
             }
             else
             {
-                if (target as IDestroyed != null)
+                if (destroyed != null)
                 {
                     if (attack.cdProgress <= 0)
                     {
-                        Attack(attack, target as IDestroyed);
+                        Attack(attack, destroyed);
                     }
+                    if (this as Unit != null && (this as Unit).typeTarget == TypeTarget.Set)
+                        SetTargetPosition(transform.position);
                 }
                 else
                 {
-                    if (target as CollectionUP != null)
+                    if (collection != null)
                     {
-                        SetTargetPosition((target as CollectionUP).transform.position);
+                        SetTargetPosition(collection.transform.position);
                         if (distance.magnitude < 2) //Длина 
                         {
-                            collectionUP = target as CollectionUP;
-                            (target as CollectionUP).gameObject.SetActive(false);
+                            collectionUP = collection;
+                            collection.transform.parent = collectionUpParent;
+                            collection.transform.localPosition = new Vector3(0, 0, 0);
                             SetTarget(null);
+                            (this as Unit).typeTarget = TypeTarget.Auto;
                         }
                     }
 
                 }
-                if (this as Unit != null && (this as Unit).typeTarget == TypeTarget.Set)
-                    SetTargetPosition(transform.position);
 
             }
         }

@@ -1,27 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 [System.Serializable]
-public class UnitPrice
+public class UnitPrice : Price
 {
     public GameObject unit;
-    public float timeCreate;
-    public int plasticPrice, babinPrice;
-    public string infoUnit;
-    public float progress;
 
 
-    public bool AddProgress()
+
+    public override void Complete(Build build)
     {
-
-        progress += Time.deltaTime;
-        return progress >= timeCreate;
+        GameObject obj = Object.Instantiate(unit);
+        obj.GetComponent<NavMeshAgent>().Warp(build.shortPoint);
+        obj.GetComponent<Unit>().SetTargetPosition(build.pointSbor);
+        Main.instance.allUnits.Add(obj.GetComponent<Unit>());
+        Main.instance.allSelectebleObjects.Add(obj.GetComponent<Unit>());
     }
 
-    public UnitPrice Copy()
+    public override T Copy<T>()
     {
-
         UnitPrice unitPrice = new UnitPrice
         {
             unit = unit,
@@ -30,6 +29,6 @@ public class UnitPrice
             babinPrice = babinPrice,
             infoUnit = infoUnit
         };
-        return unitPrice;
+        return unitPrice as T;
     }
 }

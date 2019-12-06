@@ -125,10 +125,11 @@ MonoBehaviour:
     cd: 1
     cdProgress: 0
     radiusAttack: 10
+    radiusUp: 5
   collectionUP: {fileID: 0}
+  collectionUpParent: {fileID: 9058042093991533985}
   obvodka: {fileID: 7466036706040712674}
   typeTarget: 0
-  collectionUp: {fileID: 0}
 --- !u!1001 &751417977
 PrefabInstance:
   m_ObjectHideFlags: 0
