@@ -33,6 +33,7 @@ public class Character : MonoBehaviour, IDestroyed
             CollectionUP collection = target as CollectionUP;
             IDestroyed destroyed = target as IDestroyed;
             LegoBox legoBox = target as LegoBox;
+            Smelter smelter = target as Smelter;
 
             Vector3 distance = transform.position - (target as MonoBehaviour).transform.position;
             if (destroyed != null && distance.magnitude > attack.radiusAttack)
@@ -42,7 +43,7 @@ public class Character : MonoBehaviour, IDestroyed
             }
             else
             {
-                if (destroyed != null)
+                if (destroyed != null && (target as Build != null && (target as Build).sideConflict == SideConflict.Enemy || target as Character != null && (target as Character).sideConflict == SideConflict.Enemy || target as Interactive != null))
                 {
                     if (attack.cdProgress <= 0)
                     {
@@ -69,16 +70,30 @@ public class Character : MonoBehaviour, IDestroyed
                     {
                         if (legoBox != null)
                         {
-                            SetTargetPosition(legoBox.transform.position);
-                            if (distance.magnitude < 2)
+                            SetTargetPosition(legoBox.pointSbor.position);
+                            if ((transform.position - legoBox.pointSbor.position).magnitude < 2)
                             {
                                 GameObject gameObject;
                                 gameObject = legoBox.GetBox(this as Unit);
                                 collectionUP = gameObject.GetComponent<CollectionUP>();
                                 gameObject.transform.parent = collectionUpParent;
                                 gameObject.transform.localPosition = new Vector3(0, 0, 0);
-                                SetTarget(null);
-                                (this as Unit).typeTarget = TypeTarget.Auto;
+                                SetTarget(Main.instance.smelter);
+                            }
+                        }
+                        else
+                        {
+                            SetTargetPosition(smelter.pointSdachi.position);
+                            if ((transform.position - smelter.pointSdachi.position).magnitude < 2)
+                            {
+                                if (collectionUP != null)
+                                {
+                                    Main.instance.storage.AddBabin(collectionUP.babin);
+                                    Main.instance.storage.AddPlastic(collectionUP.plastic);
+                                    Destroy(collectionUP.gameObject);
+                                    collectionUP = null;
+                                    SetTarget(Main.instance.legoBox);
+                                }
                             }
                         }
                     }

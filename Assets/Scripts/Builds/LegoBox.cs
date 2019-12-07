@@ -6,6 +6,7 @@ public class LegoBox : MonoBehaviour, ISelected, IActivity
 {
 
     public Storage storage;
+    public Transform pointSbor;
 
     public bool IsSelected { get; set; }
 

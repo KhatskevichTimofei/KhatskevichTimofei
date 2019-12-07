@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class CollectionUP : MonoBehaviour, ISelected, IActivity
 {
-    public float plastic, babin;
+    public float plastic;
+    public int babin;
     public Unit unit;
     
 

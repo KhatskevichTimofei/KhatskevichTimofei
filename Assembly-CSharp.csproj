@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\Builds\Build.cs" />
     <Compile Include="Assets\Scripts\Builds\LegoBox.cs" />
     <Compile Include="Assets\Scripts\Builds\Printer3D.cs" />
+    <Compile Include="Assets\Scripts\Builds\Printer3DUpgrade.cs" />
     <Compile Include="Assets\Scripts\Builds\Smelter.cs" />
     <Compile Include="Assets\Scripts\Character\Character.cs" />
     <Compile Include="Assets\Scripts\Character\Enemy\Taracan.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Assets\Scripts\Character\Player\Unit.cs" />
     <Compile Include="Assets\Scripts\CollectionUP.cs" />
     <Compile Include="Assets\Scripts\Hero.cs" />
+    <Compile Include="Assets\Scripts\Interactive\DestroyInteractive.cs" />
     <Compile Include="Assets\Scripts\Interactive\Interactive.cs" />
     <Compile Include="Assets\Scripts\Interface\IActivity.cs" />
     <Compile Include="Assets\Scripts\Interface\IDestroyed.cs" />
