@@ -13,8 +13,12 @@ public class LegoBox : MonoBehaviour, ISelected, IActivity
     public GameObject GetBox(Unit unit)
     {
         storage.RemovePlastic(50);
-        return Instantiate(Resources.Load<GameObject>("Prefabs/Residue/ResidueResource"));
+        if (storage.plastic <= 0)
+        {
+            Destroy(gameObject);
+        }
 
+        return Instantiate(Resources.Load<GameObject>("Prefabs/Residue/ResidueResource"));
     }
 
 

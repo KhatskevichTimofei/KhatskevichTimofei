@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 1113423691574474174}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 1.09, y: 0.96, z: 22.07}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.7255, y: 2.7255, z: 2.7255}
   m_Children:
   - {fileID: 3672443971438674321}
   m_Father: {fileID: 0}
@@ -95,7 +95,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   storage:
     babin: 0
-    plastic: 50
+    plastic: 150
     babinIcon: {fileID: 0}
     plasticIcon: {fileID: 0}
     textBabin: {fileID: 0}
