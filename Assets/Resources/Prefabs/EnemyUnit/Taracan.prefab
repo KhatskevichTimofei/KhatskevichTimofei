@@ -131,10 +131,13 @@ MonoBehaviour:
   agent: {fileID: 6914884771554602855}
   sideConflict: 1
   attack:
-    damage: 40
+    damage: 1
     cd: 2
     cdProgress: 0
     radiusAttack: 5
+    radiusUp: 0
+  collectionUP: {fileID: 0}
+  collectionUpParent: {fileID: 0}
 --- !u!195 &6914884771554602855
 NavMeshAgent:
   m_ObjectHideFlags: 0
