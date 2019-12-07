@@ -1,13 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class Smelter : Build
+public class Printer3DUpgrade : Build, IDestroyed, ISelected
 {
-    public List<BabinPrice> prices = new List<BabinPrice>();
-    public List<BabinPrice> ochered = new List<BabinPrice>();
-    public Transform pointSdachi;
+    public List<UnitPrice> prices = new List<UnitPrice>();
+    public List<UnitPrice> ochered = new List<UnitPrice>();
+    //public GameObject clickBar
+
 
     protected override void Update()
     {
@@ -51,6 +51,8 @@ public class Smelter : Build
     {
         Main.instance.storage.RemovePlastic(price.plasticPrice);
         Main.instance.storage.RemoveBabin(price.babinPrice);
-        ochered.Add(price.Copy<BabinPrice>());
+        ochered.Add(price.Copy<UnitPrice>());
     }
+
+
 }

@@ -85,7 +85,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 30
-  speed: 20
+  speed: 40
   armor: 10
   radiusLook: 40
   agent: {fileID: 1263421864172881029}

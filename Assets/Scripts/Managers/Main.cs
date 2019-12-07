@@ -20,6 +20,8 @@ public class Main : MonoBehaviour
     public Dictionary<KeyCode, List<ISelected>> saveSelectedObject = new Dictionary<KeyCode, List<ISelected>>();
     public Button continueButton;
     public Printer3D mainBuild;
+    public Smelter smelter;
+    public LegoBox legoBox;
     public Storage storage = new Storage();
     bool isFrameSelected;
 
@@ -147,17 +149,16 @@ public class Main : MonoBehaviour
             if (Physics.Raycast(ray, out casthit)) // ????
             {
                 IActivity target = casthit.transform.GetComponent<IDestroyed>();
-                if (target != null)
+                if (target != null && (target as Build != null && (target as Build).sideConflict == SideConflict.Enemy || target as Character != null && (target as Character).sideConflict == SideConflict.Enemy || target as Interactive != null))
                 {
-                    if (target as Character == null || target as Character != null && (target as Character).sideConflict == SideConflict.Enemy)
-                        for (int i = 0; i < selected.Count; i++)
+                    for (int i = 0; i < selected.Count; i++)
+                    {
+                        if (selected[i] as Unit != null)
                         {
-                            if (selected[i] as Unit != null)
-                            {
-                                (selected[i] as Unit).SetTarget(target);
-                                (selected[i] as Unit).typeTarget = TypeTarget.Set;
-                            }
+                            (selected[i] as Unit).SetTarget(target);
+                            (selected[i] as Unit).typeTarget = TypeTarget.Set;
                         }
+                    }
                 }
                 else
                 {
@@ -176,13 +177,30 @@ public class Main : MonoBehaviour
                         }
                     }
                     else
-                    for (int i = 0; i < selected.Count; i++)//Цикл который проходится по всем выбранным юнитам
                     {
-                            if (selected[i] as Unit != null)
+                        target = casthit.transform.GetComponent<LegoBox>();
+                        if (target == null)
+                            target = casthit.transform.GetComponent<Smelter>();
+                        if (target != null)
+                        {
+                            for (int i = 0; i < selected.Count; i++)
                             {
-                                (selected[i] as Unit).SetTarget(null);
-                                (selected[i] as Unit).typeTarget = TypeTarget.Auto;
-                                (selected[i] as Unit).SetTargetPosition(casthit.point);//Каждый выбранный юнит обращается к выбранной позиции, которая задаётся с помощью луча 
+                                if (selected[i] as Unit)
+                                {
+                                    (selected[i] as Unit).SetTarget(target);
+                                    (selected[i] as Unit).typeTarget = TypeTarget.Set;
+                                }
+                            }
+                        }
+                        else
+                            for (int i = 0; i < selected.Count; i++)//Цикл который проходится по всем выбранным юнитам
+                            {
+                                if (selected[i] as Unit != null)
+                                {
+                                    (selected[i] as Unit).SetTarget(null);
+                                    (selected[i] as Unit).typeTarget = TypeTarget.Auto;
+                                    (selected[i] as Unit).SetTargetPosition(casthit.point);//Каждый выбранный юнит обращается к выбранной позиции, которая задаётся с помощью луча 
+                                }
                             }
                     }
                 }
