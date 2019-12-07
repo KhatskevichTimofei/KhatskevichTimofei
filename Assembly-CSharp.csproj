@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Builds\Build.cs" />
+    <Compile Include="Assets\Scripts\Builds\LegoBox.cs" />
     <Compile Include="Assets\Scripts\Builds\Printer3D.cs" />
     <Compile Include="Assets\Scripts\Builds\Smelter.cs" />
     <Compile Include="Assets\Scripts\Character\Character.cs" />

@@ -32,7 +32,7 @@ public class Character : MonoBehaviour, IDestroyed
         {
             CollectionUP collection = target as CollectionUP;
             IDestroyed destroyed = target as IDestroyed;
-
+            LegoBox legoBox = target as LegoBox;
 
             Vector3 distance = transform.position - (target as MonoBehaviour).transform.position;
             if (destroyed != null && distance.magnitude > attack.radiusAttack)
@@ -63,6 +63,23 @@ public class Character : MonoBehaviour, IDestroyed
                             collection.transform.localPosition = new Vector3(0, 0, 0);
                             SetTarget(null);
                             (this as Unit).typeTarget = TypeTarget.Auto;
+                        }
+                    }
+                    else
+                    {
+                        if (legoBox != null)
+                        {
+                            SetTargetPosition(legoBox.transform.position);
+                            if (distance.magnitude < 2)
+                            {
+                                GameObject gameObject;
+                                gameObject = legoBox.GetBox(this as Unit);
+                                collectionUP = gameObject.GetComponent<CollectionUP>();
+                                gameObject.transform.parent = collectionUpParent;
+                                gameObject.transform.localPosition = new Vector3(0, 0, 0);
+                                SetTarget(null);
+                                (this as Unit).typeTarget = TypeTarget.Auto;
+                            }
                         }
                     }
 
@@ -112,7 +129,7 @@ public class Character : MonoBehaviour, IDestroyed
         GameObject residue = Instantiate(Resources.Load<GameObject>("Prefabs/Residue/ResidueResource"));
         Destroy(gameObject);
         residue.transform.position = transform.position;
-        
+
     }
 
 }

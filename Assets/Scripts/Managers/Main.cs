@@ -176,13 +176,28 @@ public class Main : MonoBehaviour
                         }
                     }
                     else
-                    for (int i = 0; i < selected.Count; i++)//Цикл который проходится по всем выбранным юнитам
                     {
-                            if (selected[i] as Unit != null)
+                        target = casthit.transform.GetComponent<LegoBox>();
+                        if (target != null)
+                        {
+                            for (int i = 0; i < selected.Count; i++)
                             {
-                                (selected[i] as Unit).SetTarget(null);
-                                (selected[i] as Unit).typeTarget = TypeTarget.Auto;
-                                (selected[i] as Unit).SetTargetPosition(casthit.point);//Каждый выбранный юнит обращается к выбранной позиции, которая задаётся с помощью луча 
+                                if (selected[i] as Unit)
+                                {
+                                    (selected[i] as Unit).SetTarget(target);
+                                    (selected[i] as Unit).typeTarget = TypeTarget.Set;
+                                }
+                            }
+                        }
+                        else
+                            for (int i = 0; i < selected.Count; i++)//Цикл который проходится по всем выбранным юнитам
+                            {
+                                if (selected[i] as Unit != null)
+                                {
+                                    (selected[i] as Unit).SetTarget(null);
+                                    (selected[i] as Unit).typeTarget = TypeTarget.Auto;
+                                    (selected[i] as Unit).SetTargetPosition(casthit.point);//Каждый выбранный юнит обращается к выбранной позиции, которая задаётся с помощью луча 
+                                }
                             }
                     }
                 }
