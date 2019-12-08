@@ -23,11 +23,15 @@ public class Main : MonoBehaviour
     public Smelter smelter;
     public LegoBox legoBox;
     public Storage storage = new Storage();
+    public Transform parentEnemy, parentUnit, parentBuild;
     bool isFrameSelected;
 
     void Start()
     {
         instance = this; //Переменной типа Main мы задаём здачения самого себя 
+        allUnits.AddRange(parentUnit.GetComponentsInChildren<Unit>());
+        allBuild.AddRange(parentBuild.GetComponentsInChildren<Build>());
+        unitsEnemies.AddRange(parentEnemy.GetComponentsInChildren<UnitsEnemy>());
         allSelectebleObjects.AddRange(allUnits); //В список всех построек и юнитов записываются все юниты
         allSelectebleObjects.AddRange(allBuild); //В список всех построке и юнитов записываются все построек
     }

@@ -15,6 +15,7 @@ public class UnitPrice : Price
         GameObject obj = Object.Instantiate(unit);
         obj.GetComponent<NavMeshAgent>().Warp(build.shortPoint);
         obj.GetComponent<Unit>().SetTargetPosition(build.pointSbor);
+        obj.GetComponent<Unit>().typeTarget = TypeTarget.Set;
         Main.instance.allUnits.Add(obj.GetComponent<Unit>());
         Main.instance.allSelectebleObjects.Add(obj.GetComponent<Unit>());
     }

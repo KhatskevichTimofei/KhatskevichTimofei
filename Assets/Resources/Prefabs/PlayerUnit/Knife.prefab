@@ -94,11 +94,12 @@ MonoBehaviour:
     damage: 15
     cd: 2
     cdProgress: 0
-    radiusAttack: 2
-    radiusUp: 5
+    radiusAttack: 20
+    radiusUp: 10
   collectionUP: {fileID: 0}
   collectionUpParent: {fileID: 5477649273091380912}
   nextPosition: {x: 0, y: 0, z: 0}
+  bulletTransform: {fileID: 0}
   obvodka: {fileID: 1462543140500941034}
   typeTarget: 0
 --- !u!1 &9180553587986319928

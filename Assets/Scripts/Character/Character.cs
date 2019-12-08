@@ -20,12 +20,26 @@ public class Character : MonoBehaviour, IDestroyed
     public CollectionUP collectionUP;
     public Transform collectionUpParent;
     public Vector3 nextPosition;
+    public Transform bulletTransform;
+    float timeIdle;
+    //public Bullet bullet;
     //public Attack radiusUpCharacter;
 
 
 
     public virtual void Update()
     {
+        if (this as Unit != null && (this as Unit).typeTarget == TypeTarget.Set)
+            if (agent.velocity.magnitude < agent.speed / 5)
+                timeIdle += Time.deltaTime;
+            else
+                timeIdle = 0;
+        if (timeIdle >= 0.5 && this as Unit != null)
+        {
+            (this as Unit).typeTarget = TypeTarget.Auto;
+            SetTargetPosition(transform.position);
+            timeIdle = 0;
+        }
         agent.acceleration = speed * 2;
         agent.speed = speed;
         if (target == null || (target as MonoBehaviour) == null)
@@ -41,7 +55,7 @@ public class Character : MonoBehaviour, IDestroyed
             if (destroyed != null && distance.magnitude > attack.radiusAttack && (target as Build != null && (target as Build).sideConflict != sideConflict || target as Character != null && (target as Character).sideConflict != sideConflict || target as Interactive != null))
             {
                 SetTargetPosition((target as MonoBehaviour).transform.position + distance.normalized * (attack.radiusAttack - (attack.radiusAttack * 0.1f)));
-                
+
 
             }
             else
@@ -127,8 +141,16 @@ public class Character : MonoBehaviour, IDestroyed
 
     public void Attack(Attack attack, IDestroyed destroyed)
     {
-        destroyed.GetDamage(attack.damage);
         attack.cdProgress = attack.cd;
+        if (bulletTransform == null)
+            destroyed.GetDamage(attack.damage);
+        else
+        {
+            GameObject bullet = Instantiate(Resources.Load<GameObject>("Prefabs/Bullet"));
+            bullet.transform.position = bulletTransform.position;
+            bullet.transform.LookAt((target as MonoBehaviour).transform);
+            bullet.GetComponent<Bullet>().parent = this;
+        }
     }
 
     public void GetDamage(float damage)
