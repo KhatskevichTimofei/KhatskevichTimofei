@@ -19,13 +19,15 @@ public class Character : MonoBehaviour, IDestroyed
     public Attack attack;
     public CollectionUP collectionUP;
     public Transform collectionUpParent;
+    public Vector3 nextPosition;
     //public Attack radiusUpCharacter;
 
 
 
     public virtual void Update()
     {
-
+        agent.acceleration = speed * 2;
+        agent.speed = speed;
         if (target == null || (target as MonoBehaviour) == null)
             target = null;
         if (target != null)

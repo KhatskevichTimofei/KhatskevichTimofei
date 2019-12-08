@@ -89,18 +89,36 @@ public class Main : MonoBehaviour
         }
         if (Input.GetMouseButtonUp(0) && isFrameSelected) //Выделяет юнитов попавших в картинку
         {
-
+            bool isUnitsSelect = false;
             for (int i = 0; i < allSelectebleObjects.Count; i++) //Создаёт новое изображение и записываает его в перменную area. 
             {
                 Rect area = new Rect(image1.rectTransform.anchoredPosition, image1.rectTransform.sizeDelta);
                 if (area.Contains(Camera.main.WorldToScreenPoint((allSelectebleObjects[i] as MonoBehaviour).transform.position))) //Если в созданную картинку area попадает какой либо юнит, выполняется условие  и записывает из массива allUnits юнитов в массив selectedUnits 
                 {
+                    if (allSelectebleObjects[i] as Unit != null)
+                    {
+                        isUnitsSelect = true;
+                        break;
+                    }
 
-                    selected.Add(allSelectebleObjects[i]);
-                    allSelectebleObjects[i].IsSelected = true;
+
                 }
                 image1.enabled = false;//Выключает картинку
 
+            }
+            for (int i = 0; i < allSelectebleObjects.Count; i++) //Создаёт новое изображение и записываает его в перменную area. 
+            {
+                Rect area = new Rect(image1.rectTransform.anchoredPosition, image1.rectTransform.sizeDelta);
+                if (!isUnitsSelect || isUnitsSelect && allSelectebleObjects[i] as Unit != null)
+                {
+                    if (area.Contains(Camera.main.WorldToScreenPoint((allSelectebleObjects[i] as MonoBehaviour).transform.position))) //Если в созданную картинку area попадает какой либо юнит, выполняется условие  и записывает из массива allUnits юнитов в массив selectedUnits 
+                    {
+
+                        selected.Add(allSelectebleObjects[i]);
+                        allSelectebleObjects[i].IsSelected = true;
+                    }
+                    image1.enabled = false;//Выключает картинку
+                }
             }
             isFrameSelected = false;
         }

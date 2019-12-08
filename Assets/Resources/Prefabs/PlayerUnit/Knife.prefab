@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 1263421864172881027}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6.052747, y: 0.5, z: 3.9287305}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 21.149584, y: 21.149584, z: 21.149584}
   m_Children:
   - {fileID: 4875638029121775710}
   - {fileID: 2454645295798606585}
@@ -85,7 +85,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 30
-  speed: 40
+  speed: 60
   armor: 10
   radiusLook: 40
   agent: {fileID: 1263421864172881029}
@@ -98,6 +98,7 @@ MonoBehaviour:
     radiusUp: 5
   collectionUP: {fileID: 0}
   collectionUpParent: {fileID: 5477649273091380912}
+  nextPosition: {x: 0, y: 0, z: 0}
   obvodka: {fileID: 1462543140500941034}
   typeTarget: 0
 --- !u!1 &9180553587986319928
