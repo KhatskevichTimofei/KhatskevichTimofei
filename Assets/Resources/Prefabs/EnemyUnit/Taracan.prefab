@@ -127,18 +127,19 @@ MonoBehaviour:
   hp: 30
   speed: 50
   armor: 50
-  radiusLook: 20
+  radiusLook: 150
   agent: {fileID: 6914884771554602855}
   sideConflict: 1
   attack:
-    damage: 1
+    damage: 10
     cd: 1
     cdProgress: 0
-    radiusAttack: 10
+    radiusAttack: 30
     radiusUp: 0
   collectionUP: {fileID: 0}
   collectionUpParent: {fileID: 0}
   nextPosition: {x: 0, y: 0, z: 0}
+  bulletTransform: {fileID: 0}
 --- !u!195 &6914884771554602855
 NavMeshAgent:
   m_ObjectHideFlags: 0
