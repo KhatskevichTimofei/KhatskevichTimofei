@@ -38,14 +38,15 @@ public class Character : MonoBehaviour, IDestroyed
             Smelter smelter = target as Smelter;
 
             Vector3 distance = transform.position - (target as MonoBehaviour).transform.position;
-            if (destroyed != null && distance.magnitude > attack.radiusAttack)
+            if (destroyed != null && distance.magnitude > attack.radiusAttack && (target as Build != null && (target as Build).sideConflict != sideConflict || target as Character != null && (target as Character).sideConflict != sideConflict || target as Interactive != null))
             {
                 SetTargetPosition((target as MonoBehaviour).transform.position + distance.normalized * (attack.radiusAttack - (attack.radiusAttack * 0.1f)));
+                
 
             }
             else
             {
-                if (destroyed != null && (target as Build != null && (target as Build).sideConflict == SideConflict.Enemy || target as Character != null && (target as Character).sideConflict == SideConflict.Enemy || target as Interactive != null))
+                if (destroyed != null && (target as Build != null && (target as Build).sideConflict != sideConflict || target as Character != null && (target as Character).sideConflict != sideConflict || target as Interactive != null))
                 {
                     if (attack.cdProgress <= 0)
                     {

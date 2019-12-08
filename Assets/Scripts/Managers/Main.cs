@@ -216,7 +216,7 @@ public class Main : MonoBehaviour
                                 if (selected[i] as Unit != null)
                                 {
                                     (selected[i] as Unit).SetTarget(null);
-                                    (selected[i] as Unit).typeTarget = TypeTarget.Auto;
+                                    (selected[i] as Unit).typeTarget = TypeTarget.Set;
                                     (selected[i] as Unit).SetTargetPosition(casthit.point);//Каждый выбранный юнит обращается к выбранной позиции, которая задаётся с помощью луча 
                                 }
                             }

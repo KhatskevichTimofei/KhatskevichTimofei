@@ -12123,6 +12123,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 26.29201
       objectReference: {fileID: 0}
+    - target: {fileID: 4433848992911451355, guid: 25617bcba4eb7174e95c4268b78535e9,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.979
+      objectReference: {fileID: 0}
     - target: {fileID: 8787889395524274202, guid: 25617bcba4eb7174e95c4268b78535e9,
         type: 3}
       propertyPath: buttons.Array.data[0]
