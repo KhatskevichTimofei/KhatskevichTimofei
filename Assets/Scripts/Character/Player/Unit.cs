@@ -12,6 +12,7 @@ public enum TypeTarget
 
 public abstract class Unit : Character, ISelected
 {
+
     public GameObject obvodka;
     public TypeTarget typeTarget;
     bool isSelected;
@@ -22,15 +23,15 @@ public abstract class Unit : Character, ISelected
         get { return isSelected; }
         set
         {
-            isSelected = value; // ??
+            isSelected = value;
             if (isSelected) //Если выбран
             {
-                //GetComponent<MeshRenderer>().material = Resources.Load<Material>("Materials/SelectedUnit"); //Загружает материал выбранному юниту
                 obvodka.SetActive(true);
+                AudioManager.AddAudio(this, "Select");
+                countClick++;
             }
             else
             {
-                //GetComponent<MeshRenderer>().material = Resources.Load<Material>("Materials/StandartUnit"); //Загружает материал выбранному юниту
                 obvodka.SetActive(false);
             }
 
