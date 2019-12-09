@@ -93,7 +93,7 @@ public class Character : MonoBehaviour, IDestroyed
                         if (legoBox != null)
                         {
                             SetTargetPosition(legoBox.pointSbor.position);
-                            if ((transform.position - legoBox.pointSbor.position).magnitude < 2)
+                            if ((transform.position - legoBox.pointSbor.position).magnitude < 50)
                             {
                                 GameObject gameObject;
                                 gameObject = legoBox.GetBox(this as Unit);
@@ -106,7 +106,7 @@ public class Character : MonoBehaviour, IDestroyed
                         else
                         {
                             SetTargetPosition(smelter.pointSdachi.position);
-                            if ((transform.position - smelter.pointSdachi.position).magnitude < 2)
+                            if ((transform.position - smelter.pointSdachi.position).magnitude < 30)
                             {
                                 if (collectionUP != null)
                                 {
@@ -131,8 +131,9 @@ public class Character : MonoBehaviour, IDestroyed
 
     public void SetTarget(IActivity target)
     {
-
+        
         this.target = target;
+        
 
     }
 
@@ -157,6 +158,7 @@ public class Character : MonoBehaviour, IDestroyed
             bullet.transform.position = bulletTransform.position;
             bullet.transform.LookAt((target as MonoBehaviour).transform);
             bullet.GetComponent<Bullet>().parent = this;
+            AudioManager.AddAudio(bullet.transform, "Shot", true);
         }
     }
 

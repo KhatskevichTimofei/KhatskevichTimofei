@@ -42,7 +42,7 @@ public class Quest : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void OnTriggerEnter(Collider other)
     {
 
         if (inJob && other.GetComponent<Unit>() != null)
@@ -52,4 +52,7 @@ public class Quest : MonoBehaviour
         }
 
     }
+
+        
+
 }

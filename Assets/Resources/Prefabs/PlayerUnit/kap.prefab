@@ -188,7 +188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 500
-  speed: 30
+  speed: 50
   armor: 0
   radiusLook: 60
   agent: {fileID: 3528393863308222998}
@@ -197,7 +197,7 @@ MonoBehaviour:
     damage: 25
     cd: 1.5
     cdProgress: 0
-    radiusAttack: 300
+    radiusAttack: 150
     radiusUp: 5
   collectionUP: {fileID: 0}
   collectionUpParent: {fileID: 0}
@@ -313,7 +313,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1699399869892796927}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -1.777, y: 2.07, z: -0.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4560032471309535241}

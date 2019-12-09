@@ -179,6 +179,7 @@ public class Main : MonoBehaviour
                         {
                             (selected[i] as Unit).SetTarget(target);
                             (selected[i] as Unit).typeTarget = TypeTarget.Set;
+                            AudioManager.AddAudio(transform, "TargetEnemy");
                         }
                     }
                 }
@@ -219,6 +220,7 @@ public class Main : MonoBehaviour
                             {
                                 if (selected[i] as Unit != null)
                                 {
+                                    AudioManager.AddAudio(transform, "GoUnits");
                                     (selected[i] as Unit).SetTarget(null);
                                     (selected[i] as Unit).typeTarget = TypeTarget.Set;
                                     (selected[i] as Unit).SetTargetPosition(casthit.point);//Каждый выбранный юнит обращается к выбранной позиции, которая задаётся с помощью луча 
