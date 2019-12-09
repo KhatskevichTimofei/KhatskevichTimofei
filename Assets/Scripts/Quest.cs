@@ -15,6 +15,7 @@ public class Quest : MonoBehaviour
     public int createNumber;
     public bool complete;
     public string questText;
+    public bool inJob;
 
     void Update()
     {
@@ -34,11 +35,21 @@ public class Quest : MonoBehaviour
                 }
                 break;
             case TypeQuest.Research:
+
                 break;
             case TypeQuest.Create:
                 break;
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
 
+        if (inJob && other.GetComponent<Unit>() != null)
+        {
+            complete = true;
+            Destroy(this);
+        }
+
+    }
 }
