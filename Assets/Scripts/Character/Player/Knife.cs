@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class Knife : Unit
 {
-    void Start()
-    {
-        
-    }
+  
 
     public override void Update()
     {

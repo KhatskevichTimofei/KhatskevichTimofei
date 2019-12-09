@@ -26,6 +26,10 @@ public class Character : MonoBehaviour, IDestroyed
     //public Attack radiusUpCharacter;
 
 
+    public virtual void Start()
+    {
+
+    }
 
     public virtual void Update()
     {

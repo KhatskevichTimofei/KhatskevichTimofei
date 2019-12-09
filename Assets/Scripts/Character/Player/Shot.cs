@@ -5,11 +5,4 @@ using UnityEngine;
 public class Shot : Unit
 {
 
-   
-
-    void Start()
-    {
-        
-    }
-    
 }
