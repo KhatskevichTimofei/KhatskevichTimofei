@@ -5,15 +5,26 @@ using UnityEngine;
 
 public class QuestList : MonoBehaviour
 {
-    public string questList;
     public TextMeshProUGUI text;
     public List<Quest> quests;
-    public bool inJob;
 
     void Start()
     {
-        
+        StartQuest();
     }
+
+    void Update()
+    {
+        if (quests.Count > 0)
+            if (quests[0].complete)
+            {
+                QuestComplete();
+                quests.RemoveAt(0);
+                if (quests.Count > 0)
+                    StartQuest();
+            }
+    }
+
     public void QuestComplete()
     {
         text.text += " Завершено ";
@@ -23,6 +34,6 @@ public class QuestList : MonoBehaviour
     public void StartQuest()
     {
         text.text = quests[0].questText;
-        //quests[0].inJob =;
+        quests[0].inJob = true;
     }
 }
