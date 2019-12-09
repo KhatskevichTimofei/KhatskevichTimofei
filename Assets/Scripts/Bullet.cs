@@ -24,8 +24,11 @@ public class Bullet : MonoBehaviour
         Character character = collider.GetComponent<Character>();
         if (character != null)
         {
-            character.GetDamage(parent.attack.damage);
-            Destroy(gameObject);
+            //if (character.sideConflict != parent.sideConflict)
+            {
+                character.GetDamage(parent.attack.damage);
+                Destroy(gameObject);
+            }
         }
     }
 }

@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class MainCamera : MonoBehaviour
 {
-    public float speedCamera;
+    public float speedCamera, speedCameraOnScroll;
     public float strangeScroll;
-
+    public Vector3 cameraVector;
     void Start()
     {
 
@@ -17,20 +17,37 @@ public class MainCamera : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            transform.position -= new Vector3(speedCamera, 0, 0) * Time.deltaTime;
+            float y = transform.position.y;
+            transform.position += transform.forward * speedCamera * Time.deltaTime;
+            transform.position = new Vector3(transform.position.x, y, transform.position.z);
         }
         if (Input.GetKey(KeyCode.DownArrow))
         {
-            transform.position += new Vector3(speedCamera, 0, 0) * Time.deltaTime;
+            float y = transform.position.y;
+            transform.position -= transform.forward * speedCamera * Time.deltaTime;
+            transform.position = new Vector3(transform.position.x, y, transform.position.z);
+            
         }
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            transform.position -= new Vector3(0, 0, speedCamera) * Time.deltaTime;
+            transform.position -= transform.right * speedCamera * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            transform.position += new Vector3(0, 0, speedCamera) * Time.deltaTime;
+            transform.position += transform.right * speedCamera * Time.deltaTime;
         }
         transform.position -= new Vector3(0, Input.mouseScrollDelta.y, 0) * strangeScroll;
+
+        if (Input.GetMouseButtonDown(2))
+        {
+            cameraVector = Input.mousePosition;
+        }
+        if (Input.GetMouseButton(2))
+        {
+            Vector3 delta;
+            delta = Input.mousePosition - cameraVector;
+            transform.localEulerAngles += new Vector3(0, delta.x, 0) * speedCameraOnScroll;
+            cameraVector = Input.mousePosition;
+        }
     }
 }

@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 3963238416423510414}
   m_LocalRotation: {x: 1, y: 0, z: 0, w: 0}
   m_LocalPosition: {x: 6.88, y: 0.49, z: -4.37}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 9.73633, y: 9.73633, z: 9.73633}
   m_Children:
   - {fileID: 2145312808108985005}
   m_Father: {fileID: 0}
@@ -119,18 +119,19 @@ MonoBehaviour:
   ocheredPanel: {fileID: 0}
   funcionalPanel: {fileID: 0}
   progressBar: {fileID: 0}
-  shortPoint: {x: 4, y: 0, z: 17}
-  pointSbor: {x: 1, y: 0, z: 23}
+  shortPoint: {x: -326.1, y: 233.6, z: -57.6}
+  pointSbor: {x: -303.2, y: 233.6, z: 28.4}
+  sideConflict: 0
   obvodka: {fileID: 3143221689500334270}
   prices:
   - timeCreate: 1
-    plasticPrice: 20
+    plasticPrice: 0
     babinPrice: 25
     infoUnit: 
     progress: 0
     unit: {fileID: 1263421864172881027, guid: d2461fd87fce7ae4da4267fab09c6c2a, type: 3}
   - timeCreate: 1.5
-    plasticPrice: 20
+    plasticPrice: 0
     babinPrice: 15
     infoUnit: 
     progress: 0
@@ -151,7 +152,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 6a323a632214b2f4cbbd2cdb5a4ccced,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -1.5
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 6a323a632214b2f4cbbd2cdb5a4ccced,
         type: 3}
