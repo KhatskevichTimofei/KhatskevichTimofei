@@ -23,7 +23,7 @@ public class Taracan : UnitsEnemy
         if (minDistance < radiusLook)
         {
             SetTarget(unit);
-            AudioManager.AddAudio(transform.position, "TaracanGo");
+            //AudioManager.AddAudio(transform.position, /*"TaracanGo"*/);
         }
     }
 
