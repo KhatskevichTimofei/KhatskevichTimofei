@@ -45,7 +45,8 @@ public class Printer3D : Build
 
     public void AddOchered(int index)
     {
-        AddOchered(prices[index]);
+        if (ochered.Count < 5)
+            AddOchered(prices[index]);
     }
 
 

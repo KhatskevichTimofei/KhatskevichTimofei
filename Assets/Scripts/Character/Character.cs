@@ -22,6 +22,7 @@ public class Character : MonoBehaviour, IDestroyed
     public Vector3 nextPosition;
     public Transform bulletTransform;
     float timeIdle;
+    public Animator animator;
     //public Bullet bullet;
     //public Attack radiusUpCharacter;
 
@@ -124,6 +125,8 @@ public class Character : MonoBehaviour, IDestroyed
             }
         }
         attack.cdProgress -= Time.deltaTime;
+        if (animator != null)
+            animator.SetFloat("Speed", agent.velocity.magnitude);
     }
 
     public void SetTarget(IActivity target)

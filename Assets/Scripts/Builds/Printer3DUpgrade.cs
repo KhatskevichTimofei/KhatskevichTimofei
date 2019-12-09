@@ -43,7 +43,8 @@ public class Printer3DUpgrade : Build, IDestroyed, ISelected
 
     public void AddOchered(int index)
     {
-        AddOchered(prices[index]);
+        if (ochered.Count < 5)
+            AddOchered(prices[index]);
     }
 
 
