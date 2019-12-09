@@ -30,4 +30,10 @@ public class Taracan : UnitsEnemy
             SetTarget(unit);
         }
     }
+
+    public override void Destroyed()
+    {
+        AudioManager.AddAudio(transform.position, "DeathTaracan");
+        base.Destroyed();
+    }
 }
