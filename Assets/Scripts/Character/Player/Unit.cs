@@ -37,12 +37,12 @@ public abstract class Unit : Character, ISelected
         }
     }
 
-    public override void Start()
-    {
-        base.Start();
-        AudioManager.AddAudio(transform, "Ybivat");
+    //public override void Start()
+    //{
+    //    base.Start();
+    //    AudioManager.AddAudio(transform, "Ybivat");
 
-    }
+    //}
 
     public override void Update()
     {

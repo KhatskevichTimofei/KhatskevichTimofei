@@ -27,6 +27,7 @@ public class AudioManager : MonoBehaviour
         if (spantialBlend)
         {
             audio.spatialBlend = 1;
+            audio.rolloffMode = AudioRolloffMode.Linear;
         }
         Destroy(gameObject, audio.clip.length);
     }

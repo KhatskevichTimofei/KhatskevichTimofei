@@ -5,10 +5,7 @@ using UnityEngine;
 public class Taracan : UnitsEnemy
 {
 
-    void Start()
-    {
-
-    }
+   
     public override void Update()
     {
         base.Update();
@@ -22,12 +19,11 @@ public class Taracan : UnitsEnemy
                 minDistance = distance;
                 unit = Main.instance.allUnits[i];
             }
-
-
         }
         if (minDistance < radiusLook)
         {
             SetTarget(unit);
+            AudioManager.AddAudio(transform.position, "TaracanGo");
         }
     }
 
