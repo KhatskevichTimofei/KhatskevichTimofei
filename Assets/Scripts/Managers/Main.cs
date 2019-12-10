@@ -35,6 +35,7 @@ public class Main : MonoBehaviour
         unitsEnemies.AddRange(parentEnemy.GetComponentsInChildren<UnitsEnemy>());
         allSelectebleObjects.AddRange(allUnits); //В список всех построек и юнитов записываются все юниты
         allSelectebleObjects.AddRange(allBuild); //В список всех построке и юнитов записываются все построек
+        Debug.Log(Resources.LoadAll<AudioClip>("Sound/Shot").Length);
     }
 
     void Update()

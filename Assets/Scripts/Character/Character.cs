@@ -35,6 +35,7 @@ public class Character : MonoBehaviour, IDestroyed
     {
         string[] folders = Resources.Load<TextAsset>("Sound/Folders").text.Split('\n');
         curatorAudio = folders[Random.Range(0, folders.Length)];
+        Debug.Log(curatorAudio);
 
         AudioManager.AddAudio(this, "Create");
     }
@@ -56,7 +57,10 @@ public class Character : MonoBehaviour, IDestroyed
         {
             timeIdleSound += Time.deltaTime;
             if (timeIdleSound > 15)
-                AudioManager.AddAudio(this, "Idle");
+            {
+                AudioManager.AddAudio(this, "Idle", true);
+                timeIdleSound -= 30;
+            }
         }
         else timeIdleSound = 0;
         agent.acceleration = speed * 2;
