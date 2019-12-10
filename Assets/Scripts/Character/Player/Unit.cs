@@ -12,6 +12,8 @@ public enum TypeTarget
 
 public abstract class Unit : Character, ISelected
 {
+    public static event System.Action onCreate;
+
     public GameObject obvodka;
     public TypeTarget typeTarget;
     bool isSelected;
@@ -37,12 +39,12 @@ public abstract class Unit : Character, ISelected
         }
     }
 
-    //public override void Start()
-    //{
-    //    base.Start();
-    //    AudioManager.AddAudio(transform, "Ybivat");
-
-    //}
+    public override void Start()
+    {
+        base.Start();
+        //AudioManager.AddAudio(transform, "Ybivat");
+        onCreate?.Invoke();
+    }
 
     public override void Update()
     {

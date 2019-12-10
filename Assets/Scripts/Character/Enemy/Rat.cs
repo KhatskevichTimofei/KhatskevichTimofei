@@ -2,12 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Snake : UnitsEnemy
+public class Rat : UnitsEnemy
 {
-
-
-
-
     public override void Update()
     {
         base.Update();
@@ -33,6 +29,5 @@ public class Snake : UnitsEnemy
     {
         base.Destroyed();
     }
-
-
 }
+ 
