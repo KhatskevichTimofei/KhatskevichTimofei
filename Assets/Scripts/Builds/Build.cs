@@ -16,6 +16,7 @@ public abstract class Build : MonoBehaviour, ISelected, IDestroyed
     public Vector3 pointSbor;
     protected bool isSelected;
     public SideConflict sideConflict;
+    public bool job;
     public GameObject obvodka;
 
     public virtual bool IsSelected

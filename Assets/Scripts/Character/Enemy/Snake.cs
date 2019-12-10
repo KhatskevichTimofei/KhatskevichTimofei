@@ -5,7 +5,7 @@ using UnityEngine;
 public class Snake : UnitsEnemy
 {
 
- 
+
 
 
     public override void Update()
@@ -25,7 +25,13 @@ public class Snake : UnitsEnemy
         if (minDistance < radiusLook)
         {
             SetTarget(unit);
+            //AudioManager.AddAudio(transform.position, /*"TaracanGo"*/);
         }
+    }
+
+    public override void Destroyed()
+    {
+        base.Destroyed();
     }
 
 

@@ -6,6 +6,7 @@ public class Printer3DUpgrade : Build, IDestroyed, ISelected
 {
     public List<UnitPrice> prices = new List<UnitPrice>();
     public List<UnitPrice> ochered = new List<UnitPrice>();
+    public Animation anim;
     //public GameObject clickBar
 
 
@@ -13,12 +14,17 @@ public class Printer3DUpgrade : Build, IDestroyed, ISelected
     {
         if (ochered.Count > 0)
         {
+            //if (!anim.isPlaying)
+            //{
+            //    anim.Play();
+            //}
             if (ochered[0].AddProgress())
             {
                 ochered[0].Complete(this);
                 ochered.RemoveAt(0);
             }
         }
+        else anim.Stop();
         for (int i = 0; i < ocheredImage.Count; i++)
         {
             ocheredImage[i].gameObject.SetActive(i < ochered.Count);
@@ -27,10 +33,6 @@ public class Printer3DUpgrade : Build, IDestroyed, ISelected
         {
             progressBar.transform.parent.gameObject.SetActive(true);
             progressBar.fillAmount = ochered[0].progress / ochered[0].timeCreate;
-            //if (i == 5)
-            //{
-
-            //}
         }
         else progressBar.transform.parent.gameObject.SetActive(false);
         for (int i = 0; i < prices.Count; i++)
@@ -43,8 +45,13 @@ public class Printer3DUpgrade : Build, IDestroyed, ISelected
 
     public void AddOchered(int index)
     {
+        if (ochered.Count == 0)
+        {
+            anim.Play();
+        }
         if (ochered.Count < 5)
             AddOchered(prices[index]);
+
     }
 
 

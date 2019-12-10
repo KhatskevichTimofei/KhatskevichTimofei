@@ -10,30 +10,52 @@ public class QuestList : MonoBehaviour
 
     void Start()
     {
+        quests.Clear();
+        quests.AddRange(GetComponentsInChildren<Quest>());
         StartQuest();
     }
 
     void Update()
     {
-        if (quests.Count > 0)
+        if (quests.Count > 0 && quests[0].inJob)
+        {
+            text.text = quests[0].questText;
+            switch (quests[0].typeQuest)
+            {
+                case TypeQuest.Destroy:
+                    text.text += " :" + (quests[0].all - quests[0].listDestroyed.Count) + " / " + quests[0].all;
+                    break;
+                case TypeQuest.Research:
+                    break;
+                case TypeQuest.Create:
+                    text.text += " :" + (quests[0].all - quests[0].createNumber) + " / " + quests[0].all;
+                    break;
+            }
             if (quests[0].complete)
             {
                 QuestComplete();
-                quests.RemoveAt(0);
-                if (quests.Count > 0)
-                    StartQuest();
             }
+        }
     }
 
     public void QuestComplete()
     {
+        quests[0].events.Invoke();
         text.text += " Завершено ";
-
+        quests.RemoveAt(0);
+        if (quests.Count > 0)
+            StartCoroutine(DelayStart());
     }
 
     public void StartQuest()
     {
-        text.text = quests[0].questText;
-        quests[0].inJob = true;
+        quests[0].OnStart();
+
+    }
+
+    public IEnumerator DelayStart()
+    {
+        yield return new WaitForSeconds(1.5f);
+        StartQuest();
     }
 }
