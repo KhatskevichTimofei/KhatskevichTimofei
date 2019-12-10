@@ -59,7 +59,7 @@ public class Main : MonoBehaviour
             storage.AddBabin(30);
         }
         storage.Update();
-
+        isAudioCurrentFrame = false;
     }
 
     private void Select()
