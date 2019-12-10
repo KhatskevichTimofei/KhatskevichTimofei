@@ -122,17 +122,18 @@ MonoBehaviour:
   shortPoint: {x: -367.9, y: 232.2477, z: -178.3}
   pointSbor: {x: -370.4, y: 232.2477, z: -77.3}
   sideConflict: 0
+  job: 0
   obvodka: {fileID: 3143221689500334270}
   prices:
   - timeCreate: 1
     plasticPrice: 0
-    babinPrice: 25
+    babinPrice: 50
     infoUnit: 
     progress: 0
     unit: {fileID: 1263421864172881027, guid: d2461fd87fce7ae4da4267fab09c6c2a, type: 3}
   - timeCreate: 1.5
     plasticPrice: 0
-    babinPrice: 15
+    babinPrice: 75
     infoUnit: 
     progress: 0
     unit: {fileID: 7088626861866426763, guid: 4a8288c95f112774cb60648a16b620f1, type: 3}
