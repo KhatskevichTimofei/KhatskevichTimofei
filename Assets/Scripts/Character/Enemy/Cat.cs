@@ -6,8 +6,5 @@ public class Cat : UnitsEnemy
 {
 
 
-    void Update()
-    {
-        
-    }
+ 
 }
