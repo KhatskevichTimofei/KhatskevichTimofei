@@ -8,6 +8,7 @@ public class Printer3D : Build
 {
     public List<UnitPrice> prices = new List<UnitPrice>();
     public List<UnitPrice> ochered = new List<UnitPrice>();
+
     //public GameObject clickBar
 
 
@@ -55,5 +56,11 @@ public class Printer3D : Build
         Main.instance.storage.RemovePlastic(price.plasticPrice);
         Main.instance.storage.RemoveBabin(price.babinPrice);
         ochered.Add(price.Copy<UnitPrice>());
+    }
+
+    public void QuestStart()
+    {
+        job = true;
+        Main.instance.storage.AddBabin(225);
     }
 }

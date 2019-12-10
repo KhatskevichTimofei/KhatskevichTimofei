@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public enum TypeQuest
 {
@@ -10,13 +11,15 @@ public enum TypeQuest
 }
 public class Quest : MonoBehaviour
 {
+
     public TypeQuest typeQuest;
     public List<Character> listDestroyed;
     public int createNumber;
     public bool complete;
     public string questText;
     public bool inJob;
-    public int allEnemys;
+    public int all;
+    public UnityEvent events;
 
     void Awake()
     {
@@ -78,7 +81,10 @@ public class Quest : MonoBehaviour
     public void OnStart()
     {
         inJob = true;
-        allEnemys = listDestroyed.Count;
+        if (typeQuest == TypeQuest.Destroy)
+            all = listDestroyed.Count;
+        else if (typeQuest == TypeQuest.Create)
+            all = createNumber;
     }
 
 
