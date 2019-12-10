@@ -25,6 +25,8 @@ public class Main : MonoBehaviour
     public LegoBox legoBox;
     public Storage storage = new Storage();
     public Transform parentEnemy, parentUnit, parentBuild;
+    public Animation anim;
+    public bool animStart;
     bool isFrameSelected;
 
     void Start()
@@ -57,7 +59,7 @@ public class Main : MonoBehaviour
             storage.AddBabin(30);
         }
         storage.Update();
-        isAudioCurrentFrame = false;
+
     }
 
     private void Select()

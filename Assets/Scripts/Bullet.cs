@@ -22,13 +22,19 @@ public class Bullet : MonoBehaviour
     public void OnTriggerEnter(Collider collider)
     {
         Character character = collider.GetComponent<Character>();
+        Interactive interactive = collider.GetComponent<Interactive>();
         if (character != null)
         {
-            //if (character.sideConflict != parent.sideConflict)
+            if (character.sideConflict != parent.sideConflict)
             {
                 character.GetDamage(parent.attack.damage);
                 Destroy(gameObject);
             }
+        }
+        if (interactive != null)
+        {
+                interactive.GetDamage(parent.attack.damage);
+                Destroy(gameObject);
         }
     }
 }
