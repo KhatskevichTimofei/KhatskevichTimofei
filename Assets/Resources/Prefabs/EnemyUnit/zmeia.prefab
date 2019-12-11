@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8169669985399094691}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: pluvok
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -375,7 +375,7 @@ MonoBehaviour:
   hp: 200
   speed: 40
   armor: 0
-  radiusLook: 100
+  radiusLook: 400
   agent: {fileID: 2221036784264923068}
   sideConflict: 1
   attack:
@@ -387,9 +387,10 @@ MonoBehaviour:
   collectionUP: {fileID: 0}
   collectionUpParent: {fileID: 0}
   nextPosition: {x: 0, y: 0, z: 0}
-  bulletTransform: {fileID: 0}
+  bulletTransform: {fileID: 8169669985399094691}
   animator: {fileID: 0}
   curatorAudio: 
+  snoryd: pluvok
 --- !u!195 &2221036784264923068
 NavMeshAgent:
   m_ObjectHideFlags: 0

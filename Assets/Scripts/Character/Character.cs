@@ -27,6 +27,7 @@ public class Character : MonoBehaviour, IDestroyed
     protected float timeOldSelect;
     protected int countClick;
     float timeIdle, timeIdleSound;
+    public string snoryd;
     //public Bullet bullet;
     //public Attack radiusUpCharacter;
 
@@ -169,7 +170,7 @@ public class Character : MonoBehaviour, IDestroyed
         {
             if (animator != null)
                 animator.SetTrigger("Attack");
-            GameObject bullet = Instantiate(Resources.Load<GameObject>("Prefabs/Bullet"));
+            GameObject bullet = Instantiate(Resources.Load<GameObject>("Prefabs/" + snoryd));
             bullet.transform.position = bulletTransform.position;
             bullet.transform.LookAt((target as MonoBehaviour).transform);
             bullet.GetComponent<Bullet>().parent = this;

@@ -7,7 +7,6 @@ public class QuestList : MonoBehaviour
 {
     public TextMeshProUGUI text;
     public List<Quest> quests;
-    public Quest quest;
 
     void Start()
     {
@@ -32,7 +31,7 @@ public class QuestList : MonoBehaviour
                     text.text += " :" + (quests[0].all - quests[0].createNumber) + " / " + quests[0].all;
                     break;
                 case TypeQuest.SaveUp:
-                    text.text += " :" + Main.instance.storage.plastic + " / " + quest.saveUp;
+                    text.text += " :" + Main.instance.storage.plastic + " / " + quests[0].saveUp;
                     break;
             }
             if (quests[0].complete)

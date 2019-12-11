@@ -559,7 +559,7 @@ GameObject:
   - component: {fileID: 5438111511503357088}
   - component: {fileID: 4497149906835055371}
   m_Layer: 0
-  m_Name: Mish
+  m_Name: mish
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -592,7 +592,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da81412a4c8d894458d694e54f3fae91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 100
+  hp: 400
   speed: 50
   armor: 0
   radiusLook: 250
@@ -609,6 +609,8 @@ MonoBehaviour:
   nextPosition: {x: 0, y: 0, z: 0}
   bulletTransform: {fileID: 0}
   animator: {fileID: 0}
+  curatorAudio: 
+  snoryd: 
 --- !u!135 &5438111511503357088
 SphereCollider:
   m_ObjectHideFlags: 0
