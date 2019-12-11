@@ -171,10 +171,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1
+  m_Radius: 2.0621703
+  m_Height: 7.718413
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: -0.96020705, y: 3.3592067, z: 0.6019632}
 --- !u!114 &5599781600731851611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,7 +197,7 @@ MonoBehaviour:
     damage: 25
     cd: 1.5
     cdProgress: 0
-    radiusAttack: 150
+    radiusAttack: 100
     radiusUp: 5
   collectionUP: {fileID: 0}
   collectionUpParent: {fileID: 0}

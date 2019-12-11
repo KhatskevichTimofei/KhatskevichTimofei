@@ -8,6 +8,7 @@ using UnityEngine.EventSystems;
 public class Main : MonoBehaviour
 {
     public static Main instance; //Создаётся публичная статичная переменнная типа Main. Static 
+    public static bool isAudioCurrentFrame;
 
     public Vector3 startMouse;
     public Vector3 stopMouse;
@@ -24,6 +25,8 @@ public class Main : MonoBehaviour
     public LegoBox legoBox;
     public Storage storage = new Storage();
     public Transform parentEnemy, parentUnit, parentBuild;
+    public Animation anim;
+    public bool animStart;
     bool isFrameSelected;
 
     void Start()
@@ -34,6 +37,7 @@ public class Main : MonoBehaviour
         unitsEnemies.AddRange(parentEnemy.GetComponentsInChildren<UnitsEnemy>());
         allSelectebleObjects.AddRange(allUnits); //В список всех построек и юнитов записываются все юниты
         allSelectebleObjects.AddRange(allBuild); //В список всех построке и юнитов записываются все построек
+        Debug.Log(Resources.LoadAll<AudioClip>("Sound/Shot").Length);
     }
 
     void Update()
@@ -55,7 +59,7 @@ public class Main : MonoBehaviour
             storage.AddBabin(30);
         }
         storage.Update();
-
+        isAudioCurrentFrame = false;
     }
 
     private void Select()
@@ -104,8 +108,6 @@ public class Main : MonoBehaviour
                         isUnitsSelect = true;
                         break;
                     }
-
-
                 }
                 image1.enabled = false;//Выключает картинку
 
@@ -115,9 +117,8 @@ public class Main : MonoBehaviour
                 Rect area = new Rect(image1.rectTransform.anchoredPosition, image1.rectTransform.sizeDelta);
                 if (!isUnitsSelect || isUnitsSelect && allSelectebleObjects[i] as Unit != null)
                 {
-                    if (area.Contains(Camera.main.WorldToScreenPoint((allSelectebleObjects[i] as MonoBehaviour).transform.position))) //Если в созданную картинку area попадает какой либо юнит, выполняется условие  и записывает из массива allUnits юнитов в массив selectedUnits 
+                    if (area.Contains(Camera.main.WorldToScreenPoint((allSelectebleObjects[i] as MonoBehaviour).transform.position))) //Если в созданную картинку area попадает какой либо юнит, выполняется условие и записывает из массива allUnits юнитов в массив selectedUnits 
                     {
-
                         selected.Add(allSelectebleObjects[i]);
                         allSelectebleObjects[i].IsSelected = true;
                     }
@@ -166,7 +167,7 @@ public class Main : MonoBehaviour
         if (Input.GetMouseButtonDown(1)) //При нажатии правой кнопки выполняется условие 
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); //Создаётся переменнная типа Ray(луч) ??????????
-            RaycastHit casthit; // Слздаётся переменнная типа RaycastHit(???)
+            RaycastHit casthit; // Создаётся переменнная типа RaycastHit(???)
 
             if (Physics.Raycast(ray, out casthit)) // ????
             {
@@ -179,7 +180,8 @@ public class Main : MonoBehaviour
                         {
                             (selected[i] as Unit).SetTarget(target);
                             (selected[i] as Unit).typeTarget = TypeTarget.Set;
-                            AudioManager.AddAudio(transform, "TargetEnemy");
+                            AudioManager.AddAudio(selected[i] as Character, "Attack");
+                            //AudioManager.AddAudio(transform, "TargetEnemy");
                         }
                     }
                 }
@@ -190,11 +192,11 @@ public class Main : MonoBehaviour
                     {
                         for (int i = 0; i < selected.Count; i++)
                         {
-
                             if ((selected[i] as Unit).collectionUP == null)
                             {
                                 (selected[i] as Unit).SetTarget(target);
                                 (selected[i] as Unit).typeTarget = TypeTarget.Set;
+                                AudioManager.AddAudio(selected[i] as Character, "Collect");
                                 break;
                             }
                         }
@@ -207,20 +209,21 @@ public class Main : MonoBehaviour
                         if (target != null)
                         {
                             for (int i = 0; i < selected.Count; i++)
-                            {
                                 if (selected[i] as Unit)
                                 {
                                     (selected[i] as Unit).SetTarget(target);
                                     (selected[i] as Unit).typeTarget = TypeTarget.Set;
+                                    if (target as Smelter)
+                                        AudioManager.AddAudio(selected[i] as Character, "Collect");
+                                    else AudioManager.AddAudio(selected[i] as Character, "Drop");
                                 }
-                            }
                         }
                         else
                             for (int i = 0; i < selected.Count; i++)//Цикл который проходится по всем выбранным юнитам
                             {
                                 if (selected[i] as Unit != null)
                                 {
-                                    AudioManager.AddAudio(transform, "GoUnits");
+                                    AudioManager.AddAudio(selected[i] as Character, "Go");
                                     (selected[i] as Unit).SetTarget(null);
                                     (selected[i] as Unit).typeTarget = TypeTarget.Set;
                                     (selected[i] as Unit).SetTargetPosition(casthit.point);//Каждый выбранный юнит обращается к выбранной позиции, которая задаётся с помощью луча 

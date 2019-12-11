@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 6197425180865706061}
   - component: {fileID: 377497760653657268}
   - component: {fileID: 7578363137513679520}
+  - component: {fileID: 198455124}
+  - component: {fileID: 198455121}
   m_Layer: 0
   m_Name: kubok
   m_TagString: Untagged
@@ -26,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2090218033583124584}
-  m_LocalRotation: {x: -0.7070598, y: -0.008151643, z: -0.008151639, w: 0.7070598}
+  m_LocalRotation: {x: -0.7070598, y: -0.008151268, z: -0.008151268, w: 0.7070598}
   m_LocalPosition: {x: -200, y: 232, z: 270}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -95,3 +97,30 @@ Animation:
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!65 &198455124
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2090218033583124584}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 73.52932, y: 77.31329, z: 115.13836}
+  m_Center: {x: -0.000003814626, y: -0.0000000061804677, z: 57.56918}
+--- !u!114 &198455121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2090218033583124584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf72fd05e1627e64c82c52871fc8701c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 0
+  animationMiach: {fileID: 0}

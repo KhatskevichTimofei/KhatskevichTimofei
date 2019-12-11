@@ -12,6 +12,7 @@ public enum SideConflict
 
 public class Character : MonoBehaviour, IDestroyed
 {
+
     public float hp, speed, armor, radiusLook;
     public NavMeshAgent agent;
     public SideConflict sideConflict;
@@ -21,15 +22,22 @@ public class Character : MonoBehaviour, IDestroyed
     public Transform collectionUpParent;
     public Vector3 nextPosition;
     public Transform bulletTransform;
-    float timeIdle;
     public Animator animator;
+    public string curatorAudio;
+    protected float timeOldSelect;
+    protected int countClick;
+    float timeIdle, timeIdleSound;
     //public Bullet bullet;
     //public Attack radiusUpCharacter;
 
 
     public virtual void Start()
     {
+        string[] folders = Resources.Load<TextAsset>("Sound/Folders").text.Split('\n');
+        curatorAudio = folders[Random.Range(0, folders.Length)];
+        Debug.Log(curatorAudio);
 
+        AudioManager.AddAudio(this, "Create");
     }
 
     public virtual void Update()
@@ -37,14 +45,24 @@ public class Character : MonoBehaviour, IDestroyed
         if (this as Unit != null && (this as Unit).typeTarget == TypeTarget.Set)
             if (agent.velocity.magnitude < agent.speed / 5)
                 timeIdle += Time.deltaTime;
-            else
-                timeIdle = 0;
+            else timeIdle = 0;
+        timeOldSelect += Time.deltaTime;
         if (timeIdle >= 0.5 && this as Unit != null)
         {
             (this as Unit).typeTarget = TypeTarget.Auto;
             SetTargetPosition(transform.position);
             timeIdle = 0;
         }
+        if (agent.velocity.magnitude < agent.speed / 5)
+        {
+            timeIdleSound += Time.deltaTime;
+            if (timeIdleSound > 15)
+            {
+                AudioManager.AddAudio(this, "Idle", true);
+                timeIdleSound -= 30;
+            }
+        }
+        else timeIdleSound = 0;
         agent.acceleration = speed * 2;
         agent.speed = speed;
         if (target == null || (target as MonoBehaviour) == null)
@@ -60,8 +78,6 @@ public class Character : MonoBehaviour, IDestroyed
             if (destroyed != null && distance.magnitude > attack.radiusAttack && (target as Build != null && (target as Build).sideConflict != sideConflict || target as Character != null && (target as Character).sideConflict != sideConflict || target as Interactive != null))
             {
                 SetTargetPosition((target as MonoBehaviour).transform.position + distance.normalized * (attack.radiusAttack - (attack.radiusAttack * 0.1f)));
-
-
             }
             else
             {
@@ -131,10 +147,7 @@ public class Character : MonoBehaviour, IDestroyed
 
     public void SetTarget(IActivity target)
     {
-        
         this.target = target;
-        
-
     }
 
     public void SetTargetPosition(Vector3 position)
@@ -169,6 +182,7 @@ public class Character : MonoBehaviour, IDestroyed
         if (hp <= 0)
         {
             Destroyed();
+            AudioManager.AddAudio(this, "Hit");
         }
 
     }
@@ -178,6 +192,7 @@ public class Character : MonoBehaviour, IDestroyed
         GameObject residue = Instantiate(Resources.Load<GameObject>("Prefabs/Residue/ResidueResource"));
         Destroy(gameObject);
         residue.transform.position = transform.position;
+        AudioManager.AddAudio(this, "Destroy");
 
     }
 
