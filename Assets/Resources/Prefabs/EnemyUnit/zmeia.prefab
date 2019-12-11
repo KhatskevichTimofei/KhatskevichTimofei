@@ -375,14 +375,14 @@ MonoBehaviour:
   hp: 200
   speed: 40
   armor: 0
-  radiusLook: 400
+  radiusLook: 200
   agent: {fileID: 2221036784264923068}
   sideConflict: 1
   attack:
     damage: 20
     cd: 2
     cdProgress: 0
-    radiusAttack: 300
+    radiusAttack: 150
     radiusUp: 0
   collectionUP: {fileID: 0}
   collectionUpParent: {fileID: 0}

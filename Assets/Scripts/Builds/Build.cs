@@ -57,6 +57,8 @@ public abstract class Build : MonoBehaviour, ISelected, IDestroyed
 
     public void OnMouseUp()
     {
+        if (!job)
+            return;
         Main.instance.selected.Clear();
         Main.instance.selected.Add(this);
         for (int i = 0; i < Main.instance.selected.Count; i++)

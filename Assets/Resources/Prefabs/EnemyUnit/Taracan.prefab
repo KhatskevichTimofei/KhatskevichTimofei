@@ -142,6 +142,7 @@ MonoBehaviour:
   bulletTransform: {fileID: 0}
   animator: {fileID: 0}
   curatorAudio: 
+  snoryd: 
 --- !u!195 &6914884771554602855
 NavMeshAgent:
   m_ObjectHideFlags: 0

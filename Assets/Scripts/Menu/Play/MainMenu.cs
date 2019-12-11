@@ -13,4 +13,11 @@ public class MainMenu : MonoBehaviour
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("Menu");
     }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
+
+    
 }

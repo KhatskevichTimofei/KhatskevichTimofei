@@ -595,7 +595,7 @@ MonoBehaviour:
   hp: 400
   speed: 50
   armor: 0
-  radiusLook: 250
+  radiusLook: 150
   agent: {fileID: 4497149906835055371}
   sideConflict: 1
   attack:

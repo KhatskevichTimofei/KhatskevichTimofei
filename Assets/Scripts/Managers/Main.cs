@@ -69,6 +69,11 @@ public class Main : MonoBehaviour
             anim.Play("CloseMenu");
         }
 
+        if (allUnits.Count == 0)
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Menu");
+        }
+
         storage.Update();
         isAudioCurrentFrame = false;
     }
@@ -130,6 +135,8 @@ public class Main : MonoBehaviour
                 {
                     if (area.Contains(Camera.main.WorldToScreenPoint((allSelectebleObjects[i] as MonoBehaviour).transform.position))) //Если в созданную картинку area попадает какой либо юнит, выполняется условие и записывает из массива allUnits юнитов в массив selectedUnits 
                     {
+                        if ((allSelectebleObjects[i] as Build) != null && !(allSelectebleObjects[i] as Build).job)
+                            continue;
                         selected.Add(allSelectebleObjects[i]);
                         allSelectebleObjects[i].IsSelected = true;
                     }
