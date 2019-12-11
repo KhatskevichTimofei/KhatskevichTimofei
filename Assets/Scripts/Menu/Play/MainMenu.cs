@@ -8,4 +8,9 @@ public class MainMenu : MonoBehaviour
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("Programist rukozhop");
     }
+
+    public void ExitInMainMenu()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Menu");
+    }
 }

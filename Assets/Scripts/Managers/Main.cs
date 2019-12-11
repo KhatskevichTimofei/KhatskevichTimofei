@@ -58,6 +58,17 @@ public class Main : MonoBehaviour
             storage.AddPlastic(50);
             storage.AddBabin(30);
         }
+        if (Input.GetKeyDown(KeyCode.Escape) && !animStart)
+        {
+            animStart = true;
+            anim.Play("OpenMenu");
+        }
+        else if (Input.GetKeyDown(KeyCode.Escape) && animStart)
+        {
+            animStart = false;
+            anim.Play("CloseMenu");
+        }
+
         storage.Update();
         isAudioCurrentFrame = false;
     }

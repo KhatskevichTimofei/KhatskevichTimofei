@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46933cc2b32e62a49ace5ac1b7248c99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 200
+  hp: 150
   speed: 50
   armor: 50
   radiusLook: 150
@@ -141,6 +141,7 @@ MonoBehaviour:
   nextPosition: {x: 0, y: 0, z: 0}
   bulletTransform: {fileID: 0}
   animator: {fileID: 0}
+  curatorAudio: 
 --- !u!195 &6914884771554602855
 NavMeshAgent:
   m_ObjectHideFlags: 0

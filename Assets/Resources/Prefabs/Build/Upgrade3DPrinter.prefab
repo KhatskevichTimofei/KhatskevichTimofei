@@ -187,6 +187,7 @@ GameObject:
   - component: {fileID: 9133736579169246836}
   - component: {fileID: 797557052099797999}
   - component: {fileID: 776957442996941849}
+  - component: {fileID: 5433904529558570762}
   m_Layer: 0
   m_Name: Upgrade3DPrinter
   m_TagString: Untagged
@@ -203,7 +204,7 @@ Transform:
   m_GameObject: {fileID: 5231727968682323047}
   m_LocalRotation: {x: 0, y: 0.7924015, z: 0, w: 0.6099999}
   m_LocalPosition: {x: 443.3, y: 231.2, z: -404.4}
-  m_LocalScale: {x: 62.963, y: 62.963, z: 62.963}
+  m_LocalScale: {x: 62.963036, y: 62.963, z: 62.963036}
   m_Children:
   - {fileID: 8157540846543739467}
   - {fileID: 2672273239033833021}
@@ -258,6 +259,7 @@ MonoBehaviour:
   shortPoint: {x: 297.6, y: 126, z: -238.2}
   pointSbor: {x: 284.5, y: 112.4, z: -146.6}
   sideConflict: 0
+  job: 0
   obvodka: {fileID: 8849281933076364078}
   prices:
   - timeCreate: 0.3
@@ -273,7 +275,20 @@ MonoBehaviour:
     progress: 0
     unit: {fileID: 7088626861866426763, guid: 4a8288c95f112774cb60648a16b620f1, type: 3}
   ochered: []
-  animation: {fileID: 797557052099797999}
+  anim: {fileID: 797557052099797999}
+--- !u!65 &5433904529558570762
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5231727968682323047}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.1466682, y: 1.4661411, z: 1.9264349}
+  m_Center: {x: -0.00070559204, y: 0.7048487, z: 0.11000001}
 --- !u!1 &6691912734468031805
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,17 +329,17 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 6a323a632214b2f4cbbd2cdb5a4ccced,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.6348028
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 6a323a632214b2f4cbbd2cdb5a4ccced,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.2304685
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 6a323a632214b2f4cbbd2cdb5a4ccced,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9.900719
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 6a323a632214b2f4cbbd2cdb5a4ccced,
         type: 3}
@@ -369,17 +384,17 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 6a323a632214b2f4cbbd2cdb5a4ccced,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 3.292135
+      value: 2.3643785
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 6a323a632214b2f4cbbd2cdb5a4ccced,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 3.2512817
+      value: 2.3350382
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 6a323a632214b2f4cbbd2cdb5a4ccced,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.34398165
+      value: 0.24704419
       objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: 6a323a632214b2f4cbbd2cdb5a4ccced,
         type: 3}

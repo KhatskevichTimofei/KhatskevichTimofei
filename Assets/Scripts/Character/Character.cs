@@ -35,7 +35,7 @@ public class Character : MonoBehaviour, IDestroyed
     {
         string[] folders = Resources.Load<TextAsset>("Sound/Folders").text.Split('\n');
         curatorAudio = folders[Random.Range(0, folders.Length)];
-        Debug.Log(curatorAudio);
+
 
         AudioManager.AddAudio(this, "Create");
     }
@@ -167,6 +167,8 @@ public class Character : MonoBehaviour, IDestroyed
             destroyed.GetDamage(attack.damage);
         else
         {
+            if (animator != null)
+                animator.SetTrigger("Attack");
             GameObject bullet = Instantiate(Resources.Load<GameObject>("Prefabs/Bullet"));
             bullet.transform.position = bulletTransform.position;
             bullet.transform.LookAt((target as MonoBehaviour).transform);

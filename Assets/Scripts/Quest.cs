@@ -7,7 +7,8 @@ public enum TypeQuest
 {
     Destroy,
     Research,
-    Create
+    Create,
+    SaveUp
 }
 public class Quest : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class Quest : MonoBehaviour
     public string questText;
     public bool inJob;
     public int all;
+    public int saveUp;
     public UnityEvent events;
 
     void Awake()
@@ -65,6 +67,13 @@ public class Quest : MonoBehaviour
                 break;
             case TypeQuest.Create:
 
+                break;
+
+            case TypeQuest.SaveUp:
+                if (Main.instance.storage.plastic >= saveUp)
+                {
+                    complete = true;
+                }
                 break;
         }
     }
