@@ -19,7 +19,7 @@ public abstract class Build : MonoBehaviour, ISelected, IDestroyed
     public bool job;
     public GameObject obvodka;
 
-    public virtual bool IsSelected
+    public virtual bool IsSelectedz
     {
         get
         {

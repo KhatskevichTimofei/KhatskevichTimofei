@@ -63,4 +63,11 @@ public class Printer3DUpgrade : Build, IDestroyed, ISelected
     }
 
 
+
+    public void QuestStart()
+    {
+        job = true;
+    }
+
+
 }

@@ -53,4 +53,9 @@ public class Smelter : Build
         Main.instance.storage.RemoveBabin(price.babinPrice);
         ochered.Add(price.Copy<BabinPrice>());
     }
+
+    public void QuestStart()
+    {
+        job = true;
+    }
 }
