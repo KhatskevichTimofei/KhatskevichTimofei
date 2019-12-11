@@ -372,14 +372,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5911745ca5b368442bd6b6fc001bdf95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 200
+  hp: 10000
   speed: 40
   armor: 0
   radiusLook: 200
   agent: {fileID: 2221036784264923068}
   sideConflict: 1
   attack:
-    damage: 20
+    damage: 100
     cd: 2
     cdProgress: 0
     radiusAttack: 150

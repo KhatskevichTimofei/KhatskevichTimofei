@@ -121,6 +121,8 @@ MonoBehaviour:
   progressBar: {fileID: 0}
   shortPoint: {x: 0, y: 0, z: 0}
   pointSbor: {x: 0, y: 0, z: 0}
+  sideConflict: 0
+  job: 0
   obvodka: {fileID: 2193744305805751358}
   prices:
   - timeCreate: 0.5
@@ -128,7 +130,7 @@ MonoBehaviour:
     babinPrice: 0
     infoUnit: 
     progress: 0
-    result: 10
+    result: 50
   ochered: []
   pointSdachi: {fileID: 4433848992911451355}
 --- !u!1 &5122299869297344777
