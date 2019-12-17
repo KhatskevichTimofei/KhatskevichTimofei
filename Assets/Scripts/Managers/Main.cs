@@ -53,20 +53,25 @@ public class Main : MonoBehaviour
         RightMouseClick();
         Select();
         Binds();
-        if (Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKeyDown(KeyCode.T))//При нажатии кнопки T будет добавляться 50 пластика и 30 бабинов
         {
             storage.AddPlastic(50);
             storage.AddBabin(30);
         }
-        if (Input.GetKeyDown(KeyCode.Escape) && !animStart)
+        if (Input.GetKeyDown(KeyCode.Escape) && !animStart) //При нажатии Esc и если анимация не равно true, но запускается анимация открытия меню
         {
             animStart = true;
             anim.Play("OpenMenu");
         }
-        else if (Input.GetKeyDown(KeyCode.Escape) && animStart)
+        else if (Input.GetKeyDown(KeyCode.Escape) && animStart) //При нажатии Esc и если анимация равна true, но запускается анимация открытия меню
         {
             animStart = false;
             anim.Play("CloseMenu");
+        }
+
+        if (allUnits.Count == 0) // Если на стороне Player нет юнитов запускается сцена Menu
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Menu");
         }
 
         storage.Update();
@@ -80,7 +85,7 @@ public class Main : MonoBehaviour
             if (!EventSystem.current.IsPointerOverGameObject())
             {
                 startMouse = Input.mousePosition; // В пеменную типа Vector3 записывается позиция мыши
-                for (int i = 0; i < selected.Count; i++)
+                for (int i = 0; i < selected.Count; i++)// проходится по всем выбранным юнитам и удаляет их из выбранных
                 {
                     selected[i].IsSelected = false;
                 }
@@ -97,12 +102,12 @@ public class Main : MonoBehaviour
             if (delta.x < 0) //Блок который делает координату x положительной и смещает её по ширине 
             {
                 image1.rectTransform.anchoredPosition += new Vector2(delta.x, 0); //
-                delta.x *= -1;
+                delta.x *= -1; //Нужно для того чтобы картинка, которая используется в целях выделения, не имела отрицательный размер
             }
             if (delta.y < 0) //Блок который делает координату y  положительной и смещает её по высоте
             {
                 image1.rectTransform.anchoredPosition += new Vector2(0, delta.y);
-                delta.y *= -1;
+                delta.y *= -1; //Нужно для того чтобы картинка, которая используется в целях выделения, не имела отрицательный размер
             }
             image1.rectTransform.sizeDelta = delta;// Картинке передаётся размер находящийся в переменной delta
         }
@@ -114,7 +119,7 @@ public class Main : MonoBehaviour
                 Rect area = new Rect(image1.rectTransform.anchoredPosition, image1.rectTransform.sizeDelta);
                 if (area.Contains(Camera.main.WorldToScreenPoint((allSelectebleObjects[i] as MonoBehaviour).transform.position))) //Если в созданную картинку area попадает какой либо юнит, выполняется условие  и записывает из массива allUnits юнитов в массив selectedUnits 
                 {
-                    if (allSelectebleObjects[i] as Unit != null)
+                    if (allSelectebleObjects[i] as Unit != null) //Если среди выделенных юнитов есть объект типа Unit, в буловую перменную передаётся значение true
                     {
                         isUnitsSelect = true;
                         break;
@@ -126,12 +131,14 @@ public class Main : MonoBehaviour
             for (int i = 0; i < allSelectebleObjects.Count; i++) //Создаёт новое изображение и записываает его в перменную area. 
             {
                 Rect area = new Rect(image1.rectTransform.anchoredPosition, image1.rectTransform.sizeDelta);
-                if (!isUnitsSelect || isUnitsSelect && allSelectebleObjects[i] as Unit != null)
+                if (!isUnitsSelect || isUnitsSelect && allSelectebleObjects[i] as Unit != null) //Если нет выбранных юнитов типа Unit или если есть выбранные юниты и они типа Unit
                 {
                     if (area.Contains(Camera.main.WorldToScreenPoint((allSelectebleObjects[i] as MonoBehaviour).transform.position))) //Если в созданную картинку area попадает какой либо юнит, выполняется условие и записывает из массива allUnits юнитов в массив selectedUnits 
                     {
-                        selected.Add(allSelectebleObjects[i]);
-                        allSelectebleObjects[i].IsSelected = true;
+                        if ((allSelectebleObjects[i] as Build) != null && !(allSelectebleObjects[i] as Build).job) //Если в выбранных объектах есть здания и здания не находятся в работе, пропускаем этот объект
+                            continue;
+                        selected.Add(allSelectebleObjects[i]); //Добавляет в список "выбранные" отсортированные объекты
+                        allSelectebleObjects[i].IsSelected = true; //Все выбранные юниты становятся активными
                     }
                     image1.enabled = false;//Выключает картинку
                 }
@@ -142,7 +149,7 @@ public class Main : MonoBehaviour
 
     private void Binds()
     {
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift)) //Если зажат Shift и цифра от 0-9, то выбранные объекты записываются в список и при нажатии соответствующей цифры вызывается этот список сохранёных объектов и записывает себя в список выделенных
         {
             for (int i = 48; i < 58; i++)
                 if (Input.GetKeyDown((KeyCode)i))
