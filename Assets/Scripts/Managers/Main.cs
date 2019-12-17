@@ -69,11 +69,12 @@ public class Main : MonoBehaviour
             anim.Play("CloseMenu");
         }
 
+
         if (allUnits.Count == 0) // Если на стороне Player нет юнитов запускается сцена Menu
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene("Menu");
         }
-
+ 
         storage.Update();
         isAudioCurrentFrame = false;
     }
@@ -135,10 +136,15 @@ public class Main : MonoBehaviour
                 {
                     if (area.Contains(Camera.main.WorldToScreenPoint((allSelectebleObjects[i] as MonoBehaviour).transform.position))) //Если в созданную картинку area попадает какой либо юнит, выполняется условие и записывает из массива allUnits юнитов в массив selectedUnits 
                     {
+
+                        selected.Add(allSelectebleObjects[i]);
+                        allSelectebleObjects[i].IsSelected = true;
+
                         if ((allSelectebleObjects[i] as Build) != null && !(allSelectebleObjects[i] as Build).job) //Если в выбранных объектах есть здания и здания не находятся в работе, пропускаем этот объект
                             continue;
                         selected.Add(allSelectebleObjects[i]); //Добавляет в список "выбранные" отсортированные объекты
                         allSelectebleObjects[i].IsSelected = true; //Все выбранные юниты становятся активными
+
                     }
                     image1.enabled = false;//Выключает картинку
                 }
