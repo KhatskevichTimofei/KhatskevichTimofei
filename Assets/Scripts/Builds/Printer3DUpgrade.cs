@@ -24,17 +24,17 @@ public class Printer3DUpgrade : Build, IDestroyed, ISelected
                 ochered.RemoveAt(0);
             }
         }
-        else anim.Stop();
-        for (int i = 0; i < ocheredImage.Count; i++)
+        else anim.Stop(); //Останавливает анимацию
+        for (int i = 0; i < ocheredImage.Count; i++) //Активирует на панеле картинку если в очереди кто-то есть
         {
             ocheredImage[i].gameObject.SetActive(i < ochered.Count);
         }
-        if (ochered.Count > 0)
+        if (ochered.Count > 0)//Если в очереди есть кто-то, то запускается запускается ProgressBar и ???
         {
             progressBar.transform.parent.gameObject.SetActive(true);
             progressBar.fillAmount = ochered[0].progress / ochered[0].timeCreate;
         }
-        else progressBar.transform.parent.gameObject.SetActive(false);
+        else progressBar.transform.parent.gameObject.SetActive(false); //Иначе отключает ProgressBar 
         for (int i = 0; i < prices.Count; i++)
         {
             buttons[i].interactable = Main.instance.storage.ExistBabin(prices[i].babinPrice) && Main.instance.storage.ExistPlastic(prices[i].plasticPrice);
