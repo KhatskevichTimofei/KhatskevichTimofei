@@ -35,7 +35,7 @@ public class Printer3DUpgrade : Build, IDestroyed, ISelected
             progressBar.fillAmount = ochered[0].progress / ochered[0].timeCreate;
         }
         else progressBar.transform.parent.gameObject.SetActive(false); //Иначе отключает ProgressBar 
-        for (int i = 0; i < prices.Count; i++)
+        for (int i = 0; i < prices.Count; i++)//???
         {
             buttons[i].interactable = Main.instance.storage.ExistBabin(prices[i].babinPrice) && Main.instance.storage.ExistPlastic(prices[i].plasticPrice);
         }
@@ -45,11 +45,11 @@ public class Printer3DUpgrade : Build, IDestroyed, ISelected
 
     public void AddOchered(int index)
     {
-        if (ochered.Count == 0)
+        if (ochered.Count == 0)//Если размер листа равен 0, то запускается анимация ???
         {
             anim.Play();
         }
-        if (ochered.Count < 5)
+        if (ochered.Count < 5) //Если размер очереди меньше 6 ???
             AddOchered(prices[index]);
 
     }
@@ -57,7 +57,7 @@ public class Printer3DUpgrade : Build, IDestroyed, ISelected
 
     public void AddOchered(Price price)
     {
-        Main.instance.storage.RemovePlastic(price.plasticPrice);
+        Main.instance.storage.RemovePlastic(price.plasticPrice); //
         Main.instance.storage.RemoveBabin(price.babinPrice);
         ochered.Add(price.Copy<UnitPrice>());
     }
