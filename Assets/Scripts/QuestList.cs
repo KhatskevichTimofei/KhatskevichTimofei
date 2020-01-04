@@ -58,7 +58,7 @@ public class QuestList : MonoBehaviour
 
     public IEnumerator DelayStart()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.5f);//???
         StartQuest();
     }
 }

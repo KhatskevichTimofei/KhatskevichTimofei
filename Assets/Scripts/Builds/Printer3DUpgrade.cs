@@ -35,7 +35,7 @@ public class Printer3DUpgrade : Build, IDestroyed, ISelected
             progressBar.fillAmount = ochered[0].progress / ochered[0].timeCreate;
         }
         else progressBar.transform.parent.gameObject.SetActive(false); //Иначе отключает ProgressBar 
-        for (int i = 0; i < prices.Count; i++)//???
+        for (int i = 0; i < prices.Count; i++)//Кнопка становится активной после того как нам хватает бабина и пластика
         {
             buttons[i].interactable = Main.instance.storage.ExistBabin(prices[i].babinPrice) && Main.instance.storage.ExistPlastic(prices[i].plasticPrice);
         }

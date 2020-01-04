@@ -8,8 +8,6 @@ public class UnitPrice : Price
 {
     public GameObject unit;
 
-
-
     public override void Complete(Build build)
     {
         GameObject obj = Object.Instantiate(unit);

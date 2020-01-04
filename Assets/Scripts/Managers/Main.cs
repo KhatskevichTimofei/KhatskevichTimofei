@@ -5,6 +5,12 @@ using UnityEngine.AI;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
+//enum Prof
+//{
+//    Prog,
+//    Dis,
+//    Reck
+//}
 public class Main : MonoBehaviour
 {
     public static Main instance; //Создаётся публичная статичная переменнная типа Main. Static 
@@ -28,6 +34,8 @@ public class Main : MonoBehaviour
     public Animation anim;
     public bool animStart;
     bool isFrameSelected;
+    //Prof prof;
+    
 
     void Start()
     {
@@ -42,6 +50,19 @@ public class Main : MonoBehaviour
 
     void Update()
     {
+        //switch (prof)
+        //{
+        //    case Prof.Prog:
+
+        //        break;
+        //    case Prof.Dis:
+
+        //        break;
+        //    case Prof.Reck:
+
+        //        break;
+        //}
+
         //if (Input.GetKeyDown(KeyCode.P))//При одном нажатии кнопки P выполняется условие
         //{
 
