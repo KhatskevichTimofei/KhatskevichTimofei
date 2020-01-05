@@ -97,7 +97,7 @@ MonoBehaviour:
   text: {fileID: 0}
   storage:
     babin: 0
-    plastic: 10000
+    plastic: 500
     babinIcon: {fileID: 0}
     plasticIcon: {fileID: 0}
     textBabin: {fileID: 0}
@@ -105,7 +105,6 @@ MonoBehaviour:
   pointSbor: {fileID: 3672443971438674321}
   selectedLego: {fileID: 0}
   obvodka: {fileID: 1113423690992580064}
-  job: 0
 --- !u!65 &2196862075319911838
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -249,7 +248,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 6a323a632214b2f4cbbd2cdb5a4ccced,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a323a632214b2f4cbbd2cdb5a4ccced, type: 3}

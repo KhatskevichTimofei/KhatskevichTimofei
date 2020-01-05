@@ -163,6 +163,7 @@ MonoBehaviour:
   animator: {fileID: 8832555062080989596}
   curatorAudio: 
   snoryd: Bullet
+  sprite: {fileID: 21300000, guid: 064acab1dd077b747ad8f965323ad854, type: 3}
   obvodka: {fileID: 7466036706040712674}
   typeTarget: 0
 --- !u!1001 &1494453754758092011

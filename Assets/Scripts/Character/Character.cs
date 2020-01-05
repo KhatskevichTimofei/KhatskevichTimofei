@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public enum SideConflict
 {
@@ -28,6 +29,7 @@ public class Character : MonoBehaviour, IDestroyed
     protected int countClick;
     float timeIdle, timeIdleSound;
     public string snoryd;
+    public Sprite sprite;
     //public Bullet bullet;
     //public Attack radiusUpCharacter;
 

@@ -92,7 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e63c8d746e6e1064ea986fa3c5ade2e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  plastic: 30
+  plastic: 50
   babin: 0
   unit: {fileID: 0}
 --- !u!65 &850391446746892734
