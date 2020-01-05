@@ -15,6 +15,7 @@ public class Main : MonoBehaviour
 {
     public static Main instance; //Создаётся публичная статичная переменнная типа Main. Static 
     public static bool isAudioCurrentFrame;
+    public static float volume;
 
     public Vector3 startMouse;
     public Vector3 stopMouse;
@@ -34,8 +35,9 @@ public class Main : MonoBehaviour
     public Animation anim;
     public bool animStart;
     bool isFrameSelected;
+    public float audioTime;
     //Prof prof;
-    
+
 
     void Start()
     {
@@ -94,7 +96,10 @@ public class Main : MonoBehaviour
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene("Menu");
         }
-
+        if (audioTime > 0)
+        {
+            audioTime -= Time.deltaTime;
+        }
         storage.Update();
         isAudioCurrentFrame = false;
     }
@@ -262,7 +267,12 @@ public class Main : MonoBehaviour
                             {
                                 if (selected[i] as Unit != null)
                                 {
-                                    AudioManager.AddAudio(selected[i] as Character, "Go");
+                                    if (audioTime <= 0)
+                                    {
+                                        audioTime = 15;
+                                        AudioManager.AddAudio(selected[i] as Character, "Go");
+                                    }
+
                                     (selected[i] as Unit).SetTarget(null);
                                     (selected[i] as Unit).typeTarget = TypeTarget.Set;
                                     (selected[i] as Unit).SetTargetPosition(casthit.point);//Каждый выбранный юнит обращается к выбранной позиции, которая задаётся с помощью луча 
