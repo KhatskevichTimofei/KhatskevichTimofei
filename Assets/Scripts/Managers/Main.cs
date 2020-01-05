@@ -35,7 +35,7 @@ public class Main : MonoBehaviour
     public Animation anim;
     public bool animStart;
     bool isFrameSelected;
-    public float audioTime;
+    public float audioTimeGo, audioTimeAttack, audioTimeCollectionUp, audioTimeDrop;
     //Prof prof;
 
 
@@ -96,10 +96,22 @@ public class Main : MonoBehaviour
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene("Menu");
         }
-        if (audioTime > 0)
+        if (audioTimeGo > 0)
         {
-            audioTime -= Time.deltaTime;
+            audioTimeGo -= Time.deltaTime;
         }
+        if (audioTimeAttack > 0)
+        {
+            audioTimeAttack -= Time.deltaTime;
+        }
+        if (audioTimeCollectionUp > 0)
+        {
+            audioTimeCollectionUp -= Time.deltaTime;
+        }
+        if (audioTimeDrop > 0)
+            {
+                audioTimeDrop -= Time.deltaTime;
+            }
         storage.Update();
         isAudioCurrentFrame = false;
     }
@@ -224,7 +236,11 @@ public class Main : MonoBehaviour
                         {
                             (selected[i] as Unit).SetTarget(target);
                             (selected[i] as Unit).typeTarget = TypeTarget.Set;
-                            AudioManager.AddAudio(selected[i] as Character, "Attack");
+                            if (audioTimeAttack <= 0)
+                            {
+                                AudioManager.AddAudio(selected[i] as Character, "Attack");
+                                audioTimeAttack = 8;
+                            }
                             //AudioManager.AddAudio(transform, "TargetEnemy");
                         }
                     }
@@ -258,8 +274,21 @@ public class Main : MonoBehaviour
                                     (selected[i] as Unit).SetTarget(target);
                                     (selected[i] as Unit).typeTarget = TypeTarget.Set;
                                     if (target as Smelter)
-                                        AudioManager.AddAudio(selected[i] as Character, "Collect");
-                                    else AudioManager.AddAudio(selected[i] as Character, "Drop");
+                                    {
+                                        if (audioTimeCollectionUp <= 0)
+                                        {
+                                            AudioManager.AddAudio(selected[i] as Character, "Collect");
+                                            audioTimeCollectionUp = 5;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (audioTimeDrop <= 0)
+                                        {
+                                            AudioManager.AddAudio(selected[i] as Character, "Drop");
+                                            audioTimeDrop = 5;
+                                        }
+                                    }
                                 }
                         }
                         else
@@ -267,9 +296,9 @@ public class Main : MonoBehaviour
                             {
                                 if (selected[i] as Unit != null)
                                 {
-                                    if (audioTime <= 0)
+                                    if (audioTimeGo <= 0)
                                     {
-                                        audioTime = 15;
+                                        audioTimeGo = 15;
                                         AudioManager.AddAudio(selected[i] as Character, "Go");
                                     }
 

@@ -5580,6 +5580,7 @@ MonoBehaviour:
   parentBuild: {fileID: 1523846835}
   anim: {fileID: 247096279}
   animStart: 0
+  audioTime: 0
 --- !u!4 &842692598
 Transform:
   m_ObjectHideFlags: 0
@@ -14681,7 +14682,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2108964673
 RectTransform:
   m_ObjectHideFlags: 0

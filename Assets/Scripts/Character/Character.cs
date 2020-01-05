@@ -176,7 +176,7 @@ public class Character : MonoBehaviour, IDestroyed
             bullet.transform.position = bulletTransform.position;
             bullet.transform.LookAt((target as MonoBehaviour).transform);
             bullet.GetComponent<Bullet>().parent = this;
-            AudioManager.AddAudio(bullet.transform, "Shoot");
+            AudioManager.AddAudio(bullet.transform, "Shoot", "", false, transform, SoundMusicVoice.Sound);
         }
     }
 
