@@ -27,7 +27,7 @@ public abstract class Build : MonoBehaviour, ISelected, IDestroyed
         }
         set
         {
-            isSelected = value; //
+            isSelected = value;
             if (isSelected)
             {
                 ocheredPanel.SetActive(true);
