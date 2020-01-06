@@ -188,11 +188,11 @@ public class Main : MonoBehaviour
                     image1.enabled = false;//Выключает картинку
                 }
             }
-            if (selected.Count > 1)
+            if (selected.Count > 0)
             {
                 ShowSelectedUnits();
             }
-            else if (selected.Count == 1)
+            else if (selected.Count == 0)
             {
 
             }
