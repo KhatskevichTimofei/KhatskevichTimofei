@@ -41,6 +41,9 @@ public class Main : MonoBehaviour
     bool isFrameSelected;
     public float audioTimeGo, audioTimeAttack, audioTimeCollectionUp, audioTimeDrop, audioTimeColletionUpBlock;
     public TypeSeletedAction selectedAction;
+    public Character character;
+    public float cdBuff;
+
 
     void Start()
     {
@@ -109,6 +112,8 @@ public class Main : MonoBehaviour
             audioTimeDrop -= Time.deltaTime;
         if (audioTimeColletionUpBlock > 0)
             audioTimeColletionUpBlock -= Time.deltaTime;
+        if (cdBuff > 0)
+            cdBuff -= Time.deltaTime;
 
 
 
@@ -326,7 +331,7 @@ public class Main : MonoBehaviour
                                         }
                                     }
                             }
-                            
+
                         }
                         break;
                     case TypeSeletedAction.Go:
@@ -404,5 +409,17 @@ public class Main : MonoBehaviour
     public void SetSelectedAction(int setSelected)
     {
         selectedAction = (TypeSeletedAction)setSelected;
+    }
+
+    public void Buff()
+    {
+        if (cdBuff <= 0)
+        {
+            for (int i = 0; i < selected.Count; i++)
+            {
+                (selected[i] as Character).attack.damage += 1000;
+            }
+            cdBuff = 3;
+        }
     }
 }
