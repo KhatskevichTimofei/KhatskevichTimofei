@@ -39,6 +39,7 @@ public class Interactive : MonoBehaviour, IDestroyed
                         anim.Play();
                     if (selectAnim != null)
                         selectAnim.Play();
+                    Destroy(this);
                     kubokOff = 1;
                 }
                 break;

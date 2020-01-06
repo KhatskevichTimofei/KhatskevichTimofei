@@ -33,12 +33,14 @@ public class Main : MonoBehaviour
     public Smelter smelter;
     public LegoBox legoBox;
     public Storage storage = new Storage();
+    public GameObject unitsPanel;
+    public GameObject funcionalUnitPanel;
     public Transform parentEnemy, parentUnit, parentBuild;
     public Animation anim;
     public bool animStart;
     bool isFrameSelected;
     public float audioTimeGo, audioTimeAttack, audioTimeCollectionUp, audioTimeDrop, audioTimeColletionUpBlock;
-    public TypeSeletedAction seletedAction;
+    public TypeSeletedAction selectedAction;
 
     void Start()
     {
@@ -108,7 +110,7 @@ public class Main : MonoBehaviour
         if (audioTimeColletionUpBlock > 0)
             audioTimeColletionUpBlock -= Time.deltaTime;
 
-       
+
 
         storage.Update();
         isAudioCurrentFrame = false;
@@ -120,6 +122,8 @@ public class Main : MonoBehaviour
         {
             if (!EventSystem.current.IsPointerOverGameObject())
             {
+                unitsPanel.SetActive(false);
+                funcionalUnitPanel.SetActive(false);
                 startMouse = Input.mousePosition; // В пеменную типа Vector3 записывается позиция мыши
                 for (int i = 0; i < selected.Count; i++)
                 {
@@ -188,7 +192,7 @@ public class Main : MonoBehaviour
 
             }
             isFrameSelected = false;
-           
+
         }
     }
 
@@ -234,7 +238,7 @@ public class Main : MonoBehaviour
             IActivity target;
             if (Physics.Raycast(ray, out casthit)) // ????
             {
-                switch (seletedAction)
+                switch (selectedAction)
                 {
                     case TypeSeletedAction.Defualt:
                         target = casthit.transform.GetComponent<IDestroyed>();
@@ -322,6 +326,7 @@ public class Main : MonoBehaviour
                                         }
                                     }
                             }
+                            
                         }
                         break;
                     case TypeSeletedAction.Go:
@@ -340,6 +345,7 @@ public class Main : MonoBehaviour
                                 (selected[i] as Unit).SetTargetPosition(casthit.point);//Каждый выбранный юнит обращается к выбранной позиции, которая задаётся с помощью луча 
                             }
                         }
+                        selectedAction = TypeSeletedAction.Defualt;
                         break;
                     case TypeSeletedAction.Attack:
                         target = casthit.transform.GetComponent<IDestroyed>();
@@ -360,8 +366,10 @@ public class Main : MonoBehaviour
                                 }
                             }
                         }
+                        selectedAction = TypeSeletedAction.Defualt;
                         break;
                     case TypeSeletedAction.Patrol:
+                        selectedAction = TypeSeletedAction.Defualt;
                         break;
 
                 }
@@ -387,5 +395,14 @@ public class Main : MonoBehaviour
             unit.anchoredPosition = new Vector2(128 + (i % 8) * 80, -64 - (i / 8) * 80);
             unit.GetChild(0).GetComponent<Image>().sprite = (selected[i] as Character).Icon;
         }
+        if (selected[0] as Unit && (selected[0] as Character).sideConflict == SideConflict.Player)
+        {
+            funcionalUnitPanel.SetActive(true);
+        }
+    }
+
+    public void SetSelectedAction(int setSelected)
+    {
+        selectedAction = (TypeSeletedAction)setSelected;
     }
 }

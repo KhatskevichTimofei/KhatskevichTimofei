@@ -18,7 +18,6 @@ public abstract class Unit : Character, ISelected
     public TypeTarget typeTarget;
     public SideConflict sideConflicts;
     bool isSelected;
-    public GameObject unitPanel;
 
 
     public bool IsSelected
@@ -80,10 +79,6 @@ public abstract class Unit : Character, ISelected
                 break;
             case TypeTarget.Set:
                 break;
-        }
-        if (Main.instance.selected[0] as Unit || sideConflict == SideConflict.Player)
-        {
-            
         }
 
 
