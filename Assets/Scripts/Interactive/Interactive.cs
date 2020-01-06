@@ -14,6 +14,7 @@ public class Interactive : MonoBehaviour, IDestroyed
     public TypePushAndAttack typePushAndAttack;
     public Animation selectAnim;
     public bool job;
+    public int kubokOff = 0;
 
     public void GetDamage(float damage)
     {
@@ -32,11 +33,14 @@ public class Interactive : MonoBehaviour, IDestroyed
         switch (typePushAndAttack)
         {
             case TypePushAndAttack.Push:
-                if (anim != null)
-                    anim.Play();
-                if (selectAnim != null)
-                    selectAnim.Play();
-
+                if (kubokOff == 0)
+                {
+                    if (anim != null)
+                        anim.Play();
+                    if (selectAnim != null)
+                        selectAnim.Play();
+                    kubokOff = 1;
+                }
                 break;
             case TypePushAndAttack.Attack:
                 Destroy(gameObject);

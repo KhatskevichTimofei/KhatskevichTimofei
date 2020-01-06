@@ -5580,7 +5580,10 @@ MonoBehaviour:
   parentBuild: {fileID: 1523846835}
   anim: {fileID: 247096279}
   animStart: 0
-  audioTime: 0
+  audioTimeGo: 0
+  audioTimeAttack: 0
+  audioTimeCollectionUp: 0
+  audioTimeDrop: 0
 --- !u!4 &842692598
 Transform:
   m_ObjectHideFlags: 0
@@ -16461,11 +16464,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Smelter
       objectReference: {fileID: 0}
-    - target: {fileID: 2193744305805751358, guid: 25617bcba4eb7174e95c4268b78535e9,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2521963857392215447, guid: 25617bcba4eb7174e95c4268b78535e9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -16520,41 +16518,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 110.522
-      objectReference: {fileID: 0}
-    - target: {fileID: 2521963857392215447, guid: 25617bcba4eb7174e95c4268b78535e9,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 71.20136
-      objectReference: {fileID: 0}
-    - target: {fileID: 2521963857392215447, guid: 25617bcba4eb7174e95c4268b78535e9,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 71.20139
-      objectReference: {fileID: 0}
-    - target: {fileID: 2521963857392215447, guid: 25617bcba4eb7174e95c4268b78535e9,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 71.20139
-      objectReference: {fileID: 0}
-    - target: {fileID: 2894379742083974701, guid: 25617bcba4eb7174e95c4268b78535e9,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.028
-      objectReference: {fileID: 0}
-    - target: {fileID: 4433848992911451355, guid: 25617bcba4eb7174e95c4268b78535e9,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.122
-      objectReference: {fileID: 0}
-    - target: {fileID: 4433848992911451355, guid: 25617bcba4eb7174e95c4268b78535e9,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1.387
-      objectReference: {fileID: 0}
-    - target: {fileID: 4433848992911451355, guid: 25617bcba4eb7174e95c4268b78535e9,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.07
       objectReference: {fileID: 0}
     - target: {fileID: 8787889395524274202, guid: 25617bcba4eb7174e95c4268b78535e9,
         type: 3}
@@ -16987,33 +16950,18 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 518360297087616179, guid: 9de548b242201f04b9e8bf1e05efcbf3,
         type: 3}
-      propertyPath: storage.plastic
-      value: 10000
-      objectReference: {fileID: 0}
+      propertyPath: text
+      value: 
+      objectReference: {fileID: 1651331098}
+    - target: {fileID: 518360297087616179, guid: 9de548b242201f04b9e8bf1e05efcbf3,
+        type: 3}
+      propertyPath: selectedLego
+      value: 
+      objectReference: {fileID: 2108964672}
     - target: {fileID: 1113423691574474174, guid: 9de548b242201f04b9e8bf1e05efcbf3,
         type: 3}
       propertyPath: m_Name
       value: Lego box
-      objectReference: {fileID: 0}
-    - target: {fileID: 1113423691574474174, guid: 9de548b242201f04b9e8bf1e05efcbf3,
-        type: 3}
-      propertyPath: m_NavMeshLayer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3672443971438674321, guid: 9de548b242201f04b9e8bf1e05efcbf3,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.399
-      objectReference: {fileID: 0}
-    - target: {fileID: 3672443971438674321, guid: 9de548b242201f04b9e8bf1e05efcbf3,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3672443971438674321, guid: 9de548b242201f04b9e8bf1e05efcbf3,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.2
       objectReference: {fileID: 0}
     - target: {fileID: 4118811420695070637, guid: 9de548b242201f04b9e8bf1e05efcbf3,
         type: 3}
@@ -17069,26 +17017,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4118811420695070637, guid: 9de548b242201f04b9e8bf1e05efcbf3,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 49.700634
-      objectReference: {fileID: 0}
-    - target: {fileID: 4118811420695070637, guid: 9de548b242201f04b9e8bf1e05efcbf3,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 49.700634
-      objectReference: {fileID: 0}
-    - target: {fileID: 4118811420695070637, guid: 9de548b242201f04b9e8bf1e05efcbf3,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 49.700603
-      objectReference: {fileID: 0}
-    - target: {fileID: 4696581792224183101, guid: 9de548b242201f04b9e8bf1e05efcbf3,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9de548b242201f04b9e8bf1e05efcbf3, type: 3}

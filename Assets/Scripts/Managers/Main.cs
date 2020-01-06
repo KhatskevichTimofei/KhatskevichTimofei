@@ -32,12 +32,11 @@ public class Main : MonoBehaviour
     public LegoBox legoBox;
     public Storage storage = new Storage();
     public Transform parentEnemy, parentUnit, parentBuild;
+    public GameObject unitsPanel;
     public Animation anim;
     public bool animStart;
     bool isFrameSelected;
-    public float audioTimeGo, audioTimeAttack, audioTimeCollectionUp, audioTimeDrop;
-    //Prof prof;
-
+    public float audioTimeGo, audioTimeAttack, audioTimeCollectionUp, audioTimeDrop, audioTimeColletionUpBlock;
 
     void Start()
     {
@@ -85,33 +84,28 @@ public class Main : MonoBehaviour
         {
             animStart = true;
             anim.Play("OpenMenu");
+            AudioManager.AddAudio(Camera.current.transform, "OpenMenuSound", "", false, true, SoundMusicVoice.Sound);
         }
         else if (Input.GetKeyDown(KeyCode.Escape) && animStart)
         {
             animStart = false;
             anim.Play("CloseMenu");
+
         }
 
         if (allUnits.Count == 0)
-        {
             UnityEngine.SceneManagement.SceneManager.LoadScene("Menu");
-        }
         if (audioTimeGo > 0)
-        {
             audioTimeGo -= Time.deltaTime;
-        }
         if (audioTimeAttack > 0)
-        {
             audioTimeAttack -= Time.deltaTime;
-        }
         if (audioTimeCollectionUp > 0)
-        {
             audioTimeCollectionUp -= Time.deltaTime;
-        }
         if (audioTimeDrop > 0)
-            {
-                audioTimeDrop -= Time.deltaTime;
-            }
+            audioTimeDrop -= Time.deltaTime;
+        if (audioTimeColletionUpBlock > 0)
+            audioTimeColletionUpBlock -= Time.deltaTime;
+
         storage.Update();
         isAudioCurrentFrame = false;
     }
@@ -180,6 +174,14 @@ public class Main : MonoBehaviour
                     }
                     image1.enabled = false;//Выключает картинку
                 }
+            }
+            if (selected.Count > 1)
+            {
+
+            }
+            else if (selected.Count == 1)
+            {
+
             }
             isFrameSelected = false;
         }
@@ -256,7 +258,11 @@ public class Main : MonoBehaviour
                             {
                                 (selected[i] as Unit).SetTarget(target);
                                 (selected[i] as Unit).typeTarget = TypeTarget.Set;
-                                AudioManager.AddAudio(selected[i] as Character, "Collect");
+                                if (audioTimeColletionUpBlock <= 0)
+                                {
+                                    AudioManager.AddAudio(selected[i] as Character, "Collect");
+                                    audioTimeColletionUpBlock = 3;
+                                }
                                 break;
                             }
                         }
@@ -315,6 +321,15 @@ public class Main : MonoBehaviour
             //        agent.SetPath(path);
             //    }
 
+        }
+    }
+
+    public void ShowSelectedUnits()
+    {
+        unitsPanel.SetActive(true);
+        for (int i = 0; i < unitsPanel.transform.childCount; i++)
+        {
+            Destroy(unitsPanel.transform.GetChild(i).gameObject);
         }
     }
 }

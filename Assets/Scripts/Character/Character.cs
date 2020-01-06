@@ -30,6 +30,7 @@ public class Character : MonoBehaviour, IDestroyed
     float timeIdle, timeIdleSound;
     public string snoryd;
     public Sprite sprite;
+    
     //public Bullet bullet;
     //public Attack radiusUpCharacter;
 
