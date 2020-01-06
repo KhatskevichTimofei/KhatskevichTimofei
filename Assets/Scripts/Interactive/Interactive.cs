@@ -7,7 +7,7 @@ public enum TypePushAndAttack
     Push,
     Attack
 }
-public class Interactive : MonoBehaviour, IDestroyed
+public class Interactive : UnityEngine.MonoBehaviour, IDestroyed
 {
     public float hp;
     public Animation anim;

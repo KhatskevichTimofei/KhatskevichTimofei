@@ -11,7 +11,7 @@ public enum SideConflict
 }
 
 
-public class Character : MonoBehaviour, IDestroyed
+public class MonoBehaviour : UnityEngine.MonoBehaviour, IDestroyed
 {
 
     public float hp, speed, armor, radiusLook;
@@ -75,7 +75,7 @@ public class Character : MonoBehaviour, IDestroyed
         else timeIdleSound = 0;
         agent.acceleration = speed * 2;
         agent.speed = speed;
-        if (target == null || (target as MonoBehaviour) == null)
+        if (target == null || (target as UnityEngine.MonoBehaviour) == null)
             target = null;
         if (target != null)
         {
@@ -84,14 +84,14 @@ public class Character : MonoBehaviour, IDestroyed
             LegoBox legoBox = target as LegoBox;
             Smelter smelter = target as Smelter;
 
-            Vector3 distance = transform.position - (target as MonoBehaviour).transform.position;
-            if (destroyed != null && distance.magnitude > attack.radiusAttack && (target as Build != null && (target as Build).sideConflict != sideConflict || target as Character != null && (target as Character).sideConflict != sideConflict || target as Interactive != null))
+            Vector3 distance = transform.position - (target as UnityEngine.MonoBehaviour).transform.position;
+            if (destroyed != null && distance.magnitude > attack.radiusAttack && (target as Build != null && (target as Build).sideConflict != sideConflict || target as MonoBehaviour != null && (target as MonoBehaviour).sideConflict != sideConflict || target as Interactive != null))
             {
-                SetTargetPosition((target as MonoBehaviour).transform.position + distance.normalized * (attack.radiusAttack - (attack.radiusAttack * 0.1f)));
+                SetTargetPosition((target as UnityEngine.MonoBehaviour).transform.position + distance.normalized * (attack.radiusAttack - (attack.radiusAttack * 0.1f)));
             }
             else
             {
-                if (destroyed != null && (target as Build != null && (target as Build).sideConflict != sideConflict || target as Character != null && (target as Character).sideConflict != sideConflict || target as Interactive != null))
+                if (destroyed != null && (target as Build != null && (target as Build).sideConflict != sideConflict || target as MonoBehaviour != null && (target as MonoBehaviour).sideConflict != sideConflict || target as Interactive != null))
                 {
                     if (attack.cdProgress <= 0)
                     {
@@ -181,7 +181,7 @@ public class Character : MonoBehaviour, IDestroyed
                 animator.SetTrigger("Attack");
             GameObject bullet = Instantiate(Resources.Load<GameObject>("Prefabs/" + snoryd));
             bullet.transform.position = bulletTransform.position;
-            bullet.transform.LookAt((target as MonoBehaviour).transform);
+            bullet.transform.LookAt((target as UnityEngine.MonoBehaviour).transform);
             bullet.GetComponent<Bullet>().parent = this;
             AudioManager.AddAudio(bullet.transform, "Shoot", "", false, transform, SoundMusicVoice.Sound);
         }

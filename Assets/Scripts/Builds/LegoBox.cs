@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LegoBox : MonoBehaviour, ISelected, IActivity
+public class LegoBox : UnityEngine.MonoBehaviour, ISelected, IActivity
 {
     public Text text;
     public Storage storage;

@@ -8,7 +8,7 @@ public enum SoundMusicVoice
     Music,
     Voice
 }
-public class AudioManager : MonoBehaviour
+public class AudioManager : UnityEngine.MonoBehaviour
 {
     
     public static void AddAudio(Transform target, string clip, string folder = "", bool spatialBlend = false, bool one = true, SoundMusicVoice type = SoundMusicVoice.Voice)
@@ -64,7 +64,7 @@ public class AudioManager : MonoBehaviour
         AddAudio(gameObject.transform, clip, folder, spantialBlend, one,type);
     }
 
-    public static void AddAudio(Character parent, string clip, bool spatialBlend = false, bool one = true, SoundMusicVoice type = SoundMusicVoice.Voice)
+    public static void AddAudio(MonoBehaviour parent, string clip, bool spatialBlend = false, bool one = true, SoundMusicVoice type = SoundMusicVoice.Voice)
     {
         AddAudio(parent.transform.position, clip, parent.curatorAudio + "/", spatialBlend, one,type);
     }

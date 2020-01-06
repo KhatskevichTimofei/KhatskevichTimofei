@@ -13,7 +13,7 @@ public enum TypeSeletedAction
     Patrol,
     CollectionUp,
 }
-public class Main : MonoBehaviour
+public class Main : UnityEngine.MonoBehaviour
 {
     public static Main instance; //Создаётся публичная статичная переменнная типа Main. Static 
     public static bool isAudioCurrentFrame;
@@ -37,11 +37,12 @@ public class Main : MonoBehaviour
     public GameObject funcionalUnitPanel;
     public Transform parentEnemy, parentUnit, parentBuild;
     public Animation anim;
+    public OneUnit oneUnit;
     public bool animStart;
     bool isFrameSelected;
     public float audioTimeGo, audioTimeAttack, audioTimeCollectionUp, audioTimeDrop, audioTimeColletionUpBlock;
     public TypeSeletedAction selectedAction;
-    public Character character;
+    public MonoBehaviour character;
     public float cdBuff;
 
 
@@ -162,7 +163,7 @@ public class Main : MonoBehaviour
             for (int i = 0; i < allSelectebleObjects.Count; i++) //Создаёт новое изображение и записываает его в перменную area. 
             {
                 Rect area = new Rect(image1.rectTransform.anchoredPosition, image1.rectTransform.sizeDelta);
-                if (area.Contains(Camera.main.WorldToScreenPoint((allSelectebleObjects[i] as MonoBehaviour).transform.position))) //Если в созданную картинку area попадает какой либо юнит, выполняется условие  и записывает из массива allUnits юнитов в массив selectedUnits 
+                if (area.Contains(Camera.main.WorldToScreenPoint((allSelectebleObjects[i] as UnityEngine.MonoBehaviour).transform.position))) //Если в созданную картинку area попадает какой либо юнит, выполняется условие  и записывает из массива allUnits юнитов в массив selectedUnits 
                 {
                     if (allSelectebleObjects[i] as Unit != null)
                     {
@@ -178,7 +179,7 @@ public class Main : MonoBehaviour
                 Rect area = new Rect(image1.rectTransform.anchoredPosition, image1.rectTransform.sizeDelta);
                 if (!isUnitsSelect || isUnitsSelect && allSelectebleObjects[i] as Unit != null)
                 {
-                    if (area.Contains(Camera.main.WorldToScreenPoint((allSelectebleObjects[i] as MonoBehaviour).transform.position))) //Если в созданную картинку area попадает какой либо юнит, выполняется условие и записывает из массива allUnits юнитов в массив selectedUnits 
+                    if (area.Contains(Camera.main.WorldToScreenPoint((allSelectebleObjects[i] as UnityEngine.MonoBehaviour).transform.position))) //Если в созданную картинку area попадает какой либо юнит, выполняется условие и записывает из массива allUnits юнитов в массив selectedUnits 
                     {
                         if ((allSelectebleObjects[i] as Build) != null && !(allSelectebleObjects[i] as Build).job)
                             continue;
@@ -188,13 +189,13 @@ public class Main : MonoBehaviour
                     image1.enabled = false;//Выключает картинку
                 }
             }
-            if (selected.Count > 0)
+            if (selected.Count > 1)
             {
                 ShowSelectedUnits();
             }
-            else if (selected.Count == 0)
+            else if (selected.Count == 1)
             {
-
+                oneUnit.HzKakNazvat(selected[0] as Unit);
             }
             isFrameSelected = false;
 
@@ -247,7 +248,7 @@ public class Main : MonoBehaviour
                 {
                     case TypeSeletedAction.Defualt:
                         target = casthit.transform.GetComponent<IDestroyed>();
-                        if (target != null && (target as Build != null && (target as Build).sideConflict == SideConflict.Enemy || target as Character != null && (target as Character).sideConflict == SideConflict.Enemy || target as Interactive != null))
+                        if (target != null && (target as Build != null && (target as Build).sideConflict == SideConflict.Enemy || target as MonoBehaviour != null && (target as MonoBehaviour).sideConflict == SideConflict.Enemy || target as Interactive != null))
                         {
                             for (int i = 0; i < selected.Count; i++)
                             {
@@ -257,7 +258,7 @@ public class Main : MonoBehaviour
                                     (selected[i] as Unit).typeTarget = TypeTarget.Set;
                                     if (audioTimeAttack <= 0)
                                     {
-                                        AudioManager.AddAudio(selected[i] as Character, "Attack");
+                                        AudioManager.AddAudio(selected[i] as MonoBehaviour, "Attack");
                                         audioTimeAttack = 8;
                                     }
                                     //AudioManager.AddAudio(transform, "TargetEnemy");
@@ -277,7 +278,7 @@ public class Main : MonoBehaviour
                                         (selected[i] as Unit).typeTarget = TypeTarget.Set;
                                         if (audioTimeColletionUpBlock <= 0)
                                         {
-                                            AudioManager.AddAudio(selected[i] as Character, "Collect");
+                                            AudioManager.AddAudio(selected[i] as MonoBehaviour, "Collect");
                                             audioTimeColletionUpBlock = 3;
                                         }
                                         break;
@@ -300,7 +301,7 @@ public class Main : MonoBehaviour
                                             {
                                                 if (audioTimeCollectionUp <= 0)
                                                 {
-                                                    AudioManager.AddAudio(selected[i] as Character, "Collect");
+                                                    AudioManager.AddAudio(selected[i] as MonoBehaviour, "Collect");
                                                     audioTimeCollectionUp = 5;
                                                 }
                                             }
@@ -308,7 +309,7 @@ public class Main : MonoBehaviour
                                             {
                                                 if (audioTimeDrop <= 0)
                                                 {
-                                                    AudioManager.AddAudio(selected[i] as Character, "Drop");
+                                                    AudioManager.AddAudio(selected[i] as MonoBehaviour, "Drop");
                                                     audioTimeDrop = 5;
                                                 }
                                             }
@@ -322,7 +323,7 @@ public class Main : MonoBehaviour
                                             if (audioTimeGo <= 0)
                                             {
                                                 audioTimeGo = 15;
-                                                AudioManager.AddAudio(selected[i] as Character, "Go");
+                                                AudioManager.AddAudio(selected[i] as MonoBehaviour, "Go");
                                             }
 
                                             (selected[i] as Unit).SetTarget(null);
@@ -342,7 +343,7 @@ public class Main : MonoBehaviour
                                 if (audioTimeGo <= 0)
                                 {
                                     audioTimeGo = 15;
-                                    AudioManager.AddAudio(selected[i] as Character, "Go");
+                                    AudioManager.AddAudio(selected[i] as MonoBehaviour, "Go");
                                 }
 
                                 (selected[i] as Unit).SetTarget(null);
@@ -364,7 +365,7 @@ public class Main : MonoBehaviour
                                     (selected[i] as Unit).typeTarget = TypeTarget.Set;
                                     if (audioTimeAttack <= 0)
                                     {
-                                        AudioManager.AddAudio(selected[i] as Character, "Attack");
+                                        AudioManager.AddAudio(selected[i] as MonoBehaviour, "Attack");
                                         audioTimeAttack = 8;
                                     }
                                     //AudioManager.AddAudio(transform, "TargetEnemy");
@@ -398,9 +399,9 @@ public class Main : MonoBehaviour
             RectTransform unit = Instantiate(Resources.Load<GameObject>("Prefabs/UI/UnitSelect")).GetComponent<RectTransform>();
             unit.SetParent(unitsPanel.transform);
             unit.anchoredPosition = new Vector2(128 + (i % 8) * 80, -64 - (i / 8) * 80);
-            unit.GetChild(0).GetComponent<Image>().sprite = (selected[i] as Character).Icon;
+            unit.GetChild(0).GetComponent<Image>().sprite = (selected[i] as MonoBehaviour).Icon;
         }
-        if (selected[0] as Unit && (selected[0] as Character).sideConflict == SideConflict.Player)
+        if (selected[0] as Unit && (selected[0] as Unit).sideConflict == SideConflict.Player)
         {
             funcionalUnitPanel.SetActive(true);
         }
@@ -417,7 +418,7 @@ public class Main : MonoBehaviour
         {
             for (int i = 0; i < selected.Count; i++)
             {
-                (selected[i] as Character).attack.damage += 1000;
+                (selected[i] as MonoBehaviour).attack.damage += 1000;
             }
             cdBuff = 3;
         }

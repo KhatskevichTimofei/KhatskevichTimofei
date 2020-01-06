@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainCamera : MonoBehaviour
+public class MainCamera : UnityEngine.MonoBehaviour
 {
     public float speedCamera, speedCameraOnScroll;
     public float strangeScroll;

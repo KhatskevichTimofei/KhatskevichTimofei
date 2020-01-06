@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Setting : MonoBehaviour
+public class Setting : UnityEngine.MonoBehaviour
 {
     public static float music;
     public static float sound;

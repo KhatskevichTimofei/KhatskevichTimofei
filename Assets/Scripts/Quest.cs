@@ -10,11 +10,11 @@ public enum TypeQuest
     Create,
     SaveUp
 }
-public class Quest : MonoBehaviour
+public class Quest : UnityEngine.MonoBehaviour
 {
 
     public TypeQuest typeQuest;
-    public List<Character> listDestroyed;
+    public List<MonoBehaviour> listDestroyed;
     public int createNumber;
     public bool complete;
     public string questText;

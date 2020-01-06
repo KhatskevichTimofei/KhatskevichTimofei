@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hero : MonoBehaviour //Класс Hero наследуется от MonoBehaviour
+public class Hero : UnityEngine.MonoBehaviour //Класс Hero наследуется от MonoBehaviour
 {
     int a;
     public float speed;

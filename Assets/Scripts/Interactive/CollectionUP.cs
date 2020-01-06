@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CollectionUP : MonoBehaviour, ISelected, IActivity
+public class CollectionUP : UnityEngine.MonoBehaviour, ISelected, IActivity
 {
     public float plastic;
     public int babin;

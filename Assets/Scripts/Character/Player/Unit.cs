@@ -10,7 +10,7 @@ public enum TypeTarget
     
 }
 
-public abstract class Unit : Character, ISelected
+public abstract class Unit : MonoBehaviour, ISelected
 {
     public static event System.Action onCreate;
 

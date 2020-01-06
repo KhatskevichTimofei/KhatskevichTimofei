@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainMenu : MonoBehaviour
+public class MainMenu : UnityEngine.MonoBehaviour
 {
     public void StartGame()
     {

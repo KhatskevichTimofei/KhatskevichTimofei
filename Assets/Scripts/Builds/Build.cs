@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
-public abstract class Build : MonoBehaviour, ISelected, IDestroyed
+public abstract class Build : UnityEngine.MonoBehaviour, ISelected, IDestroyed
 {
     public float hp;
     public List<Button> buttons = new List<Button>();
