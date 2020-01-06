@@ -5,12 +5,14 @@ using UnityEngine.AI;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-//enum Prof
-//{
-//    Prog,
-//    Dis,
-//    Reck
-//}
+public enum TypeSeletedAction
+{
+    Defualt,
+    Go,
+    Attack,
+    Patrol,
+    CollectionUp,
+}
 public class Main : MonoBehaviour
 {
     public static Main instance; //Создаётся публичная статичная переменнная типа Main. Static 
@@ -32,11 +34,11 @@ public class Main : MonoBehaviour
     public LegoBox legoBox;
     public Storage storage = new Storage();
     public Transform parentEnemy, parentUnit, parentBuild;
-    public GameObject unitsPanel;
     public Animation anim;
     public bool animStart;
     bool isFrameSelected;
     public float audioTimeGo, audioTimeAttack, audioTimeCollectionUp, audioTimeDrop, audioTimeColletionUpBlock;
+    public TypeSeletedAction seletedAction;
 
     void Start()
     {
@@ -105,6 +107,8 @@ public class Main : MonoBehaviour
             audioTimeDrop -= Time.deltaTime;
         if (audioTimeColletionUpBlock > 0)
             audioTimeColletionUpBlock -= Time.deltaTime;
+
+       
 
         storage.Update();
         isAudioCurrentFrame = false;
@@ -177,13 +181,14 @@ public class Main : MonoBehaviour
             }
             if (selected.Count > 1)
             {
-
+                ShowSelectedUnits();
             }
             else if (selected.Count == 1)
             {
 
             }
             isFrameSelected = false;
+           
         }
     }
 
@@ -226,95 +231,141 @@ public class Main : MonoBehaviour
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); //Создаётся переменнная типа Ray(луч) ??????????
             RaycastHit casthit; // Создаётся переменнная типа RaycastHit(???)
-
+            IActivity target;
             if (Physics.Raycast(ray, out casthit)) // ????
             {
-                IActivity target = casthit.transform.GetComponent<IDestroyed>();
-                if (target != null && (target as Build != null && (target as Build).sideConflict == SideConflict.Enemy || target as Character != null && (target as Character).sideConflict == SideConflict.Enemy || target as Interactive != null))
+                switch (seletedAction)
                 {
-                    for (int i = 0; i < selected.Count; i++)
-                    {
-                        if (selected[i] as Unit != null)
-                        {
-                            (selected[i] as Unit).SetTarget(target);
-                            (selected[i] as Unit).typeTarget = TypeTarget.Set;
-                            if (audioTimeAttack <= 0)
-                            {
-                                AudioManager.AddAudio(selected[i] as Character, "Attack");
-                                audioTimeAttack = 8;
-                            }
-                            //AudioManager.AddAudio(transform, "TargetEnemy");
-                        }
-                    }
-                }
-                else
-                {
-                    target = casthit.transform.GetComponent<CollectionUP>();
-                    if (target != null)
-                    {
-                        for (int i = 0; i < selected.Count; i++)
-                        {
-                            if ((selected[i] as Unit).collectionUP == null)
-                            {
-                                (selected[i] as Unit).SetTarget(target);
-                                (selected[i] as Unit).typeTarget = TypeTarget.Set;
-                                if (audioTimeColletionUpBlock <= 0)
-                                {
-                                    AudioManager.AddAudio(selected[i] as Character, "Collect");
-                                    audioTimeColletionUpBlock = 3;
-                                }
-                                break;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        target = casthit.transform.GetComponent<LegoBox>();
-                        if (target == null)
-                            target = casthit.transform.GetComponent<Smelter>();
-                        if (target != null)
+                    case TypeSeletedAction.Defualt:
+                        target = casthit.transform.GetComponent<IDestroyed>();
+                        if (target != null && (target as Build != null && (target as Build).sideConflict == SideConflict.Enemy || target as Character != null && (target as Character).sideConflict == SideConflict.Enemy || target as Interactive != null))
                         {
                             for (int i = 0; i < selected.Count; i++)
-                                if (selected[i] as Unit)
-                                {
-                                    (selected[i] as Unit).SetTarget(target);
-                                    (selected[i] as Unit).typeTarget = TypeTarget.Set;
-                                    if (target as Smelter)
-                                    {
-                                        if (audioTimeCollectionUp <= 0)
-                                        {
-                                            AudioManager.AddAudio(selected[i] as Character, "Collect");
-                                            audioTimeCollectionUp = 5;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        if (audioTimeDrop <= 0)
-                                        {
-                                            AudioManager.AddAudio(selected[i] as Character, "Drop");
-                                            audioTimeDrop = 5;
-                                        }
-                                    }
-                                }
-                        }
-                        else
-                            for (int i = 0; i < selected.Count; i++)//Цикл который проходится по всем выбранным юнитам
                             {
                                 if (selected[i] as Unit != null)
                                 {
-                                    if (audioTimeGo <= 0)
-                                    {
-                                        audioTimeGo = 15;
-                                        AudioManager.AddAudio(selected[i] as Character, "Go");
-                                    }
-
-                                    (selected[i] as Unit).SetTarget(null);
+                                    (selected[i] as Unit).SetTarget(target);
                                     (selected[i] as Unit).typeTarget = TypeTarget.Set;
-                                    (selected[i] as Unit).SetTargetPosition(casthit.point);//Каждый выбранный юнит обращается к выбранной позиции, которая задаётся с помощью луча 
+                                    if (audioTimeAttack <= 0)
+                                    {
+                                        AudioManager.AddAudio(selected[i] as Character, "Attack");
+                                        audioTimeAttack = 8;
+                                    }
+                                    //AudioManager.AddAudio(transform, "TargetEnemy");
                                 }
                             }
-                    }
+                        }
+                        else
+                        {
+                            target = casthit.transform.GetComponent<CollectionUP>();
+                            if (target != null)
+                            {
+                                for (int i = 0; i < selected.Count; i++)
+                                {
+                                    if ((selected[i] as Unit).collectionUP == null)
+                                    {
+                                        (selected[i] as Unit).SetTarget(target);
+                                        (selected[i] as Unit).typeTarget = TypeTarget.Set;
+                                        if (audioTimeColletionUpBlock <= 0)
+                                        {
+                                            AudioManager.AddAudio(selected[i] as Character, "Collect");
+                                            audioTimeColletionUpBlock = 3;
+                                        }
+                                        break;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                target = casthit.transform.GetComponent<LegoBox>();
+                                if (target == null)
+                                    target = casthit.transform.GetComponent<Smelter>();
+                                if (target != null)
+                                {
+                                    for (int i = 0; i < selected.Count; i++)
+                                        if (selected[i] as Unit)
+                                        {
+                                            (selected[i] as Unit).SetTarget(target);
+                                            (selected[i] as Unit).typeTarget = TypeTarget.Set;
+                                            if (target as Smelter)
+                                            {
+                                                if (audioTimeCollectionUp <= 0)
+                                                {
+                                                    AudioManager.AddAudio(selected[i] as Character, "Collect");
+                                                    audioTimeCollectionUp = 5;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                if (audioTimeDrop <= 0)
+                                                {
+                                                    AudioManager.AddAudio(selected[i] as Character, "Drop");
+                                                    audioTimeDrop = 5;
+                                                }
+                                            }
+                                        }
+                                }
+                                else
+                                    for (int i = 0; i < selected.Count; i++)//Цикл который проходится по всем выбранным юнитам
+                                    {
+                                        if (selected[i] as Unit != null)
+                                        {
+                                            if (audioTimeGo <= 0)
+                                            {
+                                                audioTimeGo = 15;
+                                                AudioManager.AddAudio(selected[i] as Character, "Go");
+                                            }
+
+                                            (selected[i] as Unit).SetTarget(null);
+                                            (selected[i] as Unit).typeTarget = TypeTarget.Set;
+                                            (selected[i] as Unit).SetTargetPosition(casthit.point);//Каждый выбранный юнит обращается к выбранной позиции, которая задаётся с помощью луча 
+                                        }
+                                    }
+                            }
+                        }
+                        break;
+                    case TypeSeletedAction.Go:
+                        for (int i = 0; i < selected.Count; i++)//Цикл который проходится по всем выбранным юнитам
+                        {
+                            if (selected[i] as Unit != null)
+                            {
+                                if (audioTimeGo <= 0)
+                                {
+                                    audioTimeGo = 15;
+                                    AudioManager.AddAudio(selected[i] as Character, "Go");
+                                }
+
+                                (selected[i] as Unit).SetTarget(null);
+                                (selected[i] as Unit).typeTarget = TypeTarget.Set;
+                                (selected[i] as Unit).SetTargetPosition(casthit.point);//Каждый выбранный юнит обращается к выбранной позиции, которая задаётся с помощью луча 
+                            }
+                        }
+                        break;
+                    case TypeSeletedAction.Attack:
+                        target = casthit.transform.GetComponent<IDestroyed>();
+                        if (target != null)
+                        {
+                            for (int i = 0; i < selected.Count; i++)
+                            {
+                                if (selected[i] as Unit != null)
+                                {
+                                    (selected[i] as Unit).SetTarget(target);
+                                    (selected[i] as Unit).typeTarget = TypeTarget.Set;
+                                    if (audioTimeAttack <= 0)
+                                    {
+                                        AudioManager.AddAudio(selected[i] as Character, "Attack");
+                                        audioTimeAttack = 8;
+                                    }
+                                    //AudioManager.AddAudio(transform, "TargetEnemy");
+                                }
+                            }
+                        }
+                        break;
+                    case TypeSeletedAction.Patrol:
+                        break;
+
                 }
+
             }
             //    if (agent.CalculatePath(casthit.point, path))
             //    {
@@ -328,8 +379,13 @@ public class Main : MonoBehaviour
     {
         unitsPanel.SetActive(true);
         for (int i = 0; i < unitsPanel.transform.childCount; i++)
-        {
             Destroy(unitsPanel.transform.GetChild(i).gameObject);
+        for (int i = 0; i < selected.Count; i++)
+        {
+            RectTransform unit = Instantiate(Resources.Load<GameObject>("Prefabs/UI/UnitSelect")).GetComponent<RectTransform>();
+            unit.SetParent(unitsPanel.transform);
+            unit.anchoredPosition = new Vector2(128 + (i % 8) * 80, -64 - (i / 8) * 80);
+            unit.GetChild(0).GetComponent<Image>().sprite = (selected[i] as Character).Icon;
         }
     }
 }

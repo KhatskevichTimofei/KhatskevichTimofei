@@ -133,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4560032471309535241}
   - component: {fileID: 4941382788131075599}
-  - component: {fileID: 5599781600731851611}
+  - component: {fileID: 1090314927261405932}
   - component: {fileID: 3528393863308222998}
   m_Layer: 0
   m_Name: kap
@@ -175,7 +175,7 @@ CapsuleCollider:
   m_Height: 7.718413
   m_Direction: 1
   m_Center: {x: -0.96020705, y: 3.3592067, z: 0.6019632}
---- !u!114 &5599781600731851611
+--- !u!114 &1090314927261405932
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -184,7 +184,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 653906535540341274}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d036ba4e7190a55479f84c2cb5450ce5, type: 3}
+  m_Script: {fileID: 11500000, guid: af2bae440f282544591b0c3b74de513c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 500
@@ -197,8 +197,8 @@ MonoBehaviour:
     damage: 25
     cd: 1.5
     cdProgress: 0
-    radiusAttack: 100
-    radiusUp: 5
+    radiusAttack: 80
+    radiusUp: 75
   collectionUP: {fileID: 0}
   collectionUpParent: {fileID: 4074521338700426174}
   nextPosition: {x: 0, y: 0, z: 0}
@@ -206,7 +206,6 @@ MonoBehaviour:
   animator: {fileID: 0}
   curatorAudio: 
   snoryd: Bullet
-  sprite: {fileID: 21300000, guid: 54c0dc4035f337349a86fff8a73368c6, type: 3}
   obvodka: {fileID: 5236588943875312428}
   typeTarget: 0
 --- !u!195 &3528393863308222998

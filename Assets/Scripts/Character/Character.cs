@@ -29,7 +29,13 @@ public class Character : MonoBehaviour, IDestroyed
     protected int countClick;
     float timeIdle, timeIdleSound;
     public string snoryd;
-    public Sprite sprite;
+    virtual public Sprite Icon
+    {
+        get
+        {
+            return null;
+        }
+    }
     
     //public Bullet bullet;
     //public Attack radiusUpCharacter;
