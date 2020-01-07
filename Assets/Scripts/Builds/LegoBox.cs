@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LegoBox : UnityEngine.MonoBehaviour, ISelected, IActivity
+public class LegoBox : MonoBehaviour, ISelected, IActivity
 {
     public Text text;
     public Storage storage;
@@ -34,6 +34,8 @@ public class LegoBox : UnityEngine.MonoBehaviour, ISelected, IActivity
             isSelected = value;
         }
     }
+
+    public int Prioryti => 0;
 
     public void OnMouseUp()
     {

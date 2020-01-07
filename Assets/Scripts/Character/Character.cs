@@ -11,7 +11,7 @@ public enum SideConflict
 }
 
 
-public class MonoBehaviour : UnityEngine.MonoBehaviour, IDestroyed
+public class Character : MonoBehaviour, IDestroyed
 {
 
     public float hp, speed, armor, radiusLook;
@@ -85,13 +85,13 @@ public class MonoBehaviour : UnityEngine.MonoBehaviour, IDestroyed
             Smelter smelter = target as Smelter;
 
             Vector3 distance = transform.position - (target as UnityEngine.MonoBehaviour).transform.position;
-            if (destroyed != null && distance.magnitude > attack.radiusAttack && (target as Build != null && (target as Build).sideConflict != sideConflict || target as MonoBehaviour != null && (target as MonoBehaviour).sideConflict != sideConflict || target as Interactive != null))
+            if (destroyed != null && distance.magnitude > attack.radiusAttack && (target as Build != null && (target as Build).sideConflict != sideConflict || target as Character != null && (target as Character).sideConflict != sideConflict || target as Interactive != null))
             {
                 SetTargetPosition((target as UnityEngine.MonoBehaviour).transform.position + distance.normalized * (attack.radiusAttack - (attack.radiusAttack * 0.1f)));
             }
             else
             {
-                if (destroyed != null && (target as Build != null && (target as Build).sideConflict != sideConflict || target as MonoBehaviour != null && (target as MonoBehaviour).sideConflict != sideConflict || target as Interactive != null))
+                if (destroyed != null && (target as Build != null && (target as Build).sideConflict != sideConflict || target as Character != null && (target as Character).sideConflict != sideConflict || target as Interactive != null))
                 {
                     if (attack.cdProgress <= 0)
                     {

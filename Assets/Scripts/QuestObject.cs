@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class QuestObject : UnityEngine.MonoBehaviour
+public class QuestObject : MonoBehaviour
 {
     public QuestList questList;
     private void OnTriggerEnter(Collider other)

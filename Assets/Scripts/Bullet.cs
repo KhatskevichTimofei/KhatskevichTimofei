@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : UnityEngine.MonoBehaviour
+public class Bullet : MonoBehaviour
 {
     public float speedBullet;
-    public MonoBehaviour parent;
+    public Character parent;
 
     void Start()
     {
@@ -21,7 +21,7 @@ public class Bullet : UnityEngine.MonoBehaviour
 
     public void OnTriggerEnter(Collider collider)
     {
-        MonoBehaviour character = collider.GetComponent<MonoBehaviour>();
+        Character character = collider.GetComponent<Character>();
         Interactive interactive = collider.GetComponent<Interactive>();
         if (character != null)
         {

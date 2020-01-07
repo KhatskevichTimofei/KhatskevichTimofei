@@ -13,7 +13,7 @@ public enum TypeSeletedAction
     Patrol,
     CollectionUp,
 }
-public class Main : UnityEngine.MonoBehaviour
+public class Main : MonoBehaviour
 {
     public static Main instance; //Создаётся публичная статичная переменнная типа Main. Static 
     public static bool isAudioCurrentFrame;
@@ -35,6 +35,7 @@ public class Main : UnityEngine.MonoBehaviour
     public Storage storage = new Storage();
     public GameObject unitsPanel;
     public GameObject funcionalUnitPanel;
+    public GameObject escMenu;
     public Transform parentEnemy, parentUnit, parentBuild;
     public Animation anim;
     public OneUnit oneUnit;
@@ -42,7 +43,7 @@ public class Main : UnityEngine.MonoBehaviour
     bool isFrameSelected;
     public float audioTimeGo, audioTimeAttack, audioTimeCollectionUp, audioTimeDrop, audioTimeColletionUpBlock;
     public TypeSeletedAction selectedAction;
-    public MonoBehaviour character;
+    public Character character;
     public float cdBuff;
 
 
@@ -55,6 +56,7 @@ public class Main : UnityEngine.MonoBehaviour
         allSelectebleObjects.AddRange(allUnits); //В список всех построек и юнитов записываются все юниты
         allSelectebleObjects.AddRange(allBuild); //В список всех построке и юнитов записываются все построек
         Debug.Log(Resources.LoadAll<AudioClip>("Sound/Shot").Length);
+
     }
 
     void Update()
@@ -90,6 +92,7 @@ public class Main : UnityEngine.MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Escape) && !animStart)
         {
+            escMenu.SetActive(true);
             animStart = true;
             anim.Play("OpenMenu");
             AudioManager.AddAudio(Camera.current.transform, "OpenMenuSound", "", false, true, SoundMusicVoice.Sound);
@@ -131,6 +134,8 @@ public class Main : UnityEngine.MonoBehaviour
                 unitsPanel.SetActive(false);
                 funcionalUnitPanel.SetActive(false);
                 startMouse = Input.mousePosition; // В пеменную типа Vector3 записывается позиция мыши
+                startMouse.x *= 1920f / Screen.width;
+                startMouse.y *= 1080f / Screen.height;
                 for (int i = 0; i < selected.Count; i++)
                 {
                     selected[i].IsSelected = false;
@@ -143,6 +148,8 @@ public class Main : UnityEngine.MonoBehaviour
         if (Input.GetMouseButton(0) && isFrameSelected) //При отжатии левой кнопки мыши выполняется условие
         {
             stopMouse = Input.mousePosition; //В переменную типа Vector3 записывается конечное значение координат нахождения мыши 
+            stopMouse.x *= 1920f / Screen.width;
+            stopMouse.y *= 1080f / Screen.height;
             image1.rectTransform.anchoredPosition = startMouse; //В переменную startMouse записывается значение нахождения объекта image1 на сцене. 
             Vector2 delta = stopMouse - startMouse; //В переменную записывается координаты от разности конечной точки положения мыши на экране и начальной точки положения мыши на экране 
             if (delta.x < 0) //Блок который делает координату x положительной и смещает её по ширине 
@@ -160,10 +167,16 @@ public class Main : UnityEngine.MonoBehaviour
         if (Input.GetMouseButtonUp(0) && isFrameSelected) //Выделяет юнитов попавших в картинку
         {
             bool isUnitsSelect = false;
+            Vector2 pos = image1.rectTransform.anchoredPosition;
+            Vector2 size = image1.rectTransform.sizeDelta;
+            pos.x /= 1920f / Screen.width;
+            pos.y /= 1080f / Screen.height;
+            size.x /= 1920f / Screen.width;
+            size.y /= 1080f / Screen.height;
             for (int i = 0; i < allSelectebleObjects.Count; i++) //Создаёт новое изображение и записываает его в перменную area. 
             {
-                Rect area = new Rect(image1.rectTransform.anchoredPosition, image1.rectTransform.sizeDelta);
-                if (area.Contains(Camera.main.WorldToScreenPoint((allSelectebleObjects[i] as UnityEngine.MonoBehaviour).transform.position))) //Если в созданную картинку area попадает какой либо юнит, выполняется условие  и записывает из массива allUnits юнитов в массив selectedUnits 
+                Rect area = new Rect(pos, size);
+                if (area.Contains(Camera.main.WorldToScreenPoint((allSelectebleObjects[i] as MonoBehaviour).transform.position))) //Если в созданную картинку area попадает какой либо юнит, выполняется условие  и записывает из массива allUnits юнитов в массив selectedUnits 
                 {
                     if (allSelectebleObjects[i] as Unit != null)
                     {
@@ -176,7 +189,7 @@ public class Main : UnityEngine.MonoBehaviour
             }
             for (int i = 0; i < allSelectebleObjects.Count; i++) //Создаёт новое изображение и записываает его в перменную area. 
             {
-                Rect area = new Rect(image1.rectTransform.anchoredPosition, image1.rectTransform.sizeDelta);
+                Rect area = new Rect(pos, size);
                 if (!isUnitsSelect || isUnitsSelect && allSelectebleObjects[i] as Unit != null)
                 {
                     if (area.Contains(Camera.main.WorldToScreenPoint((allSelectebleObjects[i] as UnityEngine.MonoBehaviour).transform.position))) //Если в созданную картинку area попадает какой либо юнит, выполняется условие и записывает из массива allUnits юнитов в массив selectedUnits 
@@ -192,10 +205,12 @@ public class Main : UnityEngine.MonoBehaviour
             if (selected.Count > 1)
             {
                 ShowSelectedUnits();
+                oneUnit.UnitStats(selected[0] as Unit);
             }
             else if (selected.Count == 1)
             {
-                oneUnit.HzKakNazvat(selected[0] as Unit);
+                isFrameSelected = false;
+                oneUnit.UnitStats(selected[0] as Unit);
             }
             isFrameSelected = false;
 
@@ -248,7 +263,7 @@ public class Main : UnityEngine.MonoBehaviour
                 {
                     case TypeSeletedAction.Defualt:
                         target = casthit.transform.GetComponent<IDestroyed>();
-                        if (target != null && (target as Build != null && (target as Build).sideConflict == SideConflict.Enemy || target as MonoBehaviour != null && (target as MonoBehaviour).sideConflict == SideConflict.Enemy || target as Interactive != null))
+                        if (target != null && (target as Build != null && (target as Build).sideConflict == SideConflict.Enemy || target as Character != null && (target as Character).sideConflict == SideConflict.Enemy || target as Interactive != null))
                         {
                             for (int i = 0; i < selected.Count; i++)
                             {
@@ -258,7 +273,7 @@ public class Main : UnityEngine.MonoBehaviour
                                     (selected[i] as Unit).typeTarget = TypeTarget.Set;
                                     if (audioTimeAttack <= 0)
                                     {
-                                        AudioManager.AddAudio(selected[i] as MonoBehaviour, "Attack");
+                                        AudioManager.AddAudio(selected[i] as Character, "Attack");
                                         audioTimeAttack = 8;
                                     }
                                     //AudioManager.AddAudio(transform, "TargetEnemy");
@@ -278,7 +293,7 @@ public class Main : UnityEngine.MonoBehaviour
                                         (selected[i] as Unit).typeTarget = TypeTarget.Set;
                                         if (audioTimeColletionUpBlock <= 0)
                                         {
-                                            AudioManager.AddAudio(selected[i] as MonoBehaviour, "Collect");
+                                            AudioManager.AddAudio(selected[i] as Character, "Collect");
                                             audioTimeColletionUpBlock = 3;
                                         }
                                         break;
@@ -301,7 +316,7 @@ public class Main : UnityEngine.MonoBehaviour
                                             {
                                                 if (audioTimeCollectionUp <= 0)
                                                 {
-                                                    AudioManager.AddAudio(selected[i] as MonoBehaviour, "Collect");
+                                                    AudioManager.AddAudio(selected[i] as Character, "Collect");
                                                     audioTimeCollectionUp = 5;
                                                 }
                                             }
@@ -309,7 +324,7 @@ public class Main : UnityEngine.MonoBehaviour
                                             {
                                                 if (audioTimeDrop <= 0)
                                                 {
-                                                    AudioManager.AddAudio(selected[i] as MonoBehaviour, "Drop");
+                                                    AudioManager.AddAudio(selected[i] as Character, "Drop");
                                                     audioTimeDrop = 5;
                                                 }
                                             }
@@ -323,7 +338,7 @@ public class Main : UnityEngine.MonoBehaviour
                                             if (audioTimeGo <= 0)
                                             {
                                                 audioTimeGo = 15;
-                                                AudioManager.AddAudio(selected[i] as MonoBehaviour, "Go");
+                                                AudioManager.AddAudio(selected[i] as Character, "Go");
                                             }
 
                                             (selected[i] as Unit).SetTarget(null);
@@ -343,7 +358,7 @@ public class Main : UnityEngine.MonoBehaviour
                                 if (audioTimeGo <= 0)
                                 {
                                     audioTimeGo = 15;
-                                    AudioManager.AddAudio(selected[i] as MonoBehaviour, "Go");
+                                    AudioManager.AddAudio(selected[i] as Character, "Go");
                                 }
 
                                 (selected[i] as Unit).SetTarget(null);
@@ -365,7 +380,7 @@ public class Main : UnityEngine.MonoBehaviour
                                     (selected[i] as Unit).typeTarget = TypeTarget.Set;
                                     if (audioTimeAttack <= 0)
                                     {
-                                        AudioManager.AddAudio(selected[i] as MonoBehaviour, "Attack");
+                                        AudioManager.AddAudio(selected[i] as Character, "Attack");
                                         audioTimeAttack = 8;
                                     }
                                     //AudioManager.AddAudio(transform, "TargetEnemy");
@@ -391,6 +406,7 @@ public class Main : UnityEngine.MonoBehaviour
 
     public void ShowSelectedUnits()
     {
+        selected.Sort(Unit.Sort);
         unitsPanel.SetActive(true);
         for (int i = 0; i < unitsPanel.transform.childCount; i++)
             Destroy(unitsPanel.transform.GetChild(i).gameObject);
@@ -399,7 +415,7 @@ public class Main : UnityEngine.MonoBehaviour
             RectTransform unit = Instantiate(Resources.Load<GameObject>("Prefabs/UI/UnitSelect")).GetComponent<RectTransform>();
             unit.SetParent(unitsPanel.transform);
             unit.anchoredPosition = new Vector2(128 + (i % 8) * 80, -64 - (i / 8) * 80);
-            unit.GetChild(0).GetComponent<Image>().sprite = (selected[i] as MonoBehaviour).Icon;
+            unit.GetChild(0).GetComponent<Image>().sprite = (selected[i] as Character).Icon;
         }
         if (selected[0] as Unit && (selected[0] as Unit).sideConflict == SideConflict.Player)
         {
@@ -412,15 +428,5 @@ public class Main : UnityEngine.MonoBehaviour
         selectedAction = (TypeSeletedAction)setSelected;
     }
 
-    public void Buff()
-    {
-        if (cdBuff <= 0)
-        {
-            for (int i = 0; i < selected.Count; i++)
-            {
-                (selected[i] as MonoBehaviour).attack.damage += 1000;
-            }
-            cdBuff = 3;
-        }
-    }
+
 }

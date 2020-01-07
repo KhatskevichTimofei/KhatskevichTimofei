@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnitsEnemy : MonoBehaviour
+public class UnitsEnemy : Character
 {
     public override void Destroyed()
     {

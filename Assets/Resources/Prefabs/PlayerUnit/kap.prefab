@@ -208,6 +208,8 @@ MonoBehaviour:
   snoryd: Bullet
   obvodka: {fileID: 5236588943875312428}
   typeTarget: 0
+  sideConflicts: 0
+  priority: 10
 --- !u!195 &3528393863308222998
 NavMeshAgent:
   m_ObjectHideFlags: 0

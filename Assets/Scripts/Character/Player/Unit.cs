@@ -10,13 +10,14 @@ public enum TypeTarget
     
 }
 
-public abstract class Unit : MonoBehaviour, ISelected
+public abstract class Unit : Character, ISelected
 {
     public static event System.Action onCreate;
 
     public GameObject obvodka;
     public TypeTarget typeTarget;
     public SideConflict sideConflicts;
+    public int priority;
     bool isSelected;
 
 
@@ -39,6 +40,8 @@ public abstract class Unit : MonoBehaviour, ISelected
 
         }
     }
+
+    public abstract int Prioryti { get; }
 
     public override void Start()
     {
@@ -84,9 +87,6 @@ public abstract class Unit : MonoBehaviour, ISelected
 
     }
 
-
-
-
     public void OnMouseUp()  //При нажатии на мышь отчищается выбранные юниты. Добавляет в список выбранных ???. Проходится по циклу от i до размерности листа выбранных. И каждый выбранный юнит получает статус выделенного.
     {
         Main.instance.selected.Clear();
@@ -106,6 +106,15 @@ public abstract class Unit : MonoBehaviour, ISelected
             Main.instance.selected.Remove(this);
         Main.instance.allSelectebleObjects.Remove(this);
 
+    }
+
+    public static int Sort(ISelected a, ISelected b)
+    {
+        if (a.Prioryti > b.Prioryti)
+            return -1;
+        else if (a.Prioryti < b.Prioryti)
+            return 1;
+        else return 0;
     }
 
 }

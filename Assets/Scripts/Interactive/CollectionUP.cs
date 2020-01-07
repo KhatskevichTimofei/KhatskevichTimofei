@@ -13,4 +13,5 @@ public class CollectionUP : UnityEngine.MonoBehaviour, ISelected, IActivity
 
     public bool IsSelected { get; set; }
 
+    public int Prioryti => 0;
 }

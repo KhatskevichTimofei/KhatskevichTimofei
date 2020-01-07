@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Knife : Unit
 {
-  
+    public override int Prioryti => 1;
 
     public override void Update()
     {

@@ -6,7 +6,7 @@ public class DestroyInteractive : UnityEngine.MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        MonoBehaviour character = other.GetComponent<MonoBehaviour>();
+        Character character = other.GetComponent<Character>();
         if (character != null)
         {
             character.GetDamage(500);
