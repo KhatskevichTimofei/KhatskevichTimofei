@@ -23,6 +23,7 @@ public class Main : MonoBehaviour
     public Vector3 stopMouse;
     public Image image1;
     public List<Unit> allUnits = new List<Unit>();
+    public static int perenosUnits;
     public List<Build> allBuild = new List<Build>();
     public List<ISelected> selected = new List<ISelected>();
     public List<ISelected> allSelectebleObjects = new List<ISelected>();
@@ -57,7 +58,8 @@ public class Main : MonoBehaviour
         allSelectebleObjects.AddRange(allUnits); //В список всех построек и юнитов записываются все юниты
         allSelectebleObjects.AddRange(allBuild); //В список всех построке и юнитов записываются все построек
         Debug.Log(Resources.LoadAll<AudioClip>("Sound/Shot").Length);
-
+        Resources.Load<Unit>("Prefabs/PlayerUnit"). = perenosUnits;
+        Resources.Load<Unit>("Prefabs/PlayerUnit").transform.position = new Vector3(291, 20, -324);
     }
 
     void Update()
@@ -429,5 +431,9 @@ public class Main : MonoBehaviour
         selectedAction = (TypeSeletedAction)setSelected;
     }
 
-
+    public void ClickOnDoor(Unit unit)
+    {
+        perenosUnits = allUnits.Count;
+        UnityEngine.SceneManagement.SceneManager.LoadScene("living room");
+    }
 }
