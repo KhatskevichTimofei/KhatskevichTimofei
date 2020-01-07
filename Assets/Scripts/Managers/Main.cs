@@ -36,6 +36,7 @@ public class Main : MonoBehaviour
     public GameObject unitsPanel;
     public GameObject funcionalUnitPanel;
     public GameObject escMenu;
+    public GameObject defualtPanel;
     public Transform parentEnemy, parentUnit, parentBuild;
     public Animation anim;
     public OneUnit oneUnit;

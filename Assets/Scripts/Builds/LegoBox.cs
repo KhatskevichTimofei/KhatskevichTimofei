@@ -10,6 +10,8 @@ public class LegoBox : MonoBehaviour, ISelected, IActivity
     public Transform pointSbor;
     public GameObject selectedLego;
     public GameObject obvodka;
+    public GameObject buildPanelNew;
+    public GameObject podlozka;
     protected bool isSelected;
     
 
@@ -25,11 +27,15 @@ public class LegoBox : MonoBehaviour, ISelected, IActivity
             {
                 selectedLego.SetActive(true);
                 obvodka.SetActive(true);
+                buildPanelNew.SetActive(true);
+                podlozka.SetActive(true);
             }
             else
             {
                 selectedLego.SetActive(false);
                 obvodka.SetActive(false);
+                buildPanelNew.SetActive(false);
+                podlozka.SetActive(false);
             }
             isSelected = value;
         }

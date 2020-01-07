@@ -261,6 +261,8 @@ MonoBehaviour:
   sideConflict: 0
   job: 0
   obvodka: {fileID: 8849281933076364078}
+  buildPanelNew: {fileID: 0}
+  podlozka: {fileID: 0}
   prices:
   - timeCreate: 0.3
     plasticPrice: 0

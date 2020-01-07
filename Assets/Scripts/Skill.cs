@@ -23,7 +23,6 @@ public class Skill : MonoBehaviour
     public void Buff(Unit unit)
     {
 
-        //switch(skills)
         for (int i = 0; i < Main.instance.selected.Count; i++)
         {
             if (cdSkill <= 0)

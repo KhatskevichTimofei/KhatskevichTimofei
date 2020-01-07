@@ -18,6 +18,8 @@ public abstract class Build : MonoBehaviour, ISelected, IDestroyed
     public SideConflict sideConflict;
     public bool job;
     public GameObject obvodka;
+    public GameObject buildPanelNew;
+    public GameObject podlozka;
 
     public virtual bool IsSelected
     {
@@ -33,12 +35,16 @@ public abstract class Build : MonoBehaviour, ISelected, IDestroyed
                 ocheredPanel.SetActive(true);
                 funcionalPanel.SetActive(true);
                 obvodka.SetActive(true);
+                buildPanelNew.SetActive(true);
+                podlozka.SetActive(true);
             }
             else
             {
                 funcionalPanel.SetActive(false);
                 ocheredPanel.SetActive(false);
                 obvodka.SetActive(false);
+                buildPanelNew.SetActive(false);
+                podlozka.SetActive(false);
             }
             isSelected = value;
 
