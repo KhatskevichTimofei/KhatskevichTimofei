@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewLocation : MonoBehaviour
-{
-    public void OnMouseDown()
-    {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("living room");
-    }
-}
+//public class NewLocation : MonoBehaviour
+//{
+//    public void OnMouseDown()
+//    {
+//        UnityEngine.SceneManagement.SceneManager.LoadScene("living room");
+//    }
+//}

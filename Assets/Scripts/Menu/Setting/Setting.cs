@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class Setting : UnityEngine.MonoBehaviour
 {
-    public static float music;
-    public static float sound;
-    public static float voice;
+    public static float music = 1;
+    public static float sound = 1;
+    public static float voice = 1;
     public bool curator;
     public Slider musicSlider;
     public Slider soundSlider;

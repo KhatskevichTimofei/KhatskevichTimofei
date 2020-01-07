@@ -57,9 +57,9 @@ public class Main : MonoBehaviour
         unitsEnemies.AddRange(parentEnemy.GetComponentsInChildren<UnitsEnemy>());
         allSelectebleObjects.AddRange(allUnits); //В список всех построек и юнитов записываются все юниты
         allSelectebleObjects.AddRange(allBuild); //В список всех построке и юнитов записываются все построек
-        Debug.Log(Resources.LoadAll<AudioClip>("Sound/Shot").Length);
-        Resources.Load<Unit>("Prefabs/PlayerUnit"). = perenosUnits;
-        Resources.Load<Unit>("Prefabs/PlayerUnit").transform.position = new Vector3(291, 20, -324);
+        //Debug.Log(Resources.LoadAll<AudioClip>("Sound/Shot").Length);
+        //Resources.Load<Unit>("Prefabs/PlayerUnit"). = perenosUnits;
+        //Resources.Load<Unit>("Prefabs/PlayerUnit").transform.position = new Vector3(291, 20, -324);
     }
 
     void Update()
@@ -212,6 +212,10 @@ public class Main : MonoBehaviour
             }
             else if (selected.Count == 1)
             {
+                if (selected[0] as Unit && (selected[0] as Unit).sideConflict == SideConflict.Player)
+                {
+                    funcionalUnitPanel.SetActive(true);
+                }
                 isFrameSelected = false;
                 oneUnit.UnitStats(selected[0] as Unit);
             }
@@ -431,9 +435,9 @@ public class Main : MonoBehaviour
         selectedAction = (TypeSeletedAction)setSelected;
     }
 
-    public void ClickOnDoor(Unit unit)
-    {
-        perenosUnits = allUnits.Count;
-        UnityEngine.SceneManagement.SceneManager.LoadScene("living room");
-    }
+    //public void ClickOnDoor(Unit unit)
+    //{
+    //    perenosUnits = allUnits.Count;
+    //    UnityEngine.SceneManagement.SceneManager.LoadScene("living room");
+    //}
 }
