@@ -38,6 +38,7 @@ public class Main : MonoBehaviour
     public GameObject funcionalUnitPanel;
     public GameObject escMenu;
     public GameObject defualtPanel;
+    public GameObject buffDamageButton;
     public Transform parentEnemy, parentUnit, parentBuild;
     public Animation anim;
     public OneUnit oneUnit;
@@ -135,6 +136,7 @@ public class Main : MonoBehaviour
             if (!EventSystem.current.IsPointerOverGameObject())
             {
                 unitsPanel.SetActive(false);
+                buffDamageButton.SetActive(false);
                 funcionalUnitPanel.SetActive(false);
                 startMouse = Input.mousePosition; // В пеменную типа Vector3 записывается позиция мыши
                 startMouse.x *= 1920f / Screen.width;
@@ -212,6 +214,10 @@ public class Main : MonoBehaviour
             }
             else if (selected.Count == 1)
             {
+                if (selected[0].Prioryti == 10)
+                {
+                    buffDamageButton.SetActive(true);
+                }
                 if (selected[0] as Unit && (selected[0] as Unit).sideConflict == SideConflict.Player)
                 {
                     funcionalUnitPanel.SetActive(true);
@@ -423,6 +429,10 @@ public class Main : MonoBehaviour
             unit.SetParent(unitsPanel.transform);
             unit.anchoredPosition = new Vector2(128 + (i % 8) * 80, -64 - (i / 8) * 80);
             unit.GetChild(0).GetComponent<Image>().sprite = (selected[i] as Character).Icon;
+            if (selected[i].Prioryti == 10)
+            {
+                buffDamageButton.SetActive(true);
+            }
         }
         if (selected[0] as Unit && (selected[0] as Unit).sideConflict == SideConflict.Player)
         {
