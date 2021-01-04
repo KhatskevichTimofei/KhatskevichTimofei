@@ -1,6 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Assets",
+    "\\Assets\\Scripts",
+    "\\Assets\\Sprite"
   ],
+  "SelectedNode": "\\Assets\\Scripts\\Bullet.cs",
   "PreviewInSolutionExplorer": false
 }
